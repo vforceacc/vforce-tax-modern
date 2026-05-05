@@ -1,0 +1,9 @@
+# Firebase App Hosting configuration file
+# See https://firebase.google.com/docs/app-hosting/configure
+
+# Environment variables for the application
+env:
+  - variable: GEMINI_API_KEY
+    secret: GEMINI_API_KEY
+  - variable: HUBSPOT_ACCESS_TOKEN
+    secret: HUBSPOT_ACCESS_TOKEN
