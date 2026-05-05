@@ -87,11 +87,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
     }
 
-    // Build Gemini API payload
-    const apiMessages = messages.map((m: { role: string; text: string }) => ({
+    // Build Gemini API payload - Ensuring it starts with 'user'
+    let apiMessages = messages.map((m: { role: string; text: string }) => ({
       role: m.role,
       parts: [{ text: m.text }],
     }));
+
+    // Gemini requires the first message to be from the 'user'
+    if (apiMessages.length > 0 && apiMessages[0].role === 'model') {
+      apiMessages = apiMessages.slice(1);
+    }
 
     const payload = {
       contents: apiMessages,

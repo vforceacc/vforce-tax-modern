@@ -237,6 +237,54 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section className="py-40 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div>
+              <div className="inline-flex items-center text-[#39d237] font-black tracking-[0.4em] uppercase text-[10px] mb-8">
+                <span className="w-8 h-[1px] bg-[#39d237] mr-4"></span> The V-Force Method
+              </div>
+              <h2 className="text-5xl lg:text-7xl font-black text-[#0a0f1e] italic tracking-tighter uppercase leading-[0.9] mb-12">
+                Simplicity in <br/><span className="text-[#39d237]">Complexity.</span>
+              </h2>
+              <p className="text-slate-600 text-lg font-medium leading-relaxed mb-10">
+                The CPA guide for accounting firms is clear: simplicity is key. While tax law is daunting, your experience shouldn't be. We translate complex legislation into clear, actionable financial health for your business.
+              </p>
+              <div className="space-y-6">
+                {[
+                  { title: "Clear Communication", desc: "No jargon. Just plain English advice that helps you make decisions." },
+                  { title: "Strategic Growth", desc: "We don't just count numbers; we engineer pathways for your business to scale." },
+                  { title: "Absolute Reliability", desc: "Townsville-owned and operated. We are here when you need us." }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start">
+                    <div className="w-6 h-6 rounded-full bg-[#39d237]/10 flex items-center justify-center mr-4 mt-1">
+                      <div className="w-2 h-2 rounded-full bg-[#39d237]"></div>
+                    </div>
+                    <div>
+                      <h4 className="text-[#0a0f1e] font-black uppercase tracking-tight italic text-lg">{item.title}</h4>
+                      <p className="text-slate-500 text-sm font-bold">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 bg-[#39d237]/5 blur-[100px] rounded-full"></div>
+              <div className="relative bg-slate-50 border border-slate-200 rounded-[3rem] p-12 shadow-inner">
+                <h4 className="text-[#0a0f1e] font-black text-2xl italic tracking-tighter uppercase mb-8">Ready to start?</h4>
+                <div className="space-y-4">
+                  <Link href="https://meetings.hubspot.com/vforce-tax/intro" target="_blank" className="block w-full bg-[#39d237] text-[#0a0f1e] text-center py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-[#0a0f1e] hover:text-white transition-all shadow-lg">
+                    Book My Strategy Session
+                  </Link>
+                  <Link href="/pricing-guide.pdf" target="_blank" className="block w-full border border-slate-200 text-[#0a0f1e] text-center py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-slate-100 transition-all">
+                    View Pricing Structure
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <SEOBlock />
       <FAQ />
     </>
