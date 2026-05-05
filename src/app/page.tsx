@@ -64,11 +64,11 @@ const Hero = () => (
             Discover Financial Freedom with Townsville's expert CPA, ASIC, and TPB-registered specialists. We provide tailored tax planning and financial advice for North Queensland businesses.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/contact" className="bg-white text-[#0a0f1e] px-10 py-5 rounded-2xl font-black text-[12px] tracking-widest uppercase hover:bg-[#39d237] transition-all shadow-xl">
+            <Link href="https://meetings.hubspot.com/vforce-tax/intro" target="_blank" className="bg-white text-[#0a0f1e] px-10 py-5 rounded-2xl font-black text-[12px] tracking-widest uppercase hover:bg-[#39d237] transition-all shadow-xl">
               Free Consultation
             </Link>
-            <Link href="#specialities" className="border border-white/20 text-white px-10 py-5 rounded-2xl font-black text-[12px] tracking-widest uppercase hover:bg-white/5 transition-all">
-              Our Specialities
+            <Link href="/pricing-guide.pdf" target="_blank" className="border border-white/20 text-white px-10 py-5 rounded-2xl font-black text-[12px] tracking-widest uppercase hover:bg-white/5 transition-all">
+              Download Pricing Guide
             </Link>
           </div>
         </div>

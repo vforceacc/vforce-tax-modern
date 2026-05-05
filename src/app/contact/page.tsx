@@ -84,42 +84,27 @@ export default function ContactPage() {
           </div>
           
           <div className="lg:col-span-7">
-            <div className="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-2xl relative">
+            <div className="bg-white p-10 md:p-14 rounded-[2.5rem] shadow-2xl relative text-center">
               <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#39d237]/20 blur-[40px] rounded-full pointer-events-none"></div>
               
-              <h4 className="text-[#0a0f1e] font-black text-3xl italic tracking-tighter uppercase mb-8">Send a Message</h4>
+              <h4 className="text-[#0a0f1e] font-black text-4xl italic tracking-tighter uppercase mb-6">Schedule Your <span className="text-[#39d237]">Session.</span></h4>
+              <p className="text-slate-600 font-bold mb-10 leading-relaxed max-w-md mx-auto">
+                Skip the back-and-forth. Select a time that works for you directly on our calendar and get your financial engineering started today.
+              </p>
               
-              <form className="space-y-6 relative z-10">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">First Name</label>
-                    <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-[13px] font-bold text-[#0a0f1e] focus:ring-2 focus:ring-[#39d237] focus:border-transparent outline-none transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Last Name</label>
-                    <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-[13px] font-bold text-[#0a0f1e] focus:ring-2 focus:ring-[#39d237] focus:border-transparent outline-none transition-all" />
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Email Address</label>
-                  <input type="email" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-[13px] font-bold text-[#0a0f1e] focus:ring-2 focus:ring-[#39d237] focus:border-transparent outline-none transition-all" />
-                </div>
-                
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Phone Number</label>
-                  <input type="tel" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-[13px] font-bold text-[#0a0f1e] focus:ring-2 focus:ring-[#39d237] focus:border-transparent outline-none transition-all" />
-                </div>
-                
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">How can we help?</label>
-                  <textarea rows={5} className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-[13px] font-bold text-[#0a0f1e] focus:ring-2 focus:ring-[#39d237] focus:border-transparent outline-none transition-all resize-none"></textarea>
-                </div>
-                
-                <button type="button" className="w-full bg-[#0a0f1e] text-white py-6 rounded-xl font-black text-[13px] tracking-widest uppercase hover:bg-[#39d237] transition-all duration-300 shadow-xl hover:shadow-[0_8px_20px_rgba(57,210,55,0.3)]">
-                  Submit Enquiry
-                </button>
-              </form>
+              <Link 
+                href="https://meetings.hubspot.com/vforce-tax/intro" 
+                target="_blank"
+                className="inline-block bg-[#0a0f1e] text-white py-6 px-12 rounded-xl font-black text-[13px] tracking-widest uppercase hover:bg-[#39d237] transition-all duration-300 shadow-xl hover:shadow-[0_8px_20px_rgba(57,210,55,0.3)] mb-8"
+              >
+                Open Booking Calendar
+              </Link>
+              
+              <div className="pt-8 border-t border-slate-100">
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                  Powered by HubSpot Meetings
+                </p>
+              </div>
             </div>
           </div>
         </div>

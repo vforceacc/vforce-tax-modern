@@ -66,7 +66,8 @@ const Navbar = () => {
           ))}
 
           <Link 
-            href="/contact"
+            href="https://meetings.hubspot.com/vforce-tax/intro"
+            target="_blank"
             className="bg-[#39d237] text-[#0a0f1e] px-8 py-3.5 rounded-xl font-black text-[11px] tracking-widest uppercase hover:bg-white transition-all transform hover:-translate-y-1 shadow-[0_8px_20px_rgba(57,210,55,0.3)] inline-block font-heading"
           >
             ENQUIRE NOW
@@ -116,7 +117,8 @@ const Navbar = () => {
             </div>
           ))}
           <Link 
-            href="/contact"
+            href="https://meetings.hubspot.com/vforce-tax/intro"
+            target="_blank"
             className="mt-8 bg-[#39d237] text-[#0a0f1e] text-center w-full py-6 rounded-2xl font-black text-[14px] tracking-[0.2em] uppercase block font-heading"
           >
             ENQUIRE NOW
