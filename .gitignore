@@ -20,6 +20,7 @@
 # Allow specific root folders
 !/src/
 !/public/
+!/.github/
 
 # Standard ignores for allowed folders
 node_modules/
