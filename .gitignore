@@ -1,0 +1,33 @@
+# Ignore everything at the root
+/*
+
+# Allow specific root files
+!/.gitignore
+!/package.json
+!/package-lock.json
+!/tsconfig.json
+!/next.config.mjs
+!/next.config.ts
+!/next.config.js
+!/tailwind.config.ts
+!/tailwind.config.js
+!/postcss.config.mjs
+!/postcss.config.js
+!/README.md
+!/GEMINI.md
+!/blueprint.md
+
+# Allow specific root folders
+!/src/
+!/public/
+
+# Standard ignores for allowed folders
+node_modules/
+.next/
+out/
+build/
+dist/
+.firebase/
+.idx/
+.vscode/
+firebase-debug.log

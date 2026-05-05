@@ -1,0 +1,29 @@
+# Global rules for all bots
+User-agent: *
+Allow: /
+Allow: /tax-ai-guide
+
+# Explicitly allow AI crawlers
+User-agent: GPTBot
+Allow: /tax-ai-guide
+
+User-agent: ChatGPT-User
+Allow: /tax-ai-guide
+
+User-agent: Google-Extended
+Allow: /tax-ai-guide
+
+User-agent: CCBot
+Allow: /tax-ai-guide
+
+User-agent: PerplexityBot
+Allow: /tax-ai-guide
+
+User-agent: anthropic-ai
+Allow: /tax-ai-guide
+
+User-agent: Claude-Web
+Allow: /tax-ai-guide
+
+# Sitemap location
+Sitemap: https://vforcetax.com.au/sitemap.xml

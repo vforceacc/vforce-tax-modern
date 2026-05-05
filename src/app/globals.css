@@ -1,0 +1,74 @@
+@import "tailwindcss";
+@source "../";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-outfit), sans-serif;
+
+  --color-vforce-dark: #0a0f1e;
+  --color-vforce-dark-alt: #0f1629;
+  --color-vforce-green: #39d237;
+  --color-vforce-accent: #fed03a;
+  --color-vforce-yellow: #fed03a;
+
+  --shadow-3xl: 0 0 120px -30px rgba(57, 210, 55, 0.4);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-vforce-dark text-slate-300 font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+
+  /* Makes all color and opacity changes on the site feel intentional and smooth */
+  * {
+    @apply transition-colors duration-300 ease-in-out;
+  }
+
+  ::selection {
+    @apply bg-vforce-green text-vforce-dark;
+  }
+}
+
+/* --- Chat Widget Animations --- */
+@keyframes chatFadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-in {
+  animation: chatFadeSlideIn 0.3s ease-out forwards;
+}
+
+/* Thin scrollbar for the chat messages area */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
