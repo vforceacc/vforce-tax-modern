@@ -85,46 +85,63 @@ const Navbar = () => {
       
       {/* MOBILE MENU PANEL */}
       {mobileMenu && (
-        <div className="fixed inset-0 top-[100px] bg-[#0a0f1e] z-[65] p-6 lg:hidden flex flex-col overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-300 pb-20">
-          <div className="mb-8 border-b border-white/10 pb-6">
+        <div className="fixed inset-0 top-0 bg-[#0a0f1e] z-50 flex flex-col overflow-y-scroll animate-in fade-in slide-in-from-top-4 duration-300">
+          {/* Mobile menu header row */}
+          <div className="flex items-center justify-between px-6 py-6 border-b border-white/10 shrink-0">
+            <Link href="/" onClick={() => setMobileMenu(false)}>
+              <img src="/vforce-logo-inverted.png" alt="VForce Tax Logo" className="h-14 w-auto object-contain" />
+            </Link>
+            <button onClick={() => setMobileMenu(false)} className="text-white p-2">
+              <X size={32} />
+            </button>
+          </div>
+
+          {/* Menu items */}
+          <div className="flex flex-col flex-1 p-6 pb-20">
+            <div className="mb-8 border-b border-white/10 pb-6">
+              <Link 
+                href="/about" 
+                className="block w-full text-left text-white text-3xl font-black py-3 hover:text-[#39d237] transition-colors italic font-heading"
+                onClick={() => setMobileMenu(false)}
+              >
+                ABOUT US
+              </Link>
+            </div>
+          
+            {navigation.map(cat => (
+              <div key={cat.title} className="mb-10">
+                <div className="text-[10px] font-black text-[#39d237] uppercase tracking-[0.3em] mb-6 opacity-60 font-heading">{cat.title}</div>
+                <div className="space-y-6">
+                  {cat.subRoutes.map(sub => (
+                    <Link 
+                      key={sub.title} 
+                      href={sub.path}
+                      className="flex items-center gap-6 w-full text-left group"
+                      onClick={() => setMobileMenu(false)}
+                    >
+                      <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+                         {sub.icon && <sub.icon className="w-6 h-6 text-[#39d237]" />}
+                      </div>
+                      <div className="text-white text-2xl font-black italic hover:text-[#39d237] transition-colors font-heading uppercase">
+                        {sub.title}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
             <Link 
-              href="/about" 
-              className="block w-full text-left text-white text-3xl font-black py-3 hover:text-[#39d237] transition-colors italic font-heading"
+              href="https://meetings.hubspot.com/vforce-tax/intro"
+              target="_blank"
+              onClick={() => setMobileMenu(false)}
+              className="mt-8 bg-[#39d237] text-[#0a0f1e] text-center w-full py-6 rounded-2xl font-black text-[14px] tracking-[0.2em] uppercase block font-heading"
             >
-              ABOUT US
+              ENQUIRE NOW
             </Link>
           </div>
-          
-          {navigation.map(cat => (
-            <div key={cat.title} className="mb-10">
-              <div className="text-[10px] font-black text-[#39d237] uppercase tracking-[0.3em] mb-6 opacity-60 font-heading">{cat.title}</div>
-              <div className="space-y-6">
-                {cat.subRoutes.map(sub => (
-                  <Link 
-                    key={sub.title} 
-                    href={sub.path}
-                    className="flex items-center gap-6 w-full text-left group"
-                  >
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
-                       {sub.icon && <sub.icon className="w-6 h-6 text-[#39d237]" />}
-                    </div>
-                    <div className="text-white text-2xl font-black italic hover:text-[#39d237] transition-colors font-heading uppercase">
-                      {sub.title}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
-          <Link 
-            href="https://meetings.hubspot.com/vforce-tax/intro"
-            target="_blank"
-            className="mt-8 bg-[#39d237] text-[#0a0f1e] text-center w-full py-6 rounded-2xl font-black text-[14px] tracking-[0.2em] uppercase block font-heading"
-          >
-            ENQUIRE NOW
-          </Link>
         </div>
       )}
+
     </header>
   );
 };

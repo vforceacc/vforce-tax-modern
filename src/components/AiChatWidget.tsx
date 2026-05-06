@@ -59,6 +59,11 @@ const AiChatWidget = () => {
         body: JSON.stringify({ messages: newMessages })
       });
 
+      if (!response.ok) {
+        console.error('[AiChatWidget] API error status:', response.status);
+        throw new Error('Chat API error');
+      }
+
       const data = await response.json();
       let replyText: string = data.reply || "Sorry, I'm experiencing a technical issue. Please call us on 07 3473 5556.";
 

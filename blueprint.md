@@ -47,8 +47,8 @@ A modern, responsive website for V-Force, a Townsville-based accounting firm. Th
 *   [x] Preserve all existing SEO/AEO content for Townsville tax agents
 *   [x] Implement Dynamic SEO Metadata for all service routes
 *   [x] Build verification — all pages compile and render correctly
-*   [ ] Configure production Gemini API key in `.env.local`
-*   [ ] Create HubSpot **Private App** (not CLI project) and add Access Token to `.env.local`
+*   [x] Configure production Gemini API key in `.env.local`
+*   [x] Create HubSpot **Private App** (not CLI project) and add Access Token to `.env.local`
 
 ### How to get your HubSpot Access Token
 You do **not** need the HubSpot CLI for this.

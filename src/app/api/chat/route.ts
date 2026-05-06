@@ -23,8 +23,6 @@ function extractContactInfo(messages: { role: string; text: string }[]): {
 
   const emailMatch = fullText.match(/[\w.+-]+@[\w-]+\.[\w.-]+/);
   const phoneMatch = fullText.match(/(?:\+?61|0)\s*\d[\d\s-]{7,}/);
-  
-  // Try to find a name - look for "my name is X", "I'm X", "I am X" patterns
   const nameMatch = fullText.match(/(?:my name is|i'm|i am|name:?)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)/i);
 
   return {
@@ -79,6 +77,15 @@ async function sendToHubSpot(contactInfo: { name: string; email: string; phone: 
 }
 
 export async function POST(request: NextRequest) {
+  // Guard: ensure API key is present
+  if (!GEMINI_API_KEY) {
+    console.error('[Chat API] GEMINI_API_KEY is not set');
+    return NextResponse.json(
+      { reply: "Sorry, I'm experiencing a technical issue. Please call us on 07 3473 5556." },
+      { status: 500 }
+    );
+  }
+
   try {
     const body = await request.json();
     const { messages } = body as { messages: { role: string; text: string }[] };
@@ -87,13 +94,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
     }
 
-    // Build Gemini API payload - Ensuring it starts with 'user'
+    // Build Gemini API payload - strip leading 'model' messages
     let apiMessages = messages.map((m: { role: string; text: string }) => ({
       role: m.role,
       parts: [{ text: m.text }],
     }));
 
-    // Gemini requires the first message to be from the 'user'
     if (apiMessages.length > 0 && apiMessages[0].role === 'model') {
       apiMessages = apiMessages.slice(1);
     }
@@ -112,7 +118,8 @@ export async function POST(request: NextRequest) {
     });
 
     if (!geminiRes.ok) {
-      console.error('[Gemini] API error:', geminiRes.status);
+      const errBody = await geminiRes.text();
+      console.error('[Gemini] API error:', geminiRes.status, errBody);
       return NextResponse.json({
         reply: "Sorry, I'm experiencing a technical issue. Please call us on 07 3473 5556.",
       });
@@ -127,8 +134,6 @@ export async function POST(request: NextRequest) {
     if (replyText.includes('[LEAD_CAPTURED]')) {
       const contactInfo = extractContactInfo(messages);
       console.log('[Lead Captured]', contactInfo);
-
-      // Fire-and-forget HubSpot push (don't block the response)
       sendToHubSpot(contactInfo).catch(err =>
         console.error('[HubSpot] Background push error:', err)
       );
