@@ -4,78 +4,117 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY || '';
 
-const SYSTEM_PROMPT = `You are a friendly, professional AI assistant for 'VForce Tax', a highly regarded accounting firm in Townsville, Australia. 
-Your goal is to answer basic accounting/tax questions briefly, but ALWAYS steer the conversation towards booking a consultation with one of our expert accountants.
-To book them in, you MUST ask for their Name, Email Address, and Phone Number.
-If the user provides contact information (like an email or phone number), acknowledge it, tell them a VForce accountant will contact them shortly, and APPEND THE EXACT STRING "[LEAD_CAPTURED]" to the very end of your response.
+const SYSTEM_PROMPT = `You are Vee, a friendly tax assistant for VForce Tax based in Australia. 
 
-When a user expresses interest in booking, a consultation, or asks about pricing/services, you MUST include a JSON block at the very end of your response in this exact format:
-<actions>
-{"buttons": [{"label": "Book a Free Intro Call", "url": "https://meetings.hubspot.com/vforce-tax/intro", "type": "booking"}]}
-</actions>
+TONE RULES:
+- Casual, warm, Aussie — say "no worries", "reckon", "arvo", "heaps", "sorted" naturally
+- Short sentences. No walls of text. Max 2-3 sentences per response.
+- Use line breaks between thoughts
+- Never say "Certainly!" or "Of course!" — just get to it
+- Emoji are fine occasionally but don't overdo it
 
-Keep answers concise and use Australian English (e.g., lodgement, optimisation).
-Do not use markdown formatting in your responses - keep it plain text.`;
+YOUR JOB:
+You help people with tax, BAS, bookkeeping, and small business accounting questions.
+While chatting, naturally collect their details one at a time — don't ask everything at once.
 
-// Extract contact details from the full chat history
-function extractContactInfo(messages: { role: string; text: string }[]): {
-  name: string;
-  email: string;
-  phone: string;
-} {
-  const fullText = messages
-    .filter(m => m.role === 'user')
-    .map(m => m.text)
-    .join(' ');
+COLLECTION ORDER (weave these in naturally, not as a form):
+1. First name (early in convo)
+2. Business name (once you know it's a business enquiry)  
+3. Email address (mid convo)
+4. Phone number (later, before suggesting a booking)
 
-  const emailMatch = fullText.match(/[\w.+-]+@[\w-]+\.[\w.-]+/);
-  const phoneMatch = fullText.match(/(?:\+?61|0)\s*\d[\d\s-]{7,}/);
-  const nameMatch = fullText.match(/(?:my name is|i'm|i am|name:?)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)/i);
+Example collection style:
+- "What's your name by the way?" not "Please provide your full name"
+- "And which biz is this for?" not "Please enter your business name"
+- "Best email to reach you on?" not "Please provide your email address"
 
-  return {
-    name: nameMatch?.[1]?.trim() || '',
-    email: emailMatch?.[0]?.trim() || '',
-    phone: phoneMatch?.[0]?.trim() || '',
-  };
-}
+BOOKING TRIGGER:
+When the user asks about pricing, wants to chat further, or you've collected name + email, 
+include this exact block at the end of your message (on its own line, nothing after it):
 
-// Send lead to HubSpot CRM
-async function sendToHubSpot(contactInfo: { name: string; email: string; phone: string }) {
-  if (!HUBSPOT_API_KEY) {
-    console.warn('[HubSpot] No access token configured – skipping CRM push.');
-    return;
-  }
+<actions>{"buttons":[{"label":"📅 Book a Free Intro Call","url":"https://meetings.hubspot.com/vforce-tax/intro","type":"booking"}]}</actions>
 
-  const nameParts = contactInfo.name.split(' ');
-  const firstName = nameParts[0] || 'Website';
-  const lastName = nameParts.slice(1).join(' ') || 'Lead';
+CRM DATA:
+Whenever you have collected any of these details, include this block too:
+
+<crm>{"firstName":"VALUE_OR_NULL","businessName":"VALUE_OR_NULL","email":"VALUE_OR_NULL","phone":"VALUE_OR_NULL"}</crm>
+
+Only include fields you actually have — set others to null. Update this block in every response once you start collecting.`;
+
+// Push contact to HubSpot CRM
+async function upsertHubSpotContact(data: {
+  firstName?: string;
+  businessName?: string;
+  email?: string;
+  phone?: string;
+}) {
+  if (!HUBSPOT_API_KEY || !data.email) return null;
 
   try {
-    const res = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${HUBSPOT_API_KEY}`,
-      },
-      body: JSON.stringify({
-        properties: {
-          email: contactInfo.email || `chatbot-lead-${Date.now()}@placeholder.vforcetax.com.au`,
-          firstname: firstName,
-          lastname: lastName,
-          phone: contactInfo.phone,
-          lifecyclestage: 'lead',
-          hs_lead_status: 'NEW',
-          company: 'VForce Tax Chatbot Lead',
-          notes_last_contacted: `Lead captured via AI chatbot on ${new Date().toISOString()}`,
+    // Search for existing contact first
+    const searchRes = await fetch(
+      "https://api.hubapi.com/crm/v3/objects/contacts/search",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${HUBSPOT_API_KEY}`,
+          "Content-Type": "application/json",
         },
-      }),
-    });
+        body: JSON.stringify({
+          filterGroups: [{
+            filters: [{
+              propertyName: "email",
+              operator: "EQ",
+              value: data.email,
+            }],
+          }],
+        }),
+      }
+    );
 
-    if (!res.ok) {
-      console.error('[HubSpot] Failed to create contact:', await res.json());
+    const searchData = await searchRes.json();
+    const existingId = searchData.results?.[0]?.id;
+
+    const properties: Record<string, string> = {};
+    if (data.firstName) properties.firstname = data.firstName;
+    if (data.businessName) properties.company = data.businessName;
+    if (data.email) properties.email = data.email;
+    if (data.phone) properties.phone = data.phone;
+    properties.lead_source = "Website Chat Widget";
+
+    if (existingId) {
+      // Update existing contact
+      await fetch(
+        `https://api.hubapi.com/crm/v3/objects/contacts/${existingId}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${HUBSPOT_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ properties }),
+        }
+      );
+      return existingId;
+    } else {
+      // Create new contact
+      const createRes = await fetch(
+        "https://api.hubapi.com/crm/v3/objects/contacts",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${HUBSPOT_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ properties }),
+        }
+      );
+      const created = await createRes.json();
+      return created.id;
     }
   } catch (err) {
-    console.error('[HubSpot] Error sending lead:', err);
+    console.error("HubSpot upsert failed:", err);
+    return null;
   }
 }
 
@@ -183,14 +222,28 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Check for lead capture trigger on the full text
-    if (replyText.includes('[LEAD_CAPTURED]')) {
-      const contactInfo = extractContactInfo(messages);
-      sendToHubSpot(contactInfo).catch(err => console.error(err));
-      cleanText = cleanText.replace('[LEAD_CAPTURED]', '').trim();
+    // Extract CRM data and push to HubSpot
+    const crmMatch = replyText.match(/<crm>([\s\S]*?)<\/crm>/);
+    let crmData: any = null;
+    let hubspotId: string | null = null;
+
+    if (crmMatch) {
+      try {
+        crmData = JSON.parse(crmMatch[1]);
+        // Remove nulls before sending
+        const cleanCrm = Object.fromEntries(
+          Object.entries(crmData).filter(([_, v]) => v !== null && v !== "null")
+        );
+        if (Object.keys(cleanCrm).length > 0) {
+          hubspotId = await upsertHubSpotContact(cleanCrm);
+        }
+      } catch (err) {
+        console.error('[Chat API] Failed to parse crm block', err);
+      }
+      cleanText = cleanText.replace(/<crm>[\s\S]*?<\/crm>/, "").trim();
     }
 
-    return NextResponse.json({ reply: cleanText, buttons });
+    return NextResponse.json({ reply: cleanText, buttons, hubspotId });
 
   } catch (err: any) {
     console.error('[Chat API] Gemini SDK Error:', err.message || err);

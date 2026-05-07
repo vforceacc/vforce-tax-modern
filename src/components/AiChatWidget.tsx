@@ -75,9 +75,8 @@ const AiChatWidget = () => {
       let replyText: string = data.reply || "Sorry, I'm experiencing a technical issue. Please call us on 07 3473 5556.";
       const actionButtons = data.buttons || [];
 
-      // Check for lead capture trigger
-      if (replyText.includes('[LEAD_CAPTURED]')) {
-        replyText = replyText.replace('[LEAD_CAPTURED]', '').trim();
+      // Check for lead capture trigger from the new CRM logic
+      if (data.hubspotId) {
         setLeadCaptured(true);
       }
 
