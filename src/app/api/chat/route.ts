@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 const HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN || '';
-
-// Try these models in order — gemini-2.0-flash is the current recommended free-tier model
-const GEMINI_MODELS = [
-  'gemini-2.0-flash',
-  'gemini-1.5-flash',
-  'gemini-1.5-flash-latest',
-];
 
 const SYSTEM_PROMPT = `You are a friendly, professional AI assistant for 'VForce Tax', a highly regarded accounting firm in Townsville, Australia. 
 Your goal is to answer basic accounting/tax questions briefly, but ALWAYS steer the conversation towards booking a consultation with one of our expert accountants.
@@ -43,7 +37,6 @@ function extractContactInfo(messages: { role: string; text: string }[]): {
 async function sendToHubSpot(contactInfo: { name: string; email: string; phone: string }) {
   if (!HUBSPOT_ACCESS_TOKEN) {
     console.warn('[HubSpot] No access token configured – skipping CRM push.');
-    console.log('[HubSpot] Lead data (local log):', contactInfo);
     return;
   }
 
@@ -73,66 +66,21 @@ async function sendToHubSpot(contactInfo: { name: string; email: string; phone: 
     });
 
     if (!res.ok) {
-      const errorData = await res.json();
-      console.error('[HubSpot] Failed to create contact:', errorData);
-    } else {
-      console.log('[HubSpot] Contact created successfully.');
+      console.error('[HubSpot] Failed to create contact:', await res.json());
     }
   } catch (err) {
     console.error('[HubSpot] Error sending lead:', err);
   }
 }
 
-// Call Gemini REST API with a specific model name
-async function callGemini(
-  modelName: string,
-  apiMessages: { role: string; parts: { text: string }[] }[]
-): Promise<{ ok: boolean; text?: string; status?: number; error?: string }> {
-  const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${GEMINI_API_KEY}`;
-
-  const payload = {
-    contents: apiMessages,
-    systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-    generationConfig: {
-      temperature: 0.7,
-      maxOutputTokens: 512,
-    },
-  };
-
-  const geminiRes = await fetch(geminiUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
-
-  if (!geminiRes.ok) {
-    const errBody = await geminiRes.text();
-    console.error(`[Gemini] Model ${modelName} failed — status ${geminiRes.status}:`, errBody);
-    return { ok: false, status: geminiRes.status, error: errBody };
-  }
-
-  const data = await geminiRes.json();
-  const text: string | undefined = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-  if (!text) {
-    console.error(`[Gemini] Model ${modelName} returned no text. Full response:`, JSON.stringify(data));
-    return { ok: false, error: 'No text in response' };
-  }
-
-  return { ok: true, text };
-}
-
 export async function POST(request: NextRequest) {
-  // Guard: ensure API key is present
   if (!GEMINI_API_KEY) {
-    console.error('[Chat API] GEMINI_API_KEY is not set in environment variables');
+    console.error('[Chat API] GEMINI_API_KEY is not set');
     return NextResponse.json(
       { reply: "Sorry, I'm experiencing a technical issue. Please call us on 07 3473 5556." },
       { status: 500 }
     );
   }
-
-  console.log('[Chat API] GEMINI_API_KEY present, length:', GEMINI_API_KEY.length);
 
   try {
     const body = await request.json();
@@ -142,76 +90,90 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
     }
 
-    // Map to Gemini format and strip all leading non-user messages.
-    // The Gemini API requires the conversation to start with a 'user' turn.
-    let apiMessages = messages.map((m: { role: string; text: string }) => ({
-      role: m.role === 'user' ? 'user' : 'model',
-      parts: [{ text: m.text }],
-    }));
+    // Initialize the Google Generative AI SDK
+    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-2.0-flash',
+      systemInstruction: SYSTEM_PROMPT,
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 512,
+      },
+    });
 
-    // Remove any leading model messages (e.g. the initial greeting)
-    while (apiMessages.length > 0 && apiMessages[0].role !== 'user') {
-      apiMessages = apiMessages.slice(1);
+    // Format history for startChat: must strictly be user -> model -> user -> model
+    // The very last message in the array should be the new user message we want to send
+    const history = [];
+    const newMessages = [...messages];
+    
+    // The latest user message
+    const lastUserMessage = newMessages.pop();
+
+    if (!lastUserMessage || lastUserMessage.role !== 'user') {
+      return NextResponse.json({ error: 'Last message must be from user' }, { status: 400 });
     }
 
-    if (apiMessages.length === 0) {
-      return NextResponse.json({ error: 'No user message found' }, { status: 400 });
-    }
-
-    // Ensure alternating roles (Gemini requires strict user/model alternation)
-    const cleanedMessages: { role: string; parts: { text: string }[] }[] = [];
-    for (const msg of apiMessages) {
-      if (cleanedMessages.length === 0) {
-        cleanedMessages.push(msg);
-      } else {
-        const lastRole = cleanedMessages[cleanedMessages.length - 1].role;
-        if (msg.role === lastRole) {
-          // Merge consecutive same-role messages
-          cleanedMessages[cleanedMessages.length - 1].parts.push(...msg.parts);
-        } else {
-          cleanedMessages.push(msg);
-        }
-      }
-    }
-
-    // Try models in order until one works
-    let replyText: string | undefined;
-    for (const modelName of GEMINI_MODELS) {
-      console.log(`[Chat API] Trying model: ${modelName}`);
-      const result = await callGemini(modelName, cleanedMessages);
-      if (result.ok && result.text) {
-        replyText = result.text;
-        console.log(`[Chat API] Success with model: ${modelName}`);
-        break;
-      }
-      // If it's a 404 (model not found) or 400, try next model
-      // If it's a 403 (auth error), no point trying others
-      if (result.status === 403 || result.status === 401) {
-        console.error('[Chat API] Auth error — check GEMINI_API_KEY validity');
-        break;
-      }
-    }
-
-    if (!replyText) {
-      return NextResponse.json({
-        reply: "Sorry, I'm experiencing a technical issue right now. Please call our Townsville office on 07 3473 5556.",
+    // Process previous history correctly
+    for (const msg of newMessages) {
+      history.push({
+        role: msg.role === 'user' ? 'user' : 'model',
+        parts: [{ text: msg.text }],
       });
     }
 
-    // Check for lead capture trigger and push to HubSpot
+    // Clean up history to ensure alternating roles (required by Gemini API)
+    // We filter out any leading model messages, and group consecutive messages of the same role
+    const cleanedHistory: { role: string; parts: { text: string }[] }[] = [];
+    for (const msg of history) {
+      if (cleanedHistory.length === 0 && msg.role !== 'user') {
+        continue; // First message must be 'user'
+      }
+      
+      if (cleanedHistory.length > 0) {
+        const lastRole = cleanedHistory[cleanedHistory.length - 1].role;
+        if (msg.role === lastRole) {
+           cleanedHistory[cleanedHistory.length - 1].parts[0].text += '\n' + msg.parts[0].text;
+           continue;
+        }
+      }
+      cleanedHistory.push({
+        role: msg.role,
+        parts: [{ text: msg.parts[0].text }]
+      });
+    }
+
+    // Ensure the last message in history before we send our prompt isn't 'user'
+    // (Because we are about to send a 'user' message)
+    if (cleanedHistory.length > 0 && cleanedHistory[cleanedHistory.length - 1].role === 'user') {
+      // If the history ends with a user message, we merge it with the final prompt
+      lastUserMessage.text = cleanedHistory.pop()!.parts[0].text + '\n' + lastUserMessage.text;
+    }
+
+    // Start chat session
+    const chat = model.startChat({
+      history: cleanedHistory,
+    });
+
+    // Send the latest message
+    const result = await chat.sendMessage(lastUserMessage.text);
+    const replyText = result.response.text();
+
+    if (!replyText) {
+      throw new Error('No text returned from Gemini API');
+    }
+
+    // Check for lead capture trigger
     if (replyText.includes('[LEAD_CAPTURED]')) {
       const contactInfo = extractContactInfo(messages);
-      console.log('[Lead Captured]', contactInfo);
-      sendToHubSpot(contactInfo).catch(err =>
-        console.error('[HubSpot] Background push error:', err)
-      );
+      sendToHubSpot(contactInfo).catch(err => console.error(err));
     }
 
     return NextResponse.json({ reply: replyText });
-  } catch (err) {
-    console.error('[Chat API] Unhandled error:', err);
+
+  } catch (err: any) {
+    console.error('[Chat API] Gemini SDK Error:', err.message || err);
     return NextResponse.json({
-      reply: "Sorry, something went wrong. Please call our Townsville office on 07 3473 5556.",
+      reply: "Sorry, I'm experiencing a technical issue right now. Please call our Townsville office on 07 3473 5556.",
     });
   }
 }
