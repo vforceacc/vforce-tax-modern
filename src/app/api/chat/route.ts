@@ -8,6 +8,12 @@ const SYSTEM_PROMPT = `You are a friendly, professional AI assistant for 'VForce
 Your goal is to answer basic accounting/tax questions briefly, but ALWAYS steer the conversation towards booking a consultation with one of our expert accountants.
 To book them in, you MUST ask for their Name, Email Address, and Phone Number.
 If the user provides contact information (like an email or phone number), acknowledge it, tell them a VForce accountant will contact them shortly, and APPEND THE EXACT STRING "[LEAD_CAPTURED]" to the very end of your response.
+
+When a user expresses interest in booking, a consultation, or asks about pricing/services, you MUST include a JSON block at the very end of your response in this exact format:
+<actions>
+{"buttons": [{"label": "Book a Free Intro Call", "url": "https://meetings.hubspot.com/vforce-tax/intro", "type": "booking"}]}
+</actions>
+
 Keep answers concise and use Australian English (e.g., lodgement, optimisation).
 Do not use markdown formatting in your responses - keep it plain text.`;
 
@@ -93,7 +99,7 @@ export async function POST(request: NextRequest) {
     // Initialize the Google Generative AI SDK
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({
-      model: 'gemini-3.0-flash',
+      model: 'gemini-2.5-flash-lite',
       systemInstruction: SYSTEM_PROMPT,
       generationConfig: {
         temperature: 0.7,
@@ -162,13 +168,29 @@ export async function POST(request: NextRequest) {
       throw new Error('No text returned from Gemini API');
     }
 
-    // Check for lead capture trigger
+    // Parse out any action buttons
+    const actionsMatch = replyText.match(/<actions>(.*?)<\/actions>/s);
+    let buttons = [];
+    let cleanText = replyText;
+    
+    if (actionsMatch) {
+      try {
+        const parsed = JSON.parse(actionsMatch[1]);
+        buttons = parsed.buttons || [];
+        cleanText = replyText.replace(/<actions>.*?<\/actions>/s, "").trim();
+      } catch (err) {
+        console.error('[Chat API] Failed to parse actions block', err);
+      }
+    }
+
+    // Check for lead capture trigger on the full text
     if (replyText.includes('[LEAD_CAPTURED]')) {
       const contactInfo = extractContactInfo(messages);
       sendToHubSpot(contactInfo).catch(err => console.error(err));
+      cleanText = cleanText.replace('[LEAD_CAPTURED]', '').trim();
     }
 
-    return NextResponse.json({ reply: replyText });
+    return NextResponse.json({ reply: cleanText, buttons });
 
   } catch (err: any) {
     console.error('[Chat API] Gemini SDK Error:', err.message || err);

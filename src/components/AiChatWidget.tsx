@@ -2,9 +2,16 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, MessageSquare, Send, Bot, CheckCircle2 } from 'lucide-react';
 
+interface ChatButton {
+  label: string;
+  url: string;
+  type: string;
+}
+
 interface ChatMessage {
   role: 'user' | 'model';
   text: string;
+  buttons?: ChatButton[];
 }
 
 const AiChatWidget = () => {
@@ -66,6 +73,7 @@ const AiChatWidget = () => {
 
       const data = await response.json();
       let replyText: string = data.reply || "Sorry, I'm experiencing a technical issue. Please call us on 07 3473 5556.";
+      const actionButtons = data.buttons || [];
 
       // Check for lead capture trigger
       if (replyText.includes('[LEAD_CAPTURED]')) {
@@ -73,7 +81,7 @@ const AiChatWidget = () => {
         setLeadCaptured(true);
       }
 
-      setMessages([...newMessages, { role: 'model', text: replyText }]);
+      setMessages([...newMessages, { role: 'model', text: replyText, buttons: actionButtons }]);
     } catch {
       setMessages([...newMessages, { role: 'model', text: "Sorry, the network is playing up. Please call our Townsville office directly on 07 3473 5556." }]);
     } finally {
@@ -111,12 +119,31 @@ const AiChatWidget = () => {
                     <Bot className="w-4 h-4 text-[#0a0f1e]" />
                   </div>
                 )}
-                <div className={`p-3 rounded-2xl max-w-[80%] text-sm ${
-                  m.role === 'user'
-                    ? 'bg-[#39d237] text-[#0a0f1e] font-medium rounded-tr-sm'
-                    : 'bg-[#1a233a] text-slate-200 border border-white/5 rounded-tl-sm'
-                }`}>
-                  {m.text}
+                <div className={`flex flex-col max-w-[80%] ${m.role === 'user' ? 'items-end' : 'items-start'}`}>
+                  <div className={`p-3 rounded-2xl text-sm ${
+                    m.role === 'user'
+                      ? 'bg-[#39d237] text-[#0a0f1e] font-medium rounded-tr-sm'
+                      : 'bg-[#1a233a] text-slate-200 border border-white/5 rounded-tl-sm'
+                  }`}>
+                    {m.text}
+                  </div>
+                  
+                  {/* Render Action Buttons if any */}
+                  {m.buttons && m.buttons.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {m.buttons.map((btn, btnIdx) => (
+                        <a
+                          key={btnIdx}
+                          href={btn.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-white/10 hover:bg-[#39d237] hover:text-[#0a0f1e] text-white text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-xl transition-all border border-white/20 hover:border-transparent"
+                        >
+                          {btn.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
