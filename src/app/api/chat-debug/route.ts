@@ -3,10 +3,10 @@ import { NextResponse } from 'next/server';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 
 const MODELS_TO_TEST = [
+  'gemini-3.0-flash',
+  'gemini-2.5-flash-lite',
   'gemini-2.0-flash',
   'gemini-1.5-flash',
-  'gemini-1.5-flash-latest',
-  'gemini-pro',
 ];
 
 export async function GET() {

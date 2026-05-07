@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
     // Initialize the Google Generative AI SDK
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-3.0-flash',
       systemInstruction: SYSTEM_PROMPT,
       generationConfig: {
         temperature: 0.7,
