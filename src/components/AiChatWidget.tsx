@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, MessageSquare, Send, Bot, CheckCircle2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface ChatButton {
   label: string;
@@ -15,14 +16,29 @@ interface ChatMessage {
 }
 
 const AiChatWidget = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "G'day! I'm the VForce Tax assistant. How can I help you or your business in Townsville today?" }
+    { role: 'model', text: "Hey! 👋 I'm AI-powered, so don't feel limited — ask me anything about tax, BAS, bookkeeping, or running your business. What's on your mind?" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [leadCaptured, setLeadCaptured] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // 30-second auto-popup timer
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const autoOpened = sessionStorage.getItem('chatAutoOpened');
+      const closedByUser = sessionStorage.getItem('chatClosedByUser');
+      
+      if (!autoOpened && !closedByUser) {
+        setIsOpen(true);
+        sessionStorage.setItem('chatAutoOpened', 'true');
+      }
+    }, 30000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Auto-scroll to bottom of chat
   useEffect(() => {
@@ -88,6 +104,22 @@ const AiChatWidget = () => {
     }
   };
 
+  const handleNavClick = (url: string) => {
+    router.push(url);
+    setMessages(prev => [
+      ...prev,
+      { role: 'model', text: "Have a read through and come back if you've got questions! 😊" }
+    ]);
+  };
+
+  const toggleChat = () => {
+    setIsOpen(prev => {
+      const next = !prev;
+      if (!next) sessionStorage.setItem('chatClosedByUser', 'true');
+      return next;
+    });
+  };
+
   return (
     <div className="fixed bottom-6 right-6 z-[90] flex flex-col items-end">
       {/* Chat Window */}
@@ -104,7 +136,7 @@ const AiChatWidget = () => {
                 <p className="text-[10px] text-[#39d237] font-bold">Online</p>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white">
+            <button onClick={() => { setIsOpen(false); sessionStorage.setItem('chatClosedByUser', 'true'); }} className="text-slate-400 hover:text-white">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -131,15 +163,25 @@ const AiChatWidget = () => {
                   {m.buttons && m.buttons.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-2">
                       {m.buttons.map((btn, btnIdx) => (
-                        <a
-                          key={btnIdx}
-                          href={btn.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-white/10 hover:bg-[#39d237] hover:text-[#0a0f1e] text-white text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-xl transition-all border border-white/20 hover:border-transparent"
-                        >
-                          {btn.label}
-                        </a>
+                        btn.type === 'nav' ? (
+                          <button
+                            key={btnIdx}
+                            onClick={() => handleNavClick(btn.url)}
+                            className="bg-transparent text-white text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-xl transition-all border border-slate-500 hover:bg-slate-800"
+                          >
+                            {btn.label}
+                          </button>
+                        ) : (
+                          <a
+                            key={btnIdx}
+                            href={btn.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-[#39d237] text-[#0a0f1e] text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-xl transition-all hover:bg-white border border-[#39d237]"
+                          >
+                            {btn.label}
+                          </a>
+                        )
                       ))}
                     </div>
                   )}
@@ -192,7 +234,7 @@ const AiChatWidget = () => {
 
       {/* Toggle Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleChat}
         className="w-16 h-16 bg-[#39d237] hover:bg-white rounded-full shadow-[0_0_25px_rgba(57,210,55,0.5)] flex items-center justify-center transition-all duration-500 transform hover:scale-110 active:scale-95 group relative overflow-hidden"
         aria-label={isOpen ? 'Close chat assistant' : 'Open chat assistant'}
       >
