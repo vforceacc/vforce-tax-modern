@@ -44,9 +44,18 @@ export async function GET() {
     }
   }
 
+  const hubspotKey = process.env.HUBSPOT_API_KEY;
+  const hubspotCheck = hubspotKey ? await fetch(
+    "https://api.hubapi.com/crm/v3/objects/contacts?limit=1",
+    { headers: { Authorization: `Bearer ${hubspotKey}` } }
+  ).then(r => ({ status: r.status, ok: r.ok }))
+  .catch(e => ({ status: 0, ok: false, error: e.message }))
+  : { status: 0, ok: false, error: "No HUBSPOT_API_KEY secret found" };
+
   return NextResponse.json({
     keyPresent: true,
     keyLengthHint: `${GEMINI_API_KEY.length} chars, starts with ${GEMINI_API_KEY.substring(0, 8)}...`,
     models: results,
+    hubspot: hubspotCheck
   });
 }

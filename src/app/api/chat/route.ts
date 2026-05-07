@@ -235,7 +235,12 @@ export async function POST(request: NextRequest) {
           Object.entries(crmData).filter(([_, v]) => v !== null && v !== "null")
         );
         if (Object.keys(cleanCrm).length > 0) {
-          hubspotId = await upsertHubSpotContact(cleanCrm);
+          try {
+            hubspotId = await upsertHubSpotContact(cleanCrm);
+          } catch (err) {
+            console.error("HubSpot call failed silently:", err);
+            // Chat continues regardless
+          }
         }
       } catch (err) {
         console.error('[Chat API] Failed to parse crm block', err);
