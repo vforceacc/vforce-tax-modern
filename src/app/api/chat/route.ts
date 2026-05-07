@@ -169,7 +169,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Parse out any action buttons
-    const actionsMatch = replyText.match(/<actions>(.*?)<\/actions>/s);
+    const actionsMatch = replyText.match(/<actions>([\s\S]*?)<\/actions>/);
     let buttons = [];
     let cleanText = replyText;
     
@@ -177,7 +177,7 @@ export async function POST(request: NextRequest) {
       try {
         const parsed = JSON.parse(actionsMatch[1]);
         buttons = parsed.buttons || [];
-        cleanText = replyText.replace(/<actions>.*?<\/actions>/s, "").trim();
+        cleanText = replyText.replace(/<actions>[\s\S]*?<\/actions>/, "").trim();
       } catch (err) {
         console.error('[Chat API] Failed to parse actions block', err);
       }
