@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
-const HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN || '';
+const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY || '';
 
 const SYSTEM_PROMPT = `You are a friendly, professional AI assistant for 'VForce Tax', a highly regarded accounting firm in Townsville, Australia. 
 Your goal is to answer basic accounting/tax questions briefly, but ALWAYS steer the conversation towards booking a consultation with one of our expert accountants.
@@ -35,7 +35,7 @@ function extractContactInfo(messages: { role: string; text: string }[]): {
 
 // Send lead to HubSpot CRM
 async function sendToHubSpot(contactInfo: { name: string; email: string; phone: string }) {
-  if (!HUBSPOT_ACCESS_TOKEN) {
+  if (!HUBSPOT_API_KEY) {
     console.warn('[HubSpot] No access token configured – skipping CRM push.');
     return;
   }
@@ -49,7 +49,7 @@ async function sendToHubSpot(contactInfo: { name: string; email: string; phone: 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${HUBSPOT_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${HUBSPOT_API_KEY}`,
       },
       body: JSON.stringify({
         properties: {
