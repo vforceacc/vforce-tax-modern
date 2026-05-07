@@ -1,29 +1,36 @@
 'use server'
 
-import { z } from 'zod'
+interface ContactFormState {
+  message: string | null;
+  errors?: {
+    name?: string[];
+    email?: string[];
+    message?: string[];
+  };
+}
 
-const schema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  message: z.string(),
-})
+export async function saveContactRequest(
+  prevState: ContactFormState,
+  formData: FormData
+): Promise<ContactFormState> {
+  const name = formData.get('name')?.toString().trim() || '';
+  const email = formData.get('email')?.toString().trim() || '';
+  const message = formData.get('message')?.toString().trim() || '';
 
-export async function saveContactRequest(prevState: { message: string | null }, formData: FormData): Promise<{ message: string | null; errors?: { name?: string[]; email?: string[]; message?: string[] } }> {
-  const validatedFields = schema.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
-    message: formData.get('message'),
-  })
+  const errors: ContactFormState['errors'] = {};
 
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: null,
-    }
+  if (!name) errors.name = ['Name is required.'];
+  if (!email || !/^[\w.+-]+@[\w-]+\.[\w.-]+$/.test(email)) {
+    errors.email = ['A valid email address is required.'];
+  }
+  if (!message) errors.message = ['Message is required.'];
+
+  if (Object.keys(errors).length > 0) {
+    return { errors, message: null };
   }
 
-  // Save contact request to database...
-  console.log(validatedFields.data)
+  // Log contact request (replace with DB write or email service)
+  console.log('[Contact Form]', { name, email, message });
 
-  return { message: 'Your message has been sent!' }
+  return { message: 'Your message has been sent!' };
 }
