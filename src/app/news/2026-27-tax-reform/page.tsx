@@ -68,54 +68,58 @@ export default function TaxReformArticle() {
         {/* Content Body */}
         <div className="prose prose-invert prose-lg max-w-none font-inter
           prose-headings:font-outfit prose-headings:font-bold prose-headings:text-white
-          prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-2 prose-h2:border-b prose-h2:border-white/10
-          prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-[#39d237]
+          prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pb-2 prose-h2:border-b prose-h2:border-white/10
           prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
           prose-li:text-gray-300 prose-ul:mb-6
           prose-strong:text-white prose-strong:font-semibold">
           
           <h2>Cutting Taxes for Working Australians</h2>
           <p>
-            The Government is introducing a <strong>$250 Working Australians Tax Offset</strong> from 2027–28, providing an ongoing annual tax cut for over 13 million Australian workers. This is on top of the three tax cuts the Government has already legislated. For an Australian worker on average earnings, the combined benefit of the Government’s five tax cuts could be up to $2,816 per year.
-          </p>
-
-          <h2>Property and Investment Changes</h2>
-          
-          <h3>Capital Gains Tax (CGT)</h3>
-          <p>
-            The Government will replace the 50 per cent Capital Gains Tax discount with a discount based on inflation and introduce a minimum 30 per cent tax on gains from 1 July 2027. This reform means that investors will only pay tax on their real capital gain. Investors in new builds will be able to choose the 50 per cent CGT discount or the new arrangements.
-          </p>
-
-          <h3>Negative Gearing</h3>
-          <p>
-            The Government will limit negative gearing to new builds from 1 July 2027, to focus tax support on new supply. Existing arrangements will remain unchanged for all properties held before Budget night.
+            The Government is introducing a <strong>$250 Working Australians Tax Offset</strong> from 2027–28. This will provide an ongoing annual tax cut for over 13 million Australian workers.
           </p>
           <p>
-            Investors who buy established housing after Budget night will still be able to deduct losses against residential property income. They will be able to carry forward unused losses to future years but won’t be able to deduct them against other income like wages.
+            This is in addition to the three tax cuts the Government has already legislated. For an Australian worker on average earnings, the combined benefit of the Government’s five tax cuts could be up to <strong>$2,816 per year</strong>.
           </p>
 
-          <h2>A Better Tax System for Businesses</h2>
-          
-          <h3>Discretionary Trusts</h3>
+          <h2>Capital Gains Tax (CGT) Overhaul</h2>
           <p>
-            The Government will introduce a minimum tax of 30 per cent on discretionary trusts from 1 July 2028 with some exceptions. Rollover relief will be provided for three years from 1 July 2027 to assist small businesses and others that wish to restructure.
+            The Government will replace the 50 per cent Capital Gains Tax discount with a discount based on inflation. Furthermore, a minimum 30 per cent tax on gains will be introduced from 1 July 2027.
+          </p>
+          <p>
+            This reform means that investors will only pay tax on their <em>real</em> capital gain. However, investors in new builds will still be able to choose between the existing 50 per cent CGT discount or the new arrangements.
           </p>
 
-          <h3>Boosting Resilience and Dynamism</h3>
+          <h2>Negative Gearing Limits</h2>
+          <p>
+            The Government will limit negative gearing to new builds from 1 July 2027, focusing tax support on new supply. Existing arrangements will remain unchanged for all properties held before Budget night.
+          </p>
+          <p>
+            If you buy established housing after Budget night, you will still be able to deduct losses against residential property income. You will be able to carry forward unused losses to future years, but you won’t be able to deduct them against other income like your wages.
+          </p>
+
+          <h2>Discretionary Trusts Minimum Tax</h2>
+          <p>
+            The Government will introduce a minimum tax of 30 per cent on discretionary trusts from 1 July 2028, with some exceptions. Rollover relief will be provided for three years from 1 July 2027 to assist small businesses and others that wish to restructure.
+          </p>
+
+          <h2>Business Resilience & Asset Write-offs</h2>
           <ul>
+            <li><strong>Instant Asset Write-off:</strong> The $20,000 instant asset write-off will be permanently extended from 1 July 2026 for small businesses with turnover up to $10 million.</li>
             <li><strong>Loss Carry Back:</strong> From 2026–27, eligible companies that make a loss can use that loss to get a refund against tax paid in the prior two income years.</li>
             <li><strong>Loss Refundability:</strong> From 2028–29, start-ups in their first two years can get a refund for tax losses, up to the value of fringe benefits tax and withholding tax paid on employee wages.</li>
-            <li><strong>Instant Asset Write-off:</strong> The $20,000 instant asset write-off will be permanently extended from 1 July 2026 for small businesses with turnover up to $10 million.</li>
           </ul>
 
-          <h3>Research and Development (R&D)</h3>
+          <h2>Research and Development (R&D)</h2>
           <p>
             From 1 July 2028, the offset for experimental core R&D will increase by around 25 to 50 per cent. The maximum expenditure cap will also increase to $200 million to encourage more R&D onshore.
           </p>
 
           <h2>Simplifying Tax Management</h2>
           <p>
-            From 2026–27, a new instant tax deduction of up to $1,000 will simplify work-related expense deductions. Additionally, it will be easier for businesses to change their PAYG instalments when conditions change, including opting into monthly instalments from 1 July 2027.
+            From 2026–27, a new instant tax deduction of up to $1,000 will simplify work-related expense deductions. 
+          </p>
+          <p>
+            Additionally, it will be easier for businesses to change their PAYG instalments when conditions change, including opting into monthly instalments from 1 July 2027.
           </p>
 
         </div>
@@ -130,7 +134,7 @@ export default function TaxReformArticle() {
             Strategic Tax Tip
           </h3>
           <p className="text-gray-300 font-inter mb-8 leading-relaxed relative z-10">
-            With the upcoming limits on negative gearing for established properties taking effect in 2027, now is the crucial window to evaluate your current property portfolio. Restructuring your investments or bringing forward property acquisitions could potentially grandfather your assets under the existing, more favorable rules. Furthermore, businesses should immediately review their capital expenditure plans to maximize the permanent $20,000 instant asset write-off.
+            With the upcoming limits on negative gearing for established properties taking effect in 2027, now is the crucial window to evaluate your current property portfolio. Restructuring your investments or bringing forward property acquisitions could potentially grandfather your assets under the existing, more favourable rules. Furthermore, businesses should immediately review their capital expenditure plans to maximise the permanent $20,000 instant asset write-off.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 relative z-10">
             <Link 
