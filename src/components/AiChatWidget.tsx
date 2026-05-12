@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, MessageSquare, Send, Bot, CheckCircle2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface ChatButton {
   label: string;
@@ -17,6 +17,7 @@ interface ChatMessage {
 
 const AiChatWidget = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: 'model', text: "Hey! 👋 I'm AI-powered, so don't feel limited — ask me anything about tax, BAS, bookkeeping, or running your business. What's on your mind?" }
@@ -25,6 +26,34 @@ const AiChatWidget = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [leadCaptured, setLeadCaptured] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Dynamic intro based on current page
+  useEffect(() => {
+    setMessages(prev => {
+      // Only change intro if user hasn't interacted yet
+      if (prev.length > 1) return prev;
+
+      let introText = "Hey! 👋 I'm AI-powered, so don't feel limited — ask me anything about tax, BAS, bookkeeping, or running your business. What's on your mind?";
+      
+      if (pathname.includes('/news/2026-27-tax-reform')) {
+        introText = "Hi there! 👋 Reading up on the new 2026-27 Budget? Let me know if you want to know how the changes to CGT or negative gearing might affect you directly.";
+      } else if (pathname.includes('/news')) {
+        introText = "Hey! 👋 Looking for the latest tax updates? Let me know if you want a summary of recent changes or have a specific tax question.";
+      } else if (pathname.includes('/individual-tax')) {
+        introText = "Hey! 👋 Need help with your personal tax return or maximising your deductions? Ask away!";
+      } else if (pathname.includes('/business-tax')) {
+        introText = "Hi! 👋 Running a business comes with a lot of tax obligations. Need help with BAS, GST, or corporate tax strategies?";
+      } else if (pathname.includes('/business-services')) {
+        introText = "Hey! 👋 Looking to streamline your bookkeeping, payroll, or need business advisory? Let me know what you need help with.";
+      } else if (pathname.includes('/contact')) {
+        introText = "Hey! 👋 Ready to book a session? You can ask me to help schedule it or just send me your contact details to pass on to the team.";
+      } else if (pathname.includes('/about')) {
+        introText = "Hi! 👋 We're proud of our Townsville roots. Want to know more about our CPA qualifications or our approach to tax?";
+      }
+
+      return [{ role: 'model', text: introText }];
+    });
+  }, [pathname]);
 
   // 30-second auto-popup timer
   useEffect(() => {
