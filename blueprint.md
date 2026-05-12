@@ -16,6 +16,7 @@ A modern, responsive website for V-Force, a Townsville-based accounting firm. Th
 *   **Homepage:** A welcoming introduction to V-Force, with a clear value proposition, animated profit graph, and easy access to key sections of the site.
 *   **About Page:** Information about the company, its mission, core values, and team.
 *   **Services Pages:** Dynamic service pages with content, features lists, and enquiry forms for individual and business services.
+*   **News & Insights:** A blog-style section featuring SEO and AEO optimized articles (e.g., Budget Tax Reforms) with strategic tax tips and contact hooks.
 *   **Contact Page:** A detailed contact form with office location, phone, email, and hours.
 *   **Header and Footer:** Consistent navigation and branding across all pages with dropdown menus and mobile responsiveness.
 *   **AI Chat Widget (HubSpot CRM Bot):** A floating AI assistant powered by Gemini, available on every page. Answers tax/accounting questions in Australian English, steers conversations toward booking consultations, and automatically captures leads (Name, Email, Phone) to forward to HubSpot CRM.
@@ -29,6 +30,10 @@ A modern, responsive website for V-Force, a Townsville-based accounting firm. Th
 *   `Footer.tsx` — Site-wide footer with navigation links
 *   `MouseGlow.tsx` — Client-side cursor-following glow effect
 *   `AiChatWidget.tsx` — Floating AI chat assistant with Gemini integration and HubSpot lead capture
+
+### Pages/Routes
+*   `/news` — News index page with article grid
+*   `/news/[slug]` — Individual SEO/AEO optimized article pages
 
 ### API Routes
 *   `POST /api/chat` — Server-side proxy to Gemini API with HubSpot CRM lead forwarding
@@ -49,6 +54,14 @@ A modern, responsive website for V-Force, a Townsville-based accounting firm. Th
 *   [x] Build verification — all pages compile and render correctly
 *   [x] Configure production Gemini API key in `.env.local`
 *   [x] Create HubSpot **Private App** (not CLI project) and add Access Token to `.env.local`
+
+### Back to Basics: Rebuilding the Chat Widget
+*   [ ] Install the official `@google/generative-ai` SDK via npm.
+*   [ ] Rewrite `/api/chat/route.ts` to use `GoogleGenerativeAI` and `startChat()` method for robust conversational history handling.
+*   [ ] Rewrite `<AiChatWidget />` state management to match the correct message payload format expected by the backend.
+*   [ ] Verify the `apphosting.yaml` correctly exposes `GEMINI_API_KEY` without requiring complex Secret Manager setups that caused the previous 404/API errors on Firebase.
+*   [ ] Commit and push the rebuilt application.
+*   [ ] Request the user to monitor Firebase App Hosting for a successful deployment.
 
 ### How to get your HubSpot Access Token
 You do **not** need the HubSpot CLI for this.

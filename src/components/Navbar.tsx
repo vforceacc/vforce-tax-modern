@@ -41,6 +41,9 @@ const Navbar = () => {
           <Link href="/about" className="text-[11px] font-black uppercase tracking-[0.2em] text-white/70 hover:text-[#39d237] transition-all py-2 font-heading">
             About Us
           </Link>
+          <Link href="/news" className="text-[11px] font-black uppercase tracking-[0.2em] text-white/70 hover:text-[#39d237] transition-all py-2 font-heading">
+            News
+          </Link>
           
           {navigation.map((item) => (
             <div key={item.title} className="group relative">
@@ -105,6 +108,13 @@ const Navbar = () => {
                 onClick={() => setMobileMenu(false)}
               >
                 ABOUT US
+              </Link>
+              <Link 
+                href="/news" 
+                className="block w-full text-left text-white text-3xl font-black py-3 hover:text-[#39d237] transition-colors italic font-heading"
+                onClick={() => setMobileMenu(false)}
+              >
+                NEWS
               </Link>
             </div>
           

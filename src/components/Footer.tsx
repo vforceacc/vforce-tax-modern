@@ -43,6 +43,7 @@ const Footer = () => {
           <div className="text-[10px] font-bold text-slate-500 tracking-[0.2em] uppercase">© {new Date().getFullYear()} VFORCE TAX. ALL RIGHTS RESERVED.</div>
           <div className="flex space-x-8">
             <Link href="/about" className="text-[10px] font-bold text-slate-500 hover:text-white uppercase tracking-widest transition-colors">About</Link>
+            <Link href="/news" className="text-[10px] font-bold text-slate-500 hover:text-white uppercase tracking-widest transition-colors">News</Link>
             <Link href="/contact" className="text-[10px] font-bold text-slate-500 hover:text-white uppercase tracking-widest transition-colors">Contact</Link>
             <span className="text-[10px] font-bold text-slate-500 hover:text-white cursor-pointer uppercase tracking-widest transition-colors">Privacy Policy</span>
             <span className="text-[10px] font-bold text-slate-500 hover:text-white cursor-pointer uppercase tracking-widest transition-colors">Terms of Service</span>
