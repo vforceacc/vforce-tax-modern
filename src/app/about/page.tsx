@@ -2,8 +2,13 @@ import React from 'react';
 import { Target, ShieldCheck, Zap } from 'lucide-react';
 
 export const metadata = {
-  title: 'About Us | V-Force Tax | Townsville CPA & ASIC Agents',
-  description: 'Learn more about V-Force Tax, Townsville\'s trusted team of CPA and ASIC-registered tax specialists.',
+  title: 'About Us | Expert Townsville Tax Agents & CPAs | V-Force Tax',
+  description: 'V-Force Tax is your leading Townsville tax agent, CPA, and business accountant. Discover our history, expertise, and why local North Queensland businesses trust us.',
+  keywords: [
+    'Townsville Tax Agent', 'CPA Townsville', 'Accountant Townsville',
+    'Business Advisory Townsville', 'Best Tax Accountant Townsville',
+    'North Queensland Tax Specialists', 'ASIC Registered Agent Townsville'
+  ]
 };
 
 export default function AboutPage() {
@@ -26,10 +31,10 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-16 mt-20">
             <div className="space-y-8">
               <p className="text-2xl text-slate-300 font-light leading-relaxed">
-                V-Force Tax supports individuals and businesses across Townsville with expert tax planning, accounting, and financial advice. 
+                As a premier <strong className="text-white">Townsville tax agent</strong> and advisory firm, V-Force Tax supports individuals and businesses across North Queensland with expert tax planning, accounting, and financial advice.
               </p>
               <p className="text-lg text-slate-400 font-medium leading-relaxed">
-                Our team of experienced <strong className="text-white">CPAs, ASIC agents, and Tax Practitioners Board–registered professionals</strong> deliver personalised solutions tailored to your needs. We believe that accounting shouldn't just be about looking backwards; it should be about looking forward, engineering outcomes, and building wealth. We combine deep local knowledge of the Townsville economy with modern, cloud-based accounting technology.
+                Our team of experienced <strong className="text-white">CPAs, ASIC registered agents, and Tax Practitioners Board–registered professionals</strong> deliver tailored solutions for your financial success. We know that finding a reliable accountant in Townsville means finding someone who understands the local economy. From mining and agriculture to healthcare and trades, we engineer outcomes that build lasting wealth. We combine deep local business advisory expertise with modern, cloud-based accounting technology like Xero to keep you ahead.
               </p>
             </div>
             
@@ -76,6 +81,68 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+      </section>
+      <section className="py-32 bg-[#0a0f1e] relative overflow-hidden border-t border-white/5">
+        <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-black text-white italic tracking-tighter uppercase mb-6">Frequently Asked Questions</h2>
+            <p className="text-slate-400 font-medium text-lg">Common questions asked by our Townsville clients.</p>
+          </div>
+          
+          <div className="space-y-6">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+              <h3 className="text-xl font-bold text-[#39d237] mb-3">Why should I choose a CPA over a regular tax agent in Townsville?</h3>
+              <p className="text-slate-300 leading-relaxed">A Certified Practising Accountant (CPA) possesses advanced qualifications and is held to rigorous professional standards. Choosing a CPA in Townsville ensures you receive high-level strategic business advisory, complex tax planning, and compliance services that go far beyond standard tax returns.</p>
+            </div>
+            
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+              <h3 className="text-xl font-bold text-[#39d237] mb-3">Do you provide services for small businesses in North Queensland?</h3>
+              <p className="text-slate-300 leading-relaxed">Absolutely. We specialize in SME accounting across North Queensland. Whether you are a sole trader, partnership, or company, our business tax agents handle everything from BAS preparation and GST compliance to ASIC corporate secretarial services.</p>
+            </div>
+            
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+              <h3 className="text-xl font-bold text-[#39d237] mb-3">How does V-Force Tax handle cloud accounting?</h3>
+              <p className="text-slate-300 leading-relaxed">We are experts in cloud accounting platforms like Xero, MYOB, and QuickBooks. We help Townsville businesses migrate to the cloud, providing real-time financial reporting and streamlined bookkeeping so you can make fast, informed decisions.</p>
+            </div>
+          </div>
+        </div>
+        
+        {/* JSON-LD for AEO (Answer Engine Optimization) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Why should I choose a CPA over a regular tax agent in Townsville?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A Certified Practising Accountant (CPA) possesses advanced qualifications and is held to rigorous professional standards. Choosing a CPA in Townsville ensures you receive high-level strategic business advisory, complex tax planning, and compliance services that go far beyond standard tax returns."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Do you provide services for small businesses in North Queensland?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Absolutely. We specialize in SME accounting across North Queensland. Whether you are a sole trader, partnership, or company, our business tax agents handle everything from BAS preparation and GST compliance to ASIC corporate secretarial services."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How does V-Force Tax handle cloud accounting?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We are experts in cloud accounting platforms like Xero, MYOB, and QuickBooks. We help Townsville businesses migrate to the cloud, providing real-time financial reporting and streamlined bookkeeping so you can make fast, informed decisions."
+                  }
+                }
+              ]
+            })
+          }}
+        />
       </section>
     </div>
   );
