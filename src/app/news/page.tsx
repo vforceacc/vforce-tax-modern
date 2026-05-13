@@ -19,7 +19,7 @@ const newsArticles = [
 
 export default function NewsPage() {
   return (
-    <div className="min-h-screen pt-32 pb-20 relative z-10 overflow-hidden">
+    <div className="min-h-screen pt-48 pb-20 relative z-10 overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
         <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] rounded-full bg-[#39d237]/5 blur-[120px]" />

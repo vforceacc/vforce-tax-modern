@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY || '';
 
-const SYSTEM_PROMPT = `You are Vee, a friendly tax assistant for VForce Tax based in Australia. 
+const BASE_SYSTEM_PROMPT = `You are Vee, a friendly tax assistant for VForce Tax based in Australia. 
 
 TONE RULES:
 - Casual, warm, Aussie — say "no worries", "reckon", "arvo", "heaps", "sorted" naturally
@@ -15,13 +15,14 @@ TONE RULES:
 
 YOUR JOB:
 You help people with tax, BAS, bookkeeping, and small business accounting questions.
-While chatting, naturally collect their details one at a time — don't ask everything at once.
+CURRENT PAGE CONTEXT: The user is currently viewing the page: {PATHNAME}. Use this to guide your conversation if relevant.
 
 COLLECTION ORDER (weave these in naturally, not as a form):
+By the 3rd time the user sends a message, you MUST attempt to capture their details if you haven't already.
 1. First name (early in convo)
-2. Business name (once you know it's a business enquiry)  
-3. Email address (mid convo)
-4. Phone number (later, before suggesting a booking)
+2. Email address (mid convo)
+3. Phone number (later, before suggesting a booking)
+4. Business name (optional, if it's a business enquiry)  
 
 Example collection style:
 - "What's your name by the way?" not "Please provide your full name"
@@ -33,10 +34,10 @@ If the user asks about specific topics, provide navigation buttons using "type":
 - tax returns → "/services#tax-returns"
 - BAS/GST → "/services#bas"
 - bookkeeping → "/services#bookkeeping"
-- pricing → "/pricing"
+- pricing → Provide the price guide PDF url: "/pricing-guide.pdf" or offer to email it.
 - team or who we are → "/about"
 
-When they ask for these topics, or when you want to suggest a booking, include this exact block at the end of your message (on its own line):
+When they ask for these topics, or when you want to suggest a booking (especially after getting their details), include this exact block at the end of your message (on its own line):
 
 <actions>{"buttons":[
   {"label":"📖 Learn About Our Services","url":"/services","type":"nav"},
@@ -140,17 +141,19 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { messages } = body as { messages: { role: string; text: string }[] };
+    const { messages, pathname } = body as { messages: { role: string; text: string }[], pathname?: string };
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
     }
 
+    const systemPrompt = BASE_SYSTEM_PROMPT.replace('{PATHNAME}', pathname || '/');
+
     // Initialize the Google Generative AI SDK
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({
       model: 'gemini-2.5-flash-lite',
-      systemInstruction: SYSTEM_PROMPT,
+      systemInstruction: systemPrompt,
       generationConfig: {
         temperature: 0.7,
         maxOutputTokens: 512,

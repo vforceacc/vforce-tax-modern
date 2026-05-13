@@ -108,7 +108,7 @@ const AiChatWidget = () => {
       const response = await fetchWithRetry('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: newMessages })
+        body: JSON.stringify({ messages: newMessages, pathname })
       });
 
       if (!response.ok) {
