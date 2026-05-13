@@ -64,7 +64,7 @@ const Hero = () => (
             Discover Financial Freedom with Townsville's expert CPA, ASIC, and TPB-registered specialists. We provide tailored tax planning and financial advice for North Queensland businesses.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="https://meetings.hubspot.com/vforce-tax/intro" target="_blank" className="bg-white text-[#0a0f1e] px-10 py-5 rounded-2xl font-black text-[12px] tracking-widest uppercase hover:bg-[#39d237] transition-all shadow-xl">
+            <Link href="/booking" className="bg-white text-[#0a0f1e] px-10 py-5 rounded-2xl font-black text-[12px] tracking-widest uppercase hover:bg-[#39d237] transition-all shadow-xl">
               Free Consultation
             </Link>
             <Link href="/pricing-guide.pdf" target="_blank" className="border border-white/20 text-white px-10 py-5 rounded-2xl font-black text-[12px] tracking-widest uppercase hover:bg-white/5 transition-all">
@@ -273,7 +273,7 @@ export default function Home() {
               <div className="relative bg-slate-50 border border-slate-200 rounded-[3rem] p-12 shadow-inner">
                 <h4 className="text-[#0a0f1e] font-black text-2xl italic tracking-tighter uppercase mb-8">Ready to start?</h4>
                 <div className="space-y-4">
-                  <Link href="https://meetings.hubspot.com/vforce-tax/intro" target="_blank" className="block w-full bg-[#39d237] text-[#0a0f1e] text-center py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-[#0a0f1e] hover:text-white transition-all shadow-lg">
+                  <Link href="/booking" className="block w-full bg-[#39d237] text-[#0a0f1e] text-center py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-[#0a0f1e] hover:text-white transition-all shadow-lg">
                     Book My Strategy Session
                   </Link>
                   <Link href="/pricing-guide.pdf" target="_blank" className="block w-full border border-slate-200 text-[#0a0f1e] text-center py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-slate-100 transition-all">

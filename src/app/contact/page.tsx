@@ -95,8 +95,7 @@ export default function ContactPage() {
               </p>
               
               <Link 
-                href="https://meetings.hubspot.com/vforce-tax/intro" 
-                target="_blank"
+                href="/booking" 
                 className="inline-block bg-[#0a0f1e] text-white py-6 px-12 rounded-xl font-black text-[13px] tracking-widest uppercase hover:bg-[#39d237] transition-all duration-300 shadow-xl hover:shadow-[0_8px_20px_rgba(57,210,55,0.3)] mb-8"
               >
                 Open Booking Calendar
@@ -104,7 +103,7 @@ export default function ContactPage() {
               
               <div className="pt-8 border-t border-slate-100">
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                  Powered by HubSpot Meetings
+                  Powered by Microsoft Bookings
                 </p>
               </div>
             </div>

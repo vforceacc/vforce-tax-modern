@@ -1,8 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import * as admin from 'firebase-admin';
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
-const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY || '';
+
+// Initialize Firebase Admin for writing to Firestore
+if (!admin.apps.length) {
+  // Uses Application Default Credentials (ADC) in App Hosting
+  // Fallback to credential logic if needed locally, but ADC is preferred.
+  try {
+    admin.initializeApp();
+  } catch (e) {
+    console.error("Firebase Admin initialization error:", e);
+  }
+}
+const db = admin.firestore();
 
 const BASE_SYSTEM_PROMPT = `You are Vee, a friendly tax assistant for VForce Tax based in Australia. 
 
@@ -41,7 +53,7 @@ When they ask for these topics, or when you want to suggest a booking (especiall
 
 <actions>{"buttons":[
   {"label":"📖 Learn About Our Services","url":"/services","type":"nav"},
-  {"label":"📅 Book a Free Intro Call","url":"https://meetings.hubspot.com/vforce-tax/intro","type":"booking"}
+  {"label":"📅 Book a Free Intro Call","url":"/booking","type":"booking"}
 ]}</actions>
 
 (Only include the buttons that are relevant to the user's message. You can include just a nav button, just a booking button, or both.)
@@ -53,82 +65,7 @@ Whenever you have collected any of these details, include this block too:
 
 Only include fields you actually have — set others to null. Update this block in every response once you start collecting.`;
 
-// Push contact to HubSpot CRM
-async function upsertHubSpotContact(data: {
-  firstName?: string;
-  businessName?: string;
-  email?: string;
-  phone?: string;
-}) {
-  if (!HUBSPOT_API_KEY || !data.email) return null;
-
-  try {
-    // Search for existing contact first
-    const searchRes = await fetch(
-      "https://api.hubapi.com/crm/v3/objects/contacts/search",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${HUBSPOT_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          filterGroups: [{
-            filters: [{
-              propertyName: "email",
-              operator: "EQ",
-              value: data.email,
-            }],
-          }],
-        }),
-      }
-    );
-
-    const searchData = await searchRes.json();
-    const existingId = searchData.results?.[0]?.id;
-
-    const properties: Record<string, string> = {};
-    if (data.firstName) properties.firstname = data.firstName;
-    if (data.businessName) properties.company = data.businessName;
-    if (data.email) properties.email = data.email;
-    if (data.phone) properties.phone = data.phone;
-    properties.lead_source = "Website Chat Widget";
-
-    if (existingId) {
-      // Update existing contact
-      await fetch(
-        `https://api.hubapi.com/crm/v3/objects/contacts/${existingId}`,
-        {
-          method: "PATCH",
-          headers: {
-            Authorization: `Bearer ${HUBSPOT_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ properties }),
-        }
-      );
-      return existingId;
-    } else {
-      // Create new contact
-      const createRes = await fetch(
-        "https://api.hubapi.com/crm/v3/objects/contacts",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${HUBSPOT_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ properties }),
-        }
-      );
-      const created = await createRes.json();
-      return created.id;
-    }
-  } catch (err) {
-    console.error("HubSpot upsert failed:", err);
-    return null;
-  }
-}
+// Removed HubSpot upsert function in favor of Firebase Firestore writes.
 
 export async function POST(request: NextRequest) {
   if (!GEMINI_API_KEY) {
@@ -236,10 +173,10 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Extract CRM data and push to HubSpot
+    // Extract CRM data and write to Firestore
     const crmMatch = replyText.match(/<crm>([\s\S]*?)<\/crm>/);
     let crmData: any = null;
-    let hubspotId: string | null = null;
+    let enquiryId: string | null = null;
 
     if (crmMatch) {
       try {
@@ -248,11 +185,16 @@ export async function POST(request: NextRequest) {
         const cleanCrm = Object.fromEntries(
           Object.entries(crmData).filter(([_, v]) => v !== null && v !== "null")
         );
-        if (Object.keys(cleanCrm).length > 0) {
+        if (Object.keys(cleanCrm).length > 0 && cleanCrm.email) {
           try {
-            hubspotId = await upsertHubSpotContact(cleanCrm);
+            const docRef = await db.collection('enquiries').add({
+              ...cleanCrm,
+              source: 'ai_chat',
+              createdAt: new Date().toISOString()
+            });
+            enquiryId = docRef.id;
           } catch (err) {
-            console.error("HubSpot call failed silently:", err);
+            console.error("Firestore call failed silently:", err);
             // Chat continues regardless
           }
         }
@@ -262,7 +204,7 @@ export async function POST(request: NextRequest) {
       cleanText = cleanText.replace(/<crm>[\s\S]*?<\/crm>/, "").trim();
     }
 
-    return NextResponse.json({ reply: cleanText, buttons, hubspotId });
+    return NextResponse.json({ reply: cleanText, buttons, hubspotId: enquiryId });
 
   } catch (err: any) {
     console.error('[Chat API] Gemini SDK Error:', err.message || err);
