@@ -7,12 +7,9 @@ export default function BookingsWidget() {
         Replace the src URL with your actual Microsoft Bookings publish URL.
       */}
       <iframe 
-        src="https://outlook.office365.com/owa/calendar/placeholder@domain.com/bookings/" 
+        src="https://outlook.office.com/book/VForceTaxAdvisory@vforcetax.com.au/" 
         width="100%" 
-        height="800" 
-        scrolling="yes" 
-        className="border-none w-full"
-        style={{ minHeight: '800px' }}
+        className="border-none w-full min-h-[700px] md:min-h-[850px]"
       ></iframe>
     </div>
   );

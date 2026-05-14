@@ -7,6 +7,14 @@ export const metadata = {
 
 const newsArticles = [
   {
+    slug: 'federal-budget-2026-property-investors',
+    title: 'Federal Budget 2026: What Property Investors Must Do Now',
+    excerpt: 'Negative gearing and CGT rules change from 1 July 2027. Understand which properties are grandfathered, why valuations are now critical, and the action window closing fast.',
+    date: 'May 14, 2026',
+    category: 'Property Investment',
+    readTime: '6 min read',
+  },
+  {
     slug: '2026-27-tax-reform',
     title: 'Australian Federal Budget 2026-27: Key Tax Reforms',
     excerpt: 'Discover how the newly announced budget reforms, including changes to CGT and Negative Gearing, will affect you and your business.',
@@ -14,7 +22,6 @@ const newsArticles = [
     category: 'Tax Updates',
     readTime: '4 min read',
   },
-  // Future articles can be added here
 ];
 
 export default function NewsPage() {

@@ -19,7 +19,9 @@ export default function BookingPage() {
           Skip the back-and-forth. Select a time that works for you directly on our calendar.
         </p>
       </div>
-      <BookingsWidget />
+      <div className="px-4 md:px-6">
+        <BookingsWidget />
+      </div>
     </div>
   );
 }
