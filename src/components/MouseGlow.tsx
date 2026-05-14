@@ -13,7 +13,7 @@ const MouseGlow = () => {
   return (
     <div 
       className="pointer-events-none fixed inset-0 z-[100]" 
-      style={{ background: `radial-gradient(220px at ${mousePos.x}px ${mousePos.y}px, rgba(57, 210, 55, 0.08), transparent 80%)` }} 
+      style={{ background: `radial-gradient(220px at ${mousePos.x}px ${mousePos.y}px, rgba(15, 23, 42, 0.08), transparent 80%)` }} 
     />
   );
 };
