@@ -9,12 +9,14 @@ export default function BookingsWidget() {
       const urlParams = new URLSearchParams(window.location.search);
       const name = urlParams.get('name');
       const email = urlParams.get('email');
+      const phone = urlParams.get('phone');
       
-      if (name || email) {
+      if (name || email || phone) {
         // MS Bookings uses these query parameters for prefilling
         const params = new URLSearchParams();
         if (name) params.append('name', name);
         if (email) params.append('email', email);
+        if (phone) params.append('phone', phone);
         
         setSrcUrl(`https://outlook.office.com/book/VForceTaxAdvisory@vforcetax.com.au/?${params.toString()}`);
       }

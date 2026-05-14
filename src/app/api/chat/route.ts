@@ -31,39 +31,18 @@ CURRENT PAGE CONTEXT: The user is currently viewing the page: {PATHNAME}. Use th
 
 COLLECTION ORDER (weave these in naturally, not as a form):
 By the 3rd time the user sends a message, you MUST attempt to capture their details if you haven't already.
-1. First name (early in convo)
-2. Email address (mid convo)
-3. Phone number (later, before suggesting a booking)
-4. Business name (optional, if it's a business enquiry)  
+1. customerName (full name)
+2. customerEmail (email address)
+3. customerPhone (Australian mobile or landline)
 
-Example collection style:
-- "What's your name by the way?" not "Please provide your full name"
-- "And which biz is this for?" not "Please enter your business name"
-- "Best email to reach you on?" not "Please provide your email address"
+BOOKING TRIGGERS:
+Once all three fields (customerName, customerEmail, customerPhone) are collected, you MUST output this exact JSON block at the end of your message to signal the frontend to open the booking widget:
 
-BOOKING & NAV TRIGGERS:
-If the user asks about specific topics, provide navigation buttons using "type": "nav".
-- tax returns → "/services#tax-returns"
-- BAS/GST → "/services#bas"
-- bookkeeping → "/services#bookkeeping"
-- pricing → Provide the price guide PDF url: "/pricing-guide.pdf" or offer to email it.
-- team or who we are → "/about"
+<booking>{"action":"OPEN_BOOKING","customerName":"John Doe","customerEmail":"john@example.com","customerPhone":"0412345678"}</booking>
 
-When they ask for these topics, or when you want to suggest a booking (especially after getting their details), include this exact block at the end of your message (on its own line):
-
-<actions>{"buttons":[
-  {"label":"📖 Learn About Our Services","url":"/services","type":"nav"},
-  {"label":"📅 Book a Free Intro Call","url":"/booking","type":"booking"}
-]}</actions>
-
-(Only include the buttons that are relevant to the user's message. You can include just a nav button, just a booking button, or both.)
-
-CRM DATA:
-Whenever you have collected any of these details, include this block too:
-
-<crm>{"firstName":"VALUE_OR_NULL","businessName":"VALUE_OR_NULL","email":"VALUE_OR_NULL","phone":"VALUE_OR_NULL"}</crm>
-
-Only include fields you actually have — set others to null. Update this block in every response once you start collecting.`;
+If the user asks about specific topics, provide navigation buttons using "type": "nav" like before:
+<actions>{"buttons":[{"label":"📖 Learn About Our Services","url":"/services","type":"nav"}]}</actions>
+`;
 
 // Removed HubSpot upsert function in favor of Firebase Firestore writes.
 
@@ -173,53 +152,20 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Extract CRM data and write to Firestore
-    const crmMatch = replyText.match(/<crm>([\s\S]*?)<\/crm>/);
-    let crmData: any = null;
-    let enquiryId: string | null = null;
+    // Extract OPEN_BOOKING data (DO NOT store in Firestore for privacy)
+    const bookingMatch = replyText.match(/<booking>([\s\S]*?)<\/booking>/);
+    let bookingData: any = null;
 
-    if (crmMatch) {
+    if (bookingMatch) {
       try {
-        crmData = JSON.parse(crmMatch[1]);
-        // Remove nulls before sending
-        const cleanCrm = Object.fromEntries(
-          Object.entries(crmData).filter(([_, v]) => v !== null && String(v).toLowerCase() !== "null" && v !== "VALUE_OR_NULL")
-        );
-        
-        // Append query params to buttons if we have name or email
-        if (Object.keys(cleanCrm).length > 0) {
-          const params = new URLSearchParams();
-          if (cleanCrm.firstName) params.append('name', cleanCrm.firstName);
-          if (cleanCrm.email) params.append('email', cleanCrm.email);
-          
-          if (params.toString() && buttons.length > 0) {
-            buttons = buttons.map((btn: any) => {
-               const separator = btn.url.includes('?') ? '&' : '?';
-               return { ...btn, url: btn.url + separator + params.toString() };
-            });
-          }
-        }
-
-        if (Object.keys(cleanCrm).length > 0 && cleanCrm.email) {
-          try {
-            const docRef = await db.collection('enquiries').add({
-              ...cleanCrm,
-              source: 'ai_chat',
-              createdAt: new Date().toISOString()
-            });
-            enquiryId = docRef.id;
-          } catch (err) {
-            console.error("Firestore call failed silently:", err);
-            // Chat continues regardless
-          }
-        }
+        bookingData = JSON.parse(bookingMatch[1]);
       } catch (err) {
-        console.error('[Chat API] Failed to parse crm block', err);
+        console.error('[Chat API] Failed to parse booking block', err);
       }
-      cleanText = cleanText.replace(/<crm>[\s\S]*?<\/crm>/, "").trim();
+      cleanText = cleanText.replace(/<booking>[\s\S]*?<\/booking>/, "").trim();
     }
 
-    return NextResponse.json({ reply: cleanText, buttons, hubspotId: enquiryId });
+    return NextResponse.json({ reply: cleanText, buttons, bookingData });
 
   } catch (err: any) {
     console.error('[Chat API] Gemini SDK Error:', err.message || err);

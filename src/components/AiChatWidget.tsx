@@ -13,6 +13,12 @@ interface ChatMessage {
   role: 'user' | 'model';
   text: string;
   buttons?: ChatButton[];
+  bookingData?: {
+    action: string;
+    customerName?: string;
+    customerEmail?: string;
+    customerPhone?: string;
+  };
 }
 
 const AiChatWidget = () => {
@@ -119,13 +125,14 @@ const AiChatWidget = () => {
       const data = await response.json();
       let replyText: string = data.reply || "Sorry, I'm experiencing a technical issue. Please call us on 07 3473 5556.";
       const actionButtons = data.buttons || [];
+      const bookingData = data.bookingData || null;
 
       // Check for lead capture trigger from the new CRM logic
       if (data.hubspotId) {
         setLeadCaptured(true);
       }
 
-      setMessages([...newMessages, { role: 'model', text: replyText, buttons: actionButtons }]);
+      setMessages([...newMessages, { role: 'model', text: replyText, buttons: actionButtons, bookingData }]);
     } catch {
       setMessages([...newMessages, { role: 'model', text: "Sorry, the network is playing up. Please call our Townsville office directly on 07 3473 5556." }]);
     } finally {
@@ -212,6 +219,23 @@ const AiChatWidget = () => {
                           </a>
                         )
                       ))}
+                    </div>
+                  )}
+                  {/* Render Booking CTA if OPEN_BOOKING signal received */}
+                  {m.bookingData && m.bookingData.action === 'OPEN_BOOKING' && (
+                    <div className="mt-3">
+                      <button 
+                        onClick={() => {
+                          const params = new URLSearchParams();
+                          if (m.bookingData?.customerName) params.append('name', m.bookingData.customerName);
+                          if (m.bookingData?.customerEmail) params.append('email', m.bookingData.customerEmail);
+                          if (m.bookingData?.customerPhone) params.append('phone', m.bookingData.customerPhone);
+                          router.push(`/booking?${params.toString()}`);
+                        }}
+                        className="bg-vforce-emerald text-white text-[12px] font-black uppercase tracking-wider px-5 py-3 rounded-xl transition-all hover:bg-emerald-600 shadow-md w-full text-center flex justify-center items-center gap-2"
+                      >
+                        Book Your Free Consultation →
+                      </button>
                     </div>
                   )}
                 </div>
