@@ -29,7 +29,7 @@ export default function TaxReformArticle() {
   };
 
   return (
-    <article className="min-h-screen pt-32 pb-20 relative z-10 overflow-hidden selection:bg-[#39d237] selection:text-[#0a0f1e]">
+    <article className="min-h-screen pt-32 pb-20 relative z-10 overflow-hidden selection:bg-vforce-emerald selection:text-white">
       {/* Schema.org JSON-LD */}
       <script
         type="application/ld+json"
@@ -38,13 +38,13 @@ export default function TaxReformArticle() {
 
       {/* Background glow */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-[20%] right-[10%] w-[500px] h-[500px] rounded-full bg-[#39d237]/5 blur-[120px]" />
+        <div className="absolute top-[20%] right-[10%] w-[500px] h-[500px] rounded-full bg-vforce-emerald/5 blur-[120px]" />
       </div>
 
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         
         {/* Back link */}
-        <Link href="/news" className="inline-flex items-center text-gray-400 hover:text-[#39d237] transition-colors duration-300 font-inter mb-12">
+        <Link href="/news" className="inline-flex items-center text-vforce-charcoal hover:text-vforce-emerald transition-colors duration-300 font-inter mb-12">
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
@@ -54,24 +54,24 @@ export default function TaxReformArticle() {
         {/* Header */}
         <header className="mb-16">
           <div className="flex items-center gap-4 mb-6 text-sm font-inter">
-            <span className="text-[#39d237] bg-[#39d237]/10 px-3 py-1 rounded-full border border-[#39d237]/20">Tax Updates</span>
-            <span className="text-gray-400">May 12, 2026</span>
+            <span className="text-vforce-emerald bg-vforce-emerald/10 px-3 py-1 rounded-full border border-vforce-emerald/20">Tax Updates</span>
+            <span className="text-vforce-charcoal">May 12, 2026</span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-outfit mb-8 leading-tight">
-            Australian Federal Budget 2026-27: <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#39d237] to-[#24a022]">Key Tax Reforms</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-outfit mb-8 leading-tight text-vforce-navy">
+            Australian Federal Budget 2026-27: <span className="text-vforce-emerald">Key Tax Reforms</span>
           </h1>
-          <p className="text-xl text-gray-300 font-inter leading-relaxed">
+          <p className="text-xl text-vforce-charcoal font-inter leading-relaxed">
             The Government is reforming the tax system to help more Australians realise the dream of home ownership, better encourage productive investment, and help fund a new $250 tax offset for workers. Here is what you need to know.
           </p>
         </header>
 
         {/* Content Body */}
-        <div className="prose prose-invert prose-lg max-w-none font-inter
-          prose-headings:font-outfit prose-headings:font-bold prose-headings:text-white
-          prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pb-2 prose-h2:border-b prose-h2:border-white/10
-          prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
-          prose-li:text-gray-300 prose-ul:mb-6
-          prose-strong:text-white prose-strong:font-semibold">
+        <div className="prose prose-lg max-w-none font-inter
+          prose-headings:font-outfit prose-headings:font-bold prose-headings:text-vforce-navy
+          prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pb-2 prose-h2:border-b prose-h2:border-vforce-border
+          prose-p:text-vforce-charcoal prose-p:leading-relaxed prose-p:mb-6
+          prose-li:text-vforce-charcoal prose-ul:mb-6
+          prose-strong:text-vforce-navy prose-strong:font-semibold">
           
           <h2>Cutting Taxes for Working Australians</h2>
           <p>
@@ -125,27 +125,27 @@ export default function TaxReformArticle() {
         </div>
 
         {/* Strategic Hook & CTA */}
-        <div className="mt-16 p-8 rounded-2xl bg-gradient-to-br from-[#39d237]/10 to-transparent border border-[#39d237]/20 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-[#39d237]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <h3 className="text-2xl font-bold font-outfit text-white mb-4 flex items-center">
-            <svg className="w-6 h-6 mr-3 text-[#39d237]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="mt-16 p-8 rounded-2xl bg-gradient-to-br from-vforce-emerald/10 to-transparent border border-vforce-emerald/20 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-vforce-emerald/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <h3 className="text-2xl font-bold font-outfit text-vforce-navy mb-4 flex items-center">
+            <svg className="w-6 h-6 mr-3 text-vforce-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             Strategic Tax Tip
           </h3>
-          <p className="text-gray-300 font-inter mb-8 leading-relaxed relative z-10">
+          <p className="text-vforce-charcoal font-inter mb-8 leading-relaxed relative z-10">
             With the upcoming limits on negative gearing for established properties taking effect in 2027, now is the crucial window to evaluate your current property portfolio. Restructuring your investments or bringing forward property acquisitions could potentially grandfather your assets under the existing, more favourable rules. Furthermore, businesses should immediately review their capital expenditure plans to maximise the permanent $20,000 instant asset write-off.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 relative z-10">
             <Link 
               href="/contact" 
-              className="inline-flex justify-center items-center px-8 py-4 rounded-full bg-[#39d237] text-[#0a0f1e] font-bold font-inter hover:bg-[#2fb52d] transition-all duration-300 hover:shadow-[0_0_20px_rgba(57,210,55,0.4)] hover:-translate-y-1"
+              className="inline-flex justify-center items-center px-8 py-4 rounded-full bg-vforce-navy-blue text-white font-bold font-inter hover:bg-vforce-navy transition-all duration-300 hover:shadow-md hover:-translate-y-1"
             >
               Book a Strategy Session
             </Link>
             <Link 
               href="/services" 
-              className="inline-flex justify-center items-center px-8 py-4 rounded-full bg-white/5 text-white font-bold font-inter border border-white/10 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1"
+              className="inline-flex justify-center items-center px-8 py-4 rounded-full bg-vforce-secondary text-vforce-navy font-bold font-inter border border-vforce-border hover:bg-vforce-primary transition-all duration-300 hover:-translate-y-1"
             >
               Explore Our Services
             </Link>

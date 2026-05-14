@@ -5,13 +5,16 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-outfit), sans-serif;
 
-  --color-vforce-dark: #0a0f1e;
-  --color-vforce-dark-alt: #0f1629;
-  --color-vforce-green: #39d237;
-  --color-vforce-accent: #fed03a;
-  --color-vforce-yellow: #fed03a;
+  --color-vforce-primary: #ffffff;
+  --color-vforce-secondary: #f8fafc;
+  --color-vforce-navy: #0f172a;
+  --color-vforce-navy-blue: #1e3a8a;
+  --color-vforce-charcoal: #475569;
+  --color-vforce-emerald: #059669;
+  --color-vforce-gold: #d97706;
+  --color-vforce-border: #e2e8f0;
 
-  --shadow-3xl: 0 0 120px -30px rgba(57, 210, 55, 0.4);
+  --shadow-3xl: 0 20px 40px -15px rgba(15, 23, 42, 0.1);
 }
 
 @layer base {
@@ -20,7 +23,7 @@
   }
 
   body {
-    @apply bg-vforce-dark text-slate-300 font-sans antialiased;
+    @apply bg-vforce-primary text-vforce-charcoal font-sans antialiased;
   }
 
   h1,
@@ -29,7 +32,7 @@
   h4,
   h5,
   h6 {
-    @apply font-heading;
+    @apply font-heading text-vforce-navy;
   }
 
   /* Makes all color and opacity changes on the site feel intentional and smooth */
@@ -38,7 +41,7 @@
   }
 
   ::selection {
-    @apply bg-vforce-green text-vforce-dark;
+    @apply bg-vforce-emerald text-white;
   }
 }
 

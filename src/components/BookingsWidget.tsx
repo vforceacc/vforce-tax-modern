@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function BookingsWidget() {
   return (
-    <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-white">
+    <div className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-vforce-border bg-white">
       {/* 
         Replace the src URL with your actual Microsoft Bookings publish URL.
       */}

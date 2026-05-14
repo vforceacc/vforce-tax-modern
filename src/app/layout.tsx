@@ -80,7 +80,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} ${outfit.variable} font-sans bg-[#0a0f1e] text-white antialiased selection:bg-[#39d237] selection:text-[#0a0f1e]`}>
+      <body className={`${inter.variable} ${outfit.variable} font-sans bg-vforce-primary text-vforce-charcoal antialiased selection:bg-vforce-emerald selection:text-white overflow-x-hidden w-full`}>
         <MouseGlow />
         <Navbar />
         <main>{children}</main>

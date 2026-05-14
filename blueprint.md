@@ -1,71 +1,69 @@
-
 # V-Force Website Blueprint
 
 ## Overview
 
-A modern, responsive website for V-Force, a Townsville-based accounting firm. The site will showcase their services, provide information about the company, and offer a clear way for potential clients to get in touch.
+A modern, responsive, professional corporate website for V-Force Tax, a Townsville-based accounting firm. The site showcases their services, provides information about the company, features SEO-optimized insights, and offers a clear way for potential clients to get in touch.
 
-## Design and Style
+## Design and Style (Professional Corporate Theme)
 
-*   **Colors:** The primary color scheme will be navy and white, with green accents for calls to action and important highlights.
-*   **Fonts:** A clean, modern sans-serif font will be used for body text, with a more stylized, italicized font for headings.
-*   **Layout:** The layout will be clean and spacious, with a focus on readability and user experience. It will be fully responsive, adapting to different screen sizes.
+*   **Colors:** 
+    *   **Primary Trust (Navy & Blue):** `vforce-navy` (#0B1B3D), `vforce-navy-blue` (#1A365D).
+    *   **Professional Backgrounds (White/Light Gray):** `vforce-primary` (#FFFFFF), `vforce-secondary` (#F8FAFC).
+    *   **Stability (Charcoal):** `vforce-charcoal` (#334155).
+    *   **Growth (Emerald):** `vforce-emerald` (#059669).
+*   **Fonts:** A clean, modern sans-serif font (Inter) for body text, with a more stylized, italicized font (Outfit) for headings.
+*   **Layout:** The layout is clean, light, and spacious, focusing on high trust and readability for financial information. Fully responsive and mobile-friendly.
 
 ## Features
 
-*   **Homepage:** A welcoming introduction to V-Force, with a clear value proposition, animated profit graph, and easy access to key sections of the site.
+*   **Homepage:** A welcoming introduction to V-Force, with a clear value proposition, animated elements, and easy access to key sections of the site.
 *   **About Page:** Information about the company, its mission, core values, and team.
 *   **Services Pages:** Dynamic service pages with content, features lists, and enquiry forms for individual and business services.
 *   **News & Insights:** A blog-style section featuring SEO and AEO optimized articles (e.g., Budget Tax Reforms) with strategic tax tips and contact hooks.
 *   **Contact Page:** A detailed contact form with office location, phone, email, and hours.
-*   **Header and Footer:** Consistent navigation and branding across all pages with dropdown menus and mobile responsiveness.
-*   **AI Chat Widget (HubSpot CRM Bot):** A floating AI assistant powered by Gemini, available on every page. Answers tax/accounting questions in Australian English, steers conversations toward booking consultations, and automatically captures leads (Name, Email, Phone) to forward to HubSpot CRM.
+*   **Header and Footer:** Consistent navigation and branding across all pages with dropdown menus and mobile responsiveness (fixed 100dvh overlay for mobile).
+*   **AI Chat Widget:** A floating AI assistant powered by Gemini 2.5 Flash Lite, available on every page. Answers tax/accounting questions in Australian English, steers conversations toward booking consultations, and automatically captures leads.
 *   **SEO/AEO Content:** Townsville-focused SEO blocks, FAQ section with structured data, and local business content targeting North Queensland tax agent searches.
-*   **Mouse Glow Effect:** Subtle green radial glow following the cursor for premium feel.
 
-## Architecture
+## Architecture & Cloudflare Migration Strategy
+
+### Frontend Hosting
+*   Migrating from Firebase Hosting to **Cloudflare Pages** (Free Tier).
+*   All Next.js App Router components and assets will be statically exported or deployed via Cloudflare adapters.
+
+### Serverless AI Proxy (Cloudflare Worker)
+*   Instead of calling Google AI Studio directly from the browser (or a Next.js server route on Firebase), we use a **Cloudflare Worker** (`cloudflare-worker/src/index.js`).
+*   **Purpose:** Protect the `GOOGLE_AI_STUDIO_API_KEY` while allowing fast edge-based LLM inference.
+*   **CORS:** The worker handles CORS to accept requests from the Cloudflare Pages frontend.
+
+### Environment Variable Mapping
+
+**Cloudflare Pages (Public Variables)**
+These variables configure the Firebase client SDK for database access on the frontend.
+*   `NEXT_PUBLIC_FIREBASE_API_KEY`
+*   `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
+*   `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
+*   `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
+*   `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
+*   `NEXT_PUBLIC_FIREBASE_APP_ID`
+
+**Cloudflare Worker (Secret Variables)**
+These variables must be kept secure and should be added to the Cloudflare dashboard or via wrangler.
+*   `GOOGLE_AI_STUDIO_API_KEY` (or `GEMINI_API_KEY`) -> *Must be set via `npx wrangler secret put GOOGLE_AI_STUDIO_API_KEY`*
 
 ### Components
-*   `Navbar.tsx` — Fixed header with desktop dropdowns and mobile drawer
-*   `Footer.tsx` — Site-wide footer with navigation links
-*   `MouseGlow.tsx` — Client-side cursor-following glow effect
-*   `AiChatWidget.tsx` — Floating AI chat assistant with Gemini integration and HubSpot lead capture
+*   `Navbar.tsx` & `Footer.tsx` — Global layout components (Light Theme).
+*   `AiChatWidget.tsx` — Client-side AI chat interface sending requests to the Cloudflare Worker proxy.
+*   `BookingsWidget.tsx` — Microsoft Bookings iframe wrapper.
 
-### Pages/Routes
-*   `/news` — News index page with article grid
-*   `/news/[slug]` — Individual SEO/AEO optimized article pages
+## Current Plan: V-Force Corporate UI Migration & Cloudflare Prep
 
-### API Routes
-*   `POST /api/chat` — Server-side proxy to Gemini API with HubSpot CRM lead forwarding
-
-### Environment Variables
-*   `GEMINI_API_KEY` — Google Gemini API key for the chatbot
-*   `HUBSPOT_ACCESS_TOKEN` — HubSpot Private App token for CRM contact creation
-
-## Current Plan
-
-*   [x] Implement AI Chat Widget component matching VForce brand
-*   [x] Create server-side `/api/chat` API route (Gemini proxy + HubSpot CRM)
-*   [x] Add chat widget globally via root layout
-*   [x] Add CSS animations for chat widget entrance
-*   [x] Create `.env.local` template for API keys
-*   [x] Preserve all existing SEO/AEO content for Townsville tax agents
-*   [x] Implement Dynamic SEO Metadata for all service routes
-*   [x] Build verification — all pages compile and render correctly
-*   [x] Configure production Gemini API key in `.env.local`
-*   [x] Create HubSpot **Private App** (not CLI project) and add Access Token to `.env.local`
-
-### Back to Basics: Rebuilding the Chat Widget
-*   [ ] Install the official `@google/generative-ai` SDK via npm.
-*   [ ] Rewrite `/api/chat/route.ts` to use `GoogleGenerativeAI` and `startChat()` method for robust conversational history handling.
-*   [ ] Rewrite `<AiChatWidget />` state management to match the correct message payload format expected by the backend.
-*   [ ] Verify the `apphosting.yaml` correctly exposes `GEMINI_API_KEY` without requiring complex Secret Manager setups that caused the previous 404/API errors on Firebase.
-*   [ ] Commit and push the rebuilt application.
-*   [ ] Request the user to monitor Firebase App Hosting for a successful deployment.
-
-### How to get your HubSpot Access Token
-You do **not** need the HubSpot CLI for this.
-1. Go to **Settings > Integrations > Private Apps** in HubSpot.
-2. Create an app named "VForce Website Bot".
-3. Add Scopes: `crm.objects.contacts.read` & `crm.objects.contacts.write`.
-4. Copy the **Access Token** into your `.env.local`.
+*   [x] 1. Resolve mobile navigation scroll bug (`h-[100dvh]`).
+*   [x] 2. Implement Professional Corporate color palette (Navy, White, Charcoal, Emerald) in `tailwind.config.ts` and `globals.css`.
+*   [x] 3. Refactor Global Components (`Navbar`, `Footer`) to Light Theme and replace logo with standard non-inverted version.
+*   [x] 4. Refactor Core Pages (`page.tsx`, `about`, `contact`, `booking`) to Light Theme.
+*   [x] 5. Refactor Dynamic Routes (`services`, `[category]/[service]`, `news`, `news/[slug]`) to Light Theme.
+*   [x] 6. Refactor Legal Pages (`terms`, `privacy`) to Light Theme.
+*   [x] 7. **Cloudflare Architecture:** Scaffold `cloudflare-worker` directory with `src/index.js` and `wrangler.toml` for the AI proxy.
+*   [ ] 8. Update frontend AI chat widget (`src/components/AiChatWidget.tsx`) to point to the Cloudflare worker URL once deployed.
+*   [ ] 9. Final QA testing across mobile and desktop.

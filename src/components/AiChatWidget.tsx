@@ -153,37 +153,37 @@ const AiChatWidget = () => {
     <div className="fixed bottom-6 right-6 z-[90] flex flex-col items-end">
       {/* Chat Window */}
       {isOpen && (
-        <div className="bg-[#0f1629] border border-white/10 rounded-2xl w-80 sm:w-96 h-[500px] mb-4 shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-10 duration-300">
+        <div className="bg-white border border-vforce-border rounded-2xl w-80 sm:w-96 h-[500px] mb-4 shadow-xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-10 duration-300">
           {/* Header */}
-          <div className="bg-[#1a233a] p-4 flex justify-between items-center border-b border-white/5">
+          <div className="bg-vforce-navy p-4 flex justify-between items-center border-b border-vforce-border">
             <div className="flex items-center">
-              <div className="w-8 h-8 bg-[#39d237]/10 rounded-full flex items-center justify-center mr-3">
-                <Bot className="w-5 h-5 text-[#39d237]" />
+              <div className="w-8 h-8 bg-vforce-emerald/20 rounded-full flex items-center justify-center mr-3">
+                <Bot className="w-5 h-5 text-vforce-emerald" />
               </div>
               <div>
                 <h3 className="text-white font-bold text-sm tracking-widest uppercase">VForce Assistant</h3>
-                <p className="text-[10px] text-[#39d237] font-bold">Online</p>
+                <p className="text-[10px] text-vforce-emerald font-bold">Online</p>
               </div>
             </div>
-            <button onClick={() => { setIsOpen(false); sessionStorage.setItem('chatClosedByUser', 'true'); }} className="text-slate-400 hover:text-white">
+            <button onClick={() => { setIsOpen(false); sessionStorage.setItem('chatClosedByUser', 'true'); }} className="text-gray-300 hover:text-white">
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin bg-vforce-primary">
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {m.role === 'model' && (
-                  <div className="w-6 h-6 bg-[#39d237] rounded-full flex items-center justify-center mr-2 shrink-0 mt-1">
-                    <Bot className="w-4 h-4 text-[#0a0f1e]" />
+                  <div className="w-6 h-6 bg-vforce-navy rounded-full flex items-center justify-center mr-2 shrink-0 mt-1">
+                    <Bot className="w-4 h-4 text-white" />
                   </div>
                 )}
                 <div className={`flex flex-col max-w-[80%] ${m.role === 'user' ? 'items-end' : 'items-start'}`}>
                   <div className={`p-3 rounded-2xl text-sm ${
                     m.role === 'user'
-                      ? 'bg-[#39d237] text-[#0a0f1e] font-medium rounded-tr-sm'
-                      : 'bg-[#1a233a] text-slate-200 border border-white/5 rounded-tl-sm'
+                      ? 'bg-vforce-emerald text-white font-medium rounded-tr-sm'
+                      : 'bg-vforce-secondary text-vforce-charcoal border border-vforce-border rounded-tl-sm'
                   }`}>
                     {m.text}
                   </div>
@@ -196,7 +196,7 @@ const AiChatWidget = () => {
                           <button
                             key={btnIdx}
                             onClick={() => handleNavClick(btn.url)}
-                            className="bg-transparent text-white text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-xl transition-all border border-slate-500 hover:bg-slate-800"
+                            className="bg-transparent text-vforce-navy text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-xl transition-all border border-vforce-border hover:bg-vforce-secondary"
                           >
                             {btn.label}
                           </button>
@@ -206,7 +206,7 @@ const AiChatWidget = () => {
                             href={btn.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-[#39d237] text-[#0a0f1e] text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-xl transition-all hover:bg-white border border-[#39d237]"
+                            className="bg-vforce-navy-blue text-white text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-xl transition-all hover:bg-vforce-navy shadow-sm"
                           >
                             {btn.label}
                           </a>
@@ -219,40 +219,40 @@ const AiChatWidget = () => {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="w-6 h-6 bg-[#39d237] rounded-full flex items-center justify-center mr-2">
-                  <Bot className="w-4 h-4 text-[#0a0f1e]" />
+                <div className="w-6 h-6 bg-vforce-navy rounded-full flex items-center justify-center mr-2">
+                  <Bot className="w-4 h-4 text-white" />
                 </div>
-                <div className="bg-[#1a233a] p-3 rounded-2xl rounded-tl-sm border border-white/5 flex items-center space-x-1.5">
-                  <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></div>
-                  <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                  <div className="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                <div className="bg-vforce-secondary p-3 rounded-2xl rounded-tl-sm border border-vforce-border flex items-center space-x-1.5">
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
                 </div>
               </div>
             )}
             {leadCaptured && (
-              <div className="bg-[#39d237]/10 border border-[#39d237]/30 rounded-xl p-3 flex items-center">
-                <CheckCircle2 className="w-5 h-5 text-[#39d237] mr-2 shrink-0" />
-                <p className="text-[11px] text-[#39d237] font-bold">Your details have been securely sent to our CRM. A Townsville accountant will be in touch.</p>
+              <div className="bg-vforce-emerald/10 border border-vforce-emerald/30 rounded-xl p-3 flex items-center">
+                <CheckCircle2 className="w-5 h-5 text-vforce-emerald mr-2 shrink-0" />
+                <p className="text-[11px] text-vforce-emerald font-bold">Your details have been securely sent to our CRM. A Townsville accountant will be in touch.</p>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
           {/* Input Area */}
-          <div className="p-3 bg-[#1a233a] border-t border-white/5">
-            <div className="flex items-center bg-[#0a0f1e] rounded-xl border border-white/10 p-1">
+          <div className="p-3 bg-white border-t border-vforce-border">
+            <div className="flex items-center bg-vforce-secondary rounded-xl border border-vforce-border p-1">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Ask a tax question..."
-                className="flex-1 bg-transparent border-none text-white text-sm px-3 focus:outline-none placeholder:text-slate-500"
+                className="flex-1 bg-transparent border-none text-vforce-charcoal text-sm px-3 focus:outline-none placeholder:text-gray-400"
               />
               <button
                 onClick={handleSend}
                 disabled={isLoading || !input.trim()}
-                className="bg-[#39d237] text-[#0a0f1e] p-2 rounded-lg disabled:opacity-50 hover:bg-white"
+                className="bg-vforce-navy-blue text-white p-2 rounded-lg disabled:opacity-50 hover:bg-vforce-navy transition-colors"
               >
                 <Send className="w-4 h-4" />
               </button>
@@ -264,20 +264,20 @@ const AiChatWidget = () => {
       {/* Toggle Button */}
       <button
         onClick={toggleChat}
-        className="w-16 h-16 bg-[#39d237] hover:bg-white rounded-full shadow-[0_0_25px_rgba(57,210,55,0.5)] flex items-center justify-center transition-all duration-500 transform hover:scale-110 active:scale-95 group relative overflow-hidden"
+        className="w-16 h-16 bg-vforce-navy-blue hover:bg-vforce-navy rounded-full shadow-lg flex items-center justify-center transition-all duration-500 transform hover:scale-110 active:scale-95 group relative overflow-hidden"
         aria-label={isOpen ? 'Close chat assistant' : 'Open chat assistant'}
       >
         {/* Pulsing ring */}
         {!isOpen && (
-          <div className="absolute inset-0 rounded-full border-4 border-[#39d237] animate-ping opacity-20"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-vforce-navy-blue animate-ping opacity-20"></div>
         )}
         
         {isOpen ? (
-          <X className="w-7 h-7 text-[#0a0f1e]" />
+          <X className="w-7 h-7 text-white" />
         ) : (
           <div className="relative">
-            <MessageSquare className="w-7 h-7 text-[#0a0f1e] fill-current" />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-[#39d237]"></div>
+            <MessageSquare className="w-7 h-7 text-white fill-current" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-vforce-navy-blue"></div>
           </div>
         )}
       </button>
