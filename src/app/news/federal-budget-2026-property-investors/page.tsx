@@ -44,20 +44,21 @@ export default function PropertyInvestorBudgetArticle() {
 
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
 
-        {/* Back link */}
-        <Link href="/news" className="inline-flex items-center text-vforce-charcoal hover:text-vforce-emerald transition-colors duration-300 font-inter mb-12 relative z-20">
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to News
-        </Link>
-
         {/* Header */}
         <header className="mb-16">
-          <div className="flex items-center gap-4 mb-6 text-sm font-inter">
-            <span className="text-vforce-emerald bg-vforce-emerald/10 px-3 py-1 rounded-full border border-vforce-emerald/20">Property Investment</span>
-            <span className="text-vforce-charcoal">May 14, 2026</span>
-            <span className="text-vforce-charcoal">6 min read</span>
+          <div className="flex items-center justify-between mb-6 text-sm font-inter">
+            <div className="flex items-center gap-4">
+              <span className="text-vforce-emerald bg-vforce-emerald/10 px-3 py-1 rounded-full border border-vforce-emerald/20">Property Investment</span>
+              <span className="text-vforce-charcoal">May 14, 2026</span>
+              <span className="text-vforce-charcoal hidden sm:inline">6 min read</span>
+            </div>
+            {/* Back link */}
+            <Link href="/news" className="inline-flex items-center text-vforce-charcoal hover:text-vforce-emerald transition-colors duration-300 font-inter font-medium relative z-20">
+              <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to News
+            </Link>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-outfit mb-8 leading-tight text-vforce-navy">
             Federal Budget 2026: What <span className="text-vforce-emerald">Property Investors</span> Must Do Now
