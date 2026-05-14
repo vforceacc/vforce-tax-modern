@@ -49,8 +49,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center relative">
         
         {/* LOGO */}
-        <div className="flex items-center group">
-          <Link href="/">
+        <div className="flex items-center group relative z-[80]">
+          <Link href="/" onClick={() => setIsMenuOpen(false)}>
             <img 
               src="/vforce-logo.png" 
               alt="VForce Tax Logo" 
@@ -121,17 +121,7 @@ const Navbar = () => {
       
       {/* MOBILE MENU PANEL */}
       {isMenuOpen && (
-        <div className="fixed inset-0 top-0 h-[100dvh] w-full bg-vforce-primary z-50 flex flex-col overflow-y-auto animate-in fade-in duration-300">
-          {/* Mobile menu header row */}
-          <div className="flex items-center justify-between px-6 py-6 border-b border-vforce-border shrink-0">
-            <Link href="/" onClick={() => setIsMenuOpen(false)}>
-              <img src="/vforce-logo.png" alt="VForce Tax Logo" className="h-20 w-auto object-contain" />
-            </Link>
-            <button onClick={() => setIsMenuOpen(false)} className="text-vforce-navy py-3 px-4 min-h-[44px] items-center flex">
-              <X size={32} />
-            </button>
-          </div>
-
+        <div className="fixed inset-0 top-0 h-[100dvh] w-full bg-vforce-primary z-50 flex flex-col overflow-y-auto animate-in fade-in duration-300 pt-[160px]">
           {/* Menu items */}
           <div className="flex flex-col flex-1 p-6 pb-20">
             <div className="mb-4 border-b border-vforce-border pb-4">
