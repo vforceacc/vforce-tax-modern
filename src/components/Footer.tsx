@@ -12,7 +12,7 @@ const Footer = () => {
               <img 
                 src="/vforce-logo.png" 
                 alt="VForce Tax" 
-                className="h-16 w-auto transition-transform group-hover:scale-105" 
+                className="h-24 w-auto transition-transform group-hover:scale-105" 
               />
             </Link>
             <p className="text-vforce-charcoal text-[15px] font-medium leading-relaxed max-w-sm mb-8">

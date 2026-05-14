@@ -43,7 +43,7 @@ const Navbar = () => {
             <img 
               src="/vforce-logo.png" 
               alt="VForce Tax Logo" 
-              className="h-20 md:h-24 w-auto object-contain transition-all duration-300 group-hover:scale-105" 
+              className="h-28 md:h-36 w-auto object-contain transition-all duration-300 group-hover:scale-105" 
             />
           </Link>
         </div>
@@ -103,7 +103,7 @@ const Navbar = () => {
           {/* Mobile menu header row */}
           <div className="flex items-center justify-between px-6 py-6 border-b border-vforce-border shrink-0">
             <Link href="/" onClick={() => setMobileMenu(false)}>
-              <img src="/vforce-logo.png" alt="VForce Tax Logo" className="h-14 w-auto object-contain" />
+              <img src="/vforce-logo.png" alt="VForce Tax Logo" className="h-20 w-auto object-contain" />
             </Link>
             <button onClick={() => setMobileMenu(false)} className="text-vforce-navy p-2">
               <X size={32} />
