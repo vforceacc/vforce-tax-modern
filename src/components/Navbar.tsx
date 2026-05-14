@@ -7,7 +7,9 @@ import { navigation } from '@/lib/data';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenu, setMobileMenu] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [openSection, setOpenSection] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const Navbar = () => {
 
   // Manage body scroll when mobile menu opens/closes
   useEffect(() => {
-    if (mobileMenu) {
+    if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
@@ -26,16 +28,25 @@ const Navbar = () => {
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [mobileMenu]);
+  }, [isMenuOpen]);
 
   // Close mobile menu when route changes
   useEffect(() => {
-    setMobileMenu(false);
+    setIsMenuOpen(false);
+    setActiveDropdown(null);
   }, [pathname]);
 
+  const toggleDropdown = (title: string) => {
+    setActiveDropdown(prev => prev === title ? null : title);
+  };
+
+  const toggleSection = (title: string) => {
+    setOpenSection(prev => prev === title ? null : title);
+  };
+
   return (
-    <header className={`fixed top-0 inset-x-0 z-[70] transition-all duration-500 ${scrolled ? 'bg-vforce-primary/95 backdrop-blur-xl border-b border-vforce-border py-4 shadow-sm' : 'bg-transparent py-8'}`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center relative">
+    <header className={`fixed top-0 inset-x-0 z-[70] w-full overflow-x-hidden transition-all duration-500 ${scrolled ? 'bg-vforce-primary/95 backdrop-blur-xl border-b border-vforce-border py-4 shadow-sm' : 'bg-transparent py-8'}`}>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center relative">
         
         {/* LOGO */}
         <div className="flex items-center group">
@@ -48,8 +59,8 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* DESKTOP NAVIGATION */}
-        <nav className="hidden lg:flex items-center space-x-10">
+        {/* DESKTOP NAVIGATION (hidden below md breakpoint) */}
+        <nav className="hidden md:flex items-center space-x-8 lg:space-x-10">
           <Link href="/about" className="text-[11px] font-black uppercase tracking-[0.2em] text-vforce-charcoal hover:text-vforce-emerald transition-all py-2 font-heading">
             About Us
           </Link>
@@ -58,14 +69,24 @@ const Navbar = () => {
           </Link>
           
           {navigation.map((item) => (
-            <div key={item.title} className="group relative">
-              <button className="flex items-center text-[11px] font-black uppercase tracking-[0.2em] text-vforce-charcoal hover:text-vforce-emerald transition-all py-2 font-heading">
-                {item.title} <ChevronDown className="ml-2 w-3.5 h-3.5 opacity-40 group-hover:rotate-180 transition-transform" />
+            <div 
+              key={item.title} 
+              className="relative"
+              onMouseEnter={() => setActiveDropdown(item.title)}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <button 
+                onClick={() => toggleDropdown(item.title)}
+                className="flex items-center text-[11px] font-black uppercase tracking-[0.2em] text-vforce-charcoal hover:text-vforce-emerald transition-all py-2 font-heading"
+              >
+                {item.title} <ChevronDown className={`ml-2 w-3.5 h-3.5 transition-transform ${activeDropdown === item.title ? 'rotate-180' : ''}`} />
               </button>
-              <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+              
+              {/* Dropdown Menu */}
+              <div className={`absolute left-1/2 -translate-x-1/2 top-full pt-4 w-80 transition-all duration-300 ${activeDropdown === item.title ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}>
                 <div className="bg-vforce-primary/95 backdrop-blur-2xl rounded-[2rem] shadow-3xl border border-vforce-border p-3 overflow-hidden">
                   {item.subRoutes.map((sub) => (
-                    <Link key={sub.title} href={sub.path} className="flex items-start gap-4 w-full text-left p-4 hover:bg-vforce-secondary rounded-2xl transition-all group/item">
+                    <Link key={sub.title} href={sub.path} className="flex items-start gap-4 w-full text-left p-4 hover:bg-vforce-secondary rounded-2xl transition-all group/item" onClick={() => setActiveDropdown(null)}>
                       <div className="w-10 h-10 rounded-xl bg-vforce-secondary flex items-center justify-center shrink-0 border border-vforce-border group-hover/item:border-vforce-emerald/30 group-hover/item:bg-vforce-emerald/10 transition-all">
                         {sub.icon && <sub.icon className="w-5 h-5 text-vforce-emerald" />}
                       </div>
@@ -88,73 +109,83 @@ const Navbar = () => {
           </Link>
         </nav>
 
-        {/* MOBILE TOGGLE */}
+        {/* MOBILE TOGGLE (flex below md breakpoint) */}
         <button 
-          onClick={() => setMobileMenu(!mobileMenu)} 
-          className="lg:hidden text-vforce-navy p-2 relative z-[80] pointer-events-auto"
+          onClick={() => setIsMenuOpen(!isMenuOpen)} 
+          className="flex md:hidden text-vforce-navy py-3 px-4 min-h-[44px] items-center relative z-[80] pointer-events-auto"
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
-          {mobileMenu ? <X size={32} /> : <Menu size={32} />}
+          {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
         </button>
       </div>
       
       {/* MOBILE MENU PANEL */}
-      {mobileMenu && (
+      {isMenuOpen && (
         <div className="fixed inset-0 top-0 h-[100dvh] w-full bg-vforce-primary z-50 flex flex-col overflow-y-auto animate-in fade-in duration-300">
           {/* Mobile menu header row */}
           <div className="flex items-center justify-between px-6 py-6 border-b border-vforce-border shrink-0">
-            <Link href="/" onClick={() => setMobileMenu(false)}>
+            <Link href="/" onClick={() => setIsMenuOpen(false)}>
               <img src="/vforce-logo.png" alt="VForce Tax Logo" className="h-20 w-auto object-contain" />
             </Link>
-            <button onClick={() => setMobileMenu(false)} className="text-vforce-navy p-2">
+            <button onClick={() => setIsMenuOpen(false)} className="text-vforce-navy py-3 px-4 min-h-[44px] items-center flex">
               <X size={32} />
             </button>
           </div>
 
           {/* Menu items */}
           <div className="flex flex-col flex-1 p-6 pb-20">
-            <div className="mb-8 border-b border-vforce-border pb-6">
+            <div className="mb-4 border-b border-vforce-border pb-4">
               <Link 
                 href="/about" 
-                className="block w-full text-left text-vforce-navy text-3xl font-black py-3 hover:text-vforce-emerald transition-colors italic font-heading"
-                onClick={() => setMobileMenu(false)}
+                className="block w-full text-left text-vforce-navy text-2xl font-black py-3 px-4 min-h-[44px] hover:text-vforce-emerald transition-colors italic font-heading"
+                onClick={() => setIsMenuOpen(false)}
               >
                 ABOUT US
               </Link>
               <Link 
                 href="/news" 
-                className="block w-full text-left text-vforce-navy text-3xl font-black py-3 hover:text-vforce-emerald transition-colors italic font-heading"
-                onClick={() => setMobileMenu(false)}
+                className="block w-full text-left text-vforce-navy text-2xl font-black py-3 px-4 min-h-[44px] hover:text-vforce-emerald transition-colors italic font-heading"
+                onClick={() => setIsMenuOpen(false)}
               >
                 NEWS
               </Link>
             </div>
           
             {navigation.map(cat => (
-              <div key={cat.title} className="mb-10">
-                <div className="text-[10px] font-black text-vforce-emerald uppercase tracking-[0.3em] mb-6 font-heading">{cat.title}</div>
-                <div className="space-y-6">
-                  {cat.subRoutes.map(sub => (
-                    <Link 
-                      key={sub.title} 
-                      href={sub.path}
-                      className="flex items-center gap-6 w-full text-left group"
-                      onClick={() => setMobileMenu(false)}
-                    >
-                      <div className="w-12 h-12 rounded-2xl bg-vforce-secondary flex items-center justify-center border border-vforce-border">
-                         {sub.icon && <sub.icon className="w-6 h-6 text-vforce-emerald" />}
-                      </div>
-                      <div className="text-vforce-navy text-2xl font-black italic hover:text-vforce-emerald transition-colors font-heading uppercase">
-                        {sub.title}
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+              <div key={cat.title} className="mb-2 border-b border-vforce-border pb-2 last:border-0">
+                <button 
+                  onClick={() => toggleSection(cat.title)}
+                  className="flex justify-between items-center w-full text-left text-vforce-navy text-2xl font-black py-3 px-4 min-h-[44px] hover:text-vforce-emerald transition-colors italic font-heading uppercase"
+                >
+                  {cat.title}
+                  <ChevronDown className={`w-6 h-6 transition-transform ${openSection === cat.title ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {openSection === cat.title && (
+                  <div className="space-y-2 mt-2 bg-vforce-secondary/50 rounded-xl p-4">
+                    {cat.subRoutes.map(sub => (
+                      <Link 
+                        key={sub.title} 
+                        href={sub.path}
+                        className="flex items-center gap-4 w-full text-left group py-3 px-4 min-h-[44px]"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-vforce-secondary flex items-center justify-center border border-vforce-border shrink-0">
+                           {sub.icon && <sub.icon className="w-5 h-5 text-vforce-emerald" />}
+                        </div>
+                        <div className="text-vforce-navy text-[15px] font-black italic hover:text-vforce-emerald transition-colors font-heading uppercase">
+                          {sub.title}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
             <Link 
               href="/booking"
-              onClick={() => setMobileMenu(false)}
-              className="mt-8 bg-vforce-navy-blue text-white text-center w-full py-6 rounded-2xl font-black text-[14px] tracking-[0.2em] uppercase block font-heading hover:bg-vforce-navy transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-8 bg-vforce-navy-blue text-white text-center w-full py-4 min-h-[44px] rounded-2xl font-black text-[14px] tracking-[0.2em] uppercase flex items-center justify-center font-heading hover:bg-vforce-navy transition-colors"
             >
               ENQUIRE NOW
             </Link>
