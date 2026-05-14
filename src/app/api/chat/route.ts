@@ -183,8 +183,23 @@ export async function POST(request: NextRequest) {
         crmData = JSON.parse(crmMatch[1]);
         // Remove nulls before sending
         const cleanCrm = Object.fromEntries(
-          Object.entries(crmData).filter(([_, v]) => v !== null && v !== "null")
+          Object.entries(crmData).filter(([_, v]) => v !== null && String(v).toLowerCase() !== "null" && v !== "VALUE_OR_NULL")
         );
+        
+        // Append query params to buttons if we have name or email
+        if (Object.keys(cleanCrm).length > 0) {
+          const params = new URLSearchParams();
+          if (cleanCrm.firstName) params.append('name', cleanCrm.firstName);
+          if (cleanCrm.email) params.append('email', cleanCrm.email);
+          
+          if (params.toString() && buttons.length > 0) {
+            buttons = buttons.map((btn: any) => {
+               const separator = btn.url.includes('?') ? '&' : '?';
+               return { ...btn, url: btn.url + separator + params.toString() };
+            });
+          }
+        }
+
         if (Object.keys(cleanCrm).length > 0 && cleanCrm.email) {
           try {
             const docRef = await db.collection('enquiries').add({
