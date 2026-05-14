@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { navigation } from '@/lib/data';
 
 const Footer = () => {
@@ -9,10 +10,13 @@ const Footer = () => {
         <div className="grid md:grid-cols-5 gap-16 mb-24">
           <div className="md:col-span-2">
             <Link href="/" className="inline-block mb-8 group">
-              <img 
-                src="/vforce-logo.png" 
-                alt="VForce Tax" 
-                className="h-24 w-auto transition-transform group-hover:scale-105" 
+              <Image
+                src="/vforce-logo.png"
+                alt="VForce Tax"
+                width={120}
+                height={120}
+                loading="lazy"
+                className="h-24 w-auto transition-transform group-hover:scale-105"
               />
             </Link>
             <p className="text-vforce-charcoal text-[15px] font-medium leading-relaxed max-w-sm mb-8">

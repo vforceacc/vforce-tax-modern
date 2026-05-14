@@ -3,16 +3,20 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import MouseGlow from '@/components/MouseGlow';
-import AiChatWidget from '@/components/AiChatWidget';
+import LazyAiChatWidget from '@/components/LazyAiChatWidget';
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+  preload: true,
 });
 
 const outfit = Outfit({
   subsets: ['latin'],
   variable: '--font-outfit',
+  display: 'swap',
+  preload: true,
 });
 
 export const metadata = {
@@ -20,8 +24,8 @@ export const metadata = {
   title: 'V-Force Tax | Townsville Tax Agent | CPA & ASIC Registered',
   description: 'Expert tax planning, business accounting, and financial advisory for Townsville. Registered CPA and ASIC agents specialising in GST, BAS, and SME tax strategies.',
   keywords: [
-    'Tax Agent Townsville', 'Townsville Tax Agent', 'Accountant Townsville', 
-    'Tax Return Townsville', 'CPA Townsville', 'Business Accountant Townsville', 
+    'Tax Agent Townsville', 'Townsville Tax Agent', 'Accountant Townsville',
+    'Tax Return Townsville', 'CPA Townsville', 'Business Accountant Townsville',
     'BAS Agent Townsville', 'Tax Advice Townsville', 'VForce Tax'
   ],
   openGraph: {
@@ -62,9 +66,7 @@ const jsonLd = {
   },
   areaServed: 'Townsville',
   priceRange: '$$',
-  sameAs: [
-    'https://vforcetax.com.au'
-  ]
+  sameAs: ['https://vforcetax.com.au']
 };
 
 export default function RootLayout({
@@ -75,6 +77,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        {/* Resource hints for third-party origins */}
+        <link rel="preconnect" href="https://outlook.office365.com" />
+        <link rel="preconnect" href="https://firestore.googleapis.com" />
+        <link rel="preconnect" href="https://generativelanguage.googleapis.com" />
+        <link rel="dns-prefetch" href="https://outlook.office365.com" />
+        <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+        <link rel="dns-prefetch" href="https://generativelanguage.googleapis.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -85,7 +94,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
-        <AiChatWidget />
+        <LazyAiChatWidget />
       </body>
     </html>
   );

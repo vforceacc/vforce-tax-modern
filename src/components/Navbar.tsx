@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { navigation } from '@/lib/data';
@@ -51,10 +52,13 @@ const Navbar = () => {
         {/* LOGO */}
         <div className="flex items-center group relative z-[80]">
           <Link href="/" onClick={() => setIsMenuOpen(false)}>
-            <img 
-              src="/vforce-logo.png" 
-              alt="VForce Tax Logo" 
-              className="h-28 md:h-36 w-auto object-contain transition-all duration-300 group-hover:scale-105" 
+            <Image
+              src="/vforce-logo.png"
+              alt="VForce Tax Logo"
+              width={144}
+              height={144}
+              priority
+              className="h-28 md:h-36 w-auto object-contain transition-all duration-300 group-hover:scale-105"
             />
           </Link>
         </div>
