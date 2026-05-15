@@ -25,6 +25,7 @@ const AiChatWidget = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: 'model', text: "Hey! 👋 I'm AI-powered, so don't feel limited — ask me anything about tax, BAS, bookkeeping, or running your business. What's on your mind?" }
   ]);
@@ -61,19 +62,16 @@ const AiChatWidget = () => {
     });
   }, [pathname]);
 
-  // 30-second auto-popup timer
+  // 30-second notification badge (instead of auto-opening, which is intrusive on mobile)
   useEffect(() => {
     const timer = setTimeout(() => {
-      const autoOpened = sessionStorage.getItem('chatAutoOpened');
-      const closedByUser = sessionStorage.getItem('chatClosedByUser');
-      
-      if (!autoOpened && !closedByUser) {
-        setIsOpen(true);
-        sessionStorage.setItem('chatAutoOpened', 'true');
+      const dismissed = sessionStorage.getItem('chatNotificationDismissed');
+      if (!dismissed && !isOpen) {
+        setShowNotification(true);
       }
     }, 30000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [isOpen]);
 
   // Auto-scroll to bottom of chat
   useEffect(() => {
@@ -154,6 +152,11 @@ const AiChatWidget = () => {
       if (!next) sessionStorage.setItem('chatClosedByUser', 'true');
       return next;
     });
+    // Dismiss the notification badge when user opens chat
+    if (!isOpen) {
+      setShowNotification(false);
+      sessionStorage.setItem('chatNotificationDismissed', 'true');
+    }
   };
 
   return (
@@ -295,7 +298,14 @@ const AiChatWidget = () => {
         ) : (
           <div className="relative">
             <MessageSquare className="w-7 h-7 text-white fill-current" />
+            {/* Static white dot */}
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-vforce-navy-blue"></div>
+            {/* Red notification badge — appears after 30s */}
+            {showNotification && (
+              <div className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center border-2 border-white animate-bounce">
+                <span className="text-white text-[9px] font-black leading-none">1</span>
+              </div>
+            )}
           </div>
         )}
       </button>

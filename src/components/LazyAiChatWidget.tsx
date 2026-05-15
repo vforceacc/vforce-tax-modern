@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 
 // Lazy-load: defers Firebase + Gemini SDK from the critical path
 const AiChatWidget = dynamic(() => import('./AiChatWidget'), {
@@ -10,6 +11,11 @@ const AiChatWidget = dynamic(() => import('./AiChatWidget'), {
 
 export default function LazyAiChatWidget() {
   const [shouldLoad, setShouldLoad] = useState(false);
+  const pathname = usePathname();
+
+  // Don't load the chat widget on the booking page — it interferes with the booking flow
+  const suppressedPaths = ['/booking'];
+  if (suppressedPaths.includes(pathname)) return null;
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;

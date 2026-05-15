@@ -50,12 +50,10 @@ export default function NewsPage() {
                 {/* Glow effect on hover */}
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-vforce-emerald/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 
-                <div className="flex items-center justify-between mb-4 text-sm font-inter text-vforce-charcoal">
-                  <span className="text-vforce-emerald bg-vforce-emerald/10 px-3 py-1 rounded-full">{article.category}</span>
-                  <div className="flex items-center gap-4">
-                    <span>{article.date}</span>
-                    <span>{article.readTime}</span>
-                  </div>
+                <div className="flex flex-wrap items-center gap-3 mb-4 text-sm font-inter text-vforce-charcoal">
+                  <span className="text-vforce-emerald bg-vforce-emerald/10 px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">{article.category}</span>
+                  <span className="text-xs whitespace-nowrap">{article.date}</span>
+                  <span className="text-xs whitespace-nowrap">{article.readTime}</span>
                 </div>
                 
                 <h2 className="text-2xl font-bold font-outfit mb-4 text-vforce-navy group-hover:text-vforce-emerald transition-colors duration-300">

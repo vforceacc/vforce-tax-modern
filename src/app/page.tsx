@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import ProfitGraph from '@/components/ProfitGraph';
 import FAQ from '@/components/FAQ';
 import Link from 'next/link';
@@ -18,7 +19,10 @@ const Hero = () => (
       <div className="grid lg:grid-cols-2 gap-20 items-center">
         <div>
           <div className="inline-flex items-center bg-vforce-emerald/10 border border-vforce-emerald/20 rounded-full px-5 py-2 mb-8">
-            <span className="w-2 h-2 rounded-full bg-vforce-emerald mr-3 animate-pulse"></span>
+            <span className="relative flex h-2 w-2 mr-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-vforce-emerald opacity-60"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-vforce-emerald"></span>
+            </span>
             <span className="text-[10px] font-bold tracking-[0.2em] text-vforce-emerald uppercase">Your Trusted Townsville Accounting Ally</span>
           </div>
           <h1 className="text-6xl lg:text-[100px] font-black text-vforce-navy leading-[0.85] tracking-tighter italic mb-10">
@@ -77,7 +81,7 @@ const SEOBlock = () => (
             Generic accountants don't understand the specific logistical hurdles or the local community dynamics that drive Townsville's success. Whether you are in Mount Louisa, Kirwan, or the CBD, we are your <strong className="text-vforce-navy">trusted Townsville tax specialists</strong>.
           </p>
           <ul className="grid md:grid-cols-2 gap-4 mt-8">
-            {["CPA Certified", "ASIC Registered", "TPB Registered Agent", "Tax Planning Experts", "BAS/GST Specialists", "Xero Gold Partners"].map(item => (
+            {["CPA Certified", "ASIC Registered", "TPB Registered Agent", "Tax Planning Experts", "BAS/GST Specialists", "Xero Certified Advisor"].map(item => (
               <li key={item} className="flex items-center text-sm font-bold text-vforce-navy uppercase tracking-wider">
                 <CheckCircle2 className="w-5 h-5 text-vforce-emerald mr-3 drop-shadow-[0_0_8px_rgba(5,150,105,0.3)]" /> {item}
               </li>
@@ -96,6 +100,32 @@ export default function Home() {
     <>
       <Hero />
       <Features />
+
+      {/* ACCREDITATION STRIP */}
+      <section className="py-12 bg-vforce-primary border-y border-vforce-border">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <p className="text-[10px] font-black text-vforce-charcoal tracking-[0.3em] uppercase text-center mb-8">Registered & Certified With</p>
+          <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
+            {/* CPA Australia */}
+            <Image
+              src="/badge-cpa.png"
+              alt="CPA Australia"
+              width={120}
+              height={60}
+              className="h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+            />
+            {/* Tax Practitioners Board + Xero Certified */}
+            <Image
+              src="/badge-tpb-xero.png"
+              alt="TPB Registered & Xero Certified Advisor"
+              width={220}
+              height={60}
+              className="h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </div>
+        </div>
+      </section>
+
       <section id="specialities" className="py-40 bg-vforce-secondary border-t border-vforce-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="text-center mb-24">
