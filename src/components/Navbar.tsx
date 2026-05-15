@@ -56,11 +56,11 @@ const Navbar = () => {
             <Image
               src="/vforce-logo.png"
               alt="VForce Tax Logo"
-              width={120}
-              height={120}
+              width={160}
+              height={160}
               priority
-              sizes="120px"
-              className="h-14 md:h-20 w-auto object-contain group-hover:scale-105"
+              sizes="160px"
+              className="h-16 md:h-28 w-auto object-contain group-hover:scale-105"
             />
           </Link>
         </div>
