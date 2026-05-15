@@ -24,10 +24,10 @@ const Navbar = () => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
     }
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
     };
   }, [isMenuOpen]);
 
@@ -46,7 +46,8 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`fixed top-0 inset-x-0 z-[70] w-full overflow-x-hidden transition-all duration-500 ${scrolled ? 'bg-vforce-primary/95 backdrop-blur-xl border-b border-vforce-border py-4 shadow-sm' : 'bg-transparent py-8'}`}>
+    <>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-vforce-primary/95 backdrop-blur-xl border-b border-vforce-border py-4 shadow-sm' : 'bg-transparent py-8'}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center relative">
         
         {/* LOGO */}
@@ -88,7 +89,7 @@ const Navbar = () => {
               
               {/* Dropdown Menu */}
               <div className={`absolute left-1/2 -translate-x-1/2 top-full pt-4 w-80 transition-all duration-300 ${activeDropdown === item.title ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}>
-                <div className="bg-vforce-primary/95 backdrop-blur-2xl rounded-[2rem] shadow-3xl border border-vforce-border p-3 overflow-hidden">
+                <div className="bg-vforce-primary/95 backdrop-blur-2xl rounded-[2rem] shadow-3xl border border-vforce-border p-3 overflow-visible">
                   {item.subRoutes.map((sub) => (
                     <Link key={sub.title} href={sub.path} className="flex items-start gap-4 w-full text-left p-4 hover:bg-vforce-secondary rounded-2xl transition-all group/item" onClick={() => setActiveDropdown(null)}>
                       <div className="w-10 h-10 rounded-xl bg-vforce-secondary flex items-center justify-center shrink-0 border border-vforce-border group-hover/item:border-vforce-emerald/30 group-hover/item:bg-vforce-emerald/10 transition-all">
@@ -125,7 +126,7 @@ const Navbar = () => {
       
       {/* MOBILE MENU PANEL */}
       {isMenuOpen && (
-        <div className="fixed inset-0 top-0 h-[100dvh] w-full bg-vforce-primary z-50 flex flex-col overflow-y-auto animate-in fade-in duration-300 pt-[160px]">
+        <div className="fixed inset-0 z-40 bg-vforce-primary flex flex-col overflow-y-auto md:hidden animate-in fade-in duration-300 pt-[160px]">
           {/* Menu items */}
           <div className="flex flex-col flex-1 p-6 pb-20">
             <div className="mb-4 border-b border-vforce-border pb-4">
@@ -188,6 +189,7 @@ const Navbar = () => {
       )}
 
     </header>
+    </>
   );
 };
 

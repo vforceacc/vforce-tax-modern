@@ -1,49 +1,13 @@
-'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import ProfitGraph from '@/components/ProfitGraph';
+import FAQ from '@/components/FAQ';
 import Link from 'next/link';
 import { 
   ChevronDown, ArrowRight, Building, Users, 
   CheckCircle2, ShieldCheck, Zap, Target, Activity
 } from 'lucide-react';
 
-const ProfitGraph = () => {
-  const [offset, setOffset] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => setOffset(prev => (prev + 1) % 100), 50);
-    return () => clearInterval(interval);
-  }, []);
-  const pathData = "M 0 80 Q 25 75, 50 50 T 100 20 T 150 40 T 200 10";
-  return (
-    <div className="relative group w-full max-w-md mx-auto">
-      <div className="absolute inset-0 bg-vforce-emerald/10 blur-[80px] rounded-full group-hover:bg-vforce-emerald/20 transition-all duration-1000"></div>
-      <div className="relative bg-white/80 backdrop-blur-xl border border-vforce-border rounded-[2.5rem] p-10 shadow-2xl overflow-hidden">
-        <div className="flex justify-between items-start mb-10">
-          <div>
-            <div className="text-[10px] font-bold tracking-[0.3em] text-vforce-emerald uppercase mb-1">VForce Analytics</div>
-            <h3 className="text-vforce-navy text-2xl font-black italic tracking-tighter">Profit Projection</h3>
-          </div>
-          <Activity className="w-6 h-6 text-vforce-emerald" />
-        </div>
-        <div className="h-40 relative flex items-end justify-between px-2 mb-8">
-          <svg className="absolute inset-0 w-full h-full text-vforce-emerald" viewBox="0 0 200 100" preserveAspectRatio="none">
-            {[20, 50, 80].map(y => <line key={y} x1="0" y1={y} x2="200" y2={y} stroke="currentColor" strokeOpacity={0.1} />)}
-            <path d={pathData} fill="none" stroke="currentColor" strokeWidth={4} strokeLinecap="round" className="drop-shadow-[0_0_12px_rgba(5,150,105,0.4)]" strokeDasharray="400" strokeDashoffset={400 - (offset * 4)} />
-          </svg>
-        </div>
-        <div className="grid grid-cols-2 gap-4 mt-12 border-t border-vforce-border pt-6">
-          <div>
-            <div className="text-[10px] font-bold text-vforce-charcoal uppercase mb-1">Status</div>
-            <div className="text-vforce-navy text-xl font-black italic">OPTIMISED</div>
-          </div>
-          <div className="text-right">
-            <div className="text-[10px] font-bold text-vforce-charcoal uppercase mb-1">Projection</div>
-            <div className="text-vforce-emerald text-xl font-black italic">ASCENDING</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+
 
 const Hero = () => (
   <section className="relative pt-40 pb-32 lg:pt-56 lg:pb-48 overflow-hidden bg-vforce-secondary">
@@ -125,54 +89,7 @@ const SEOBlock = () => (
   </section>
 );
 
-const FAQ = () => {
-  const [active, setActive] = useState<number | null>(null);
 
-  const faqs = [
-    { q: "What documents do I need for my tax return?", a: "Generally, you'll need your PAYG summaries, bank interest statements, private health insurance details, and receipts for work-related expenses. For businesses, we'll need access to your cloud accounting software or a summary of income and expenses." },
-    { q: "How long does a tax refund take?", a: "Once we lodge your return electronically with the ATO, most refunds are processed within 10 to 14 business days. We ensure all information is accurate to prevent any unnecessary delays." },
-    { q: "Do I need to be in Townsville to work with you?", a: "While we love seeing our clients in our Townsville office, we are fully digital. We support businesses and individuals across Australia using secure cloud portals and video conferencing." }
-  ];
-
-  return (
-    <section className="py-32 bg-vforce-primary border-t border-vforce-border">
-      <div className="max-w-3xl mx-auto px-6">
-        <h2 className="text-3xl font-black text-vforce-navy italic mb-12 uppercase text-center tracking-tighter">
-          Frequently Asked Questions
-        </h2>
-        <div className="space-y-4">
-          {faqs.map((faq, i) => (
-            <div key={i} className="border border-vforce-border rounded-2xl overflow-hidden bg-vforce-secondary transition-all duration-300 hover:border-vforce-emerald/50">
-              <button 
-                onClick={() => setActive(active === i ? null : i)} 
-                className="w-full p-6 text-left flex justify-between items-center hover:bg-white transition-all duration-300"
-              >
-                <span className={`font-bold uppercase tracking-wide text-sm transition-colors duration-300 ${active === i ? 'text-vforce-emerald' : 'text-vforce-navy'}`}>
-                  {faq.q}
-                </span>
-                <ChevronDown className={`w-5 h-5 text-vforce-emerald transition-transform duration-500 ${active === i ? 'rotate-180' : ''}`} />
-              </button>
-              
-              <div 
-                className={`grid transition-all duration-500 ease-in-out ${
-                  active === i 
-                    ? 'grid-rows-[1fr] opacity-100' 
-                    : 'grid-rows-[0fr] opacity-0'
-                }`}
-              >
-                <div className="overflow-hidden">
-                  <div className="p-6 pt-0 text-vforce-charcoal text-[15px] leading-relaxed font-medium border-t border-vforce-border">
-                    {faq.a}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 export default function Home() {
   return (
