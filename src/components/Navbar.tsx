@@ -124,72 +124,71 @@ const Navbar = () => {
           {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
         </button>
       </div>
-      
-      {/* MOBILE MENU PANEL */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-vforce-primary flex flex-col overflow-y-auto md:hidden animate-in fade-in duration-300 pt-20">
-          {/* Menu items */}
-          <div className="flex flex-col flex-1 p-6 pb-20">
-            <div className="mb-4 border-b border-vforce-border pb-4">
-              <Link 
-                href="/about" 
-                className="block w-full text-left text-vforce-navy text-2xl font-black py-3 px-4 min-h-[44px] hover:text-vforce-emerald transition-colors italic font-heading"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                ABOUT US
-              </Link>
-              <Link 
-                href="/news" 
-                className="block w-full text-left text-vforce-navy text-2xl font-black py-3 px-4 min-h-[44px] hover:text-vforce-emerald transition-colors italic font-heading"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                NEWS
-              </Link>
-            </div>
-          
-            {navigation.map(cat => (
-              <div key={cat.title} className="mb-2 border-b border-vforce-border pb-2 last:border-0">
-                <button 
-                  onClick={() => toggleSection(cat.title)}
-                  className="flex justify-between items-center w-full text-left text-vforce-navy text-2xl font-black py-3 px-4 min-h-[44px] hover:text-vforce-emerald transition-colors italic font-heading uppercase"
-                >
-                  {cat.title}
-                  <ChevronDown className={`w-6 h-6 transition-transform ${openSection === cat.title ? 'rotate-180' : ''}`} />
-                </button>
-                
-                {openSection === cat.title && (
-                  <div className="space-y-2 mt-2 bg-vforce-secondary/50 rounded-xl p-4">
-                    {cat.subRoutes.map(sub => (
-                      <Link 
-                        key={sub.title} 
-                        href={sub.path}
-                        className="flex items-center gap-4 w-full text-left group py-3 px-4 min-h-[44px]"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        <div className="w-10 h-10 rounded-xl bg-vforce-secondary flex items-center justify-center border border-vforce-border shrink-0">
-                           {sub.icon && <sub.icon className="w-5 h-5 text-vforce-emerald" />}
-                        </div>
-                        <div className="text-vforce-navy text-[15px] font-black italic hover:text-vforce-emerald transition-colors font-heading uppercase">
-                          {sub.title}
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+    </header>
+    
+    {/* MOBILE MENU PANEL (Moved outside header to avoid backdrop-filter containing block issues) */}
+    {isMenuOpen && (
+      <div className="fixed inset-0 z-[55] bg-vforce-primary flex flex-col overflow-y-auto md:hidden animate-in fade-in duration-300 pt-[100px]">
+        {/* Menu items */}
+        <div className="flex flex-col flex-1 p-6 pb-20">
+          <div className="mb-4 border-b border-vforce-border pb-4">
             <Link 
-              href="/booking"
+              href="/about" 
+              className="block w-full text-left text-vforce-navy text-2xl font-black py-3 px-4 min-h-[44px] hover:text-vforce-emerald transition-colors italic font-heading"
               onClick={() => setIsMenuOpen(false)}
-              className="mt-8 bg-vforce-navy-blue text-white text-center w-full py-4 min-h-[44px] rounded-2xl font-black text-[14px] tracking-[0.2em] uppercase flex items-center justify-center font-heading hover:bg-vforce-navy transition-colors"
             >
-              ENQUIRE NOW
+              ABOUT US
+            </Link>
+            <Link 
+              href="/news" 
+              className="block w-full text-left text-vforce-navy text-2xl font-black py-3 px-4 min-h-[44px] hover:text-vforce-emerald transition-colors italic font-heading"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              NEWS
             </Link>
           </div>
+        
+          {navigation.map(cat => (
+            <div key={cat.title} className="mb-2 border-b border-vforce-border pb-2 last:border-0">
+              <button 
+                onClick={() => toggleSection(cat.title)}
+                className="flex justify-between items-center w-full text-left text-vforce-navy text-2xl font-black py-3 px-4 min-h-[44px] hover:text-vforce-emerald transition-colors italic font-heading uppercase"
+              >
+                {cat.title}
+                <ChevronDown className={`w-6 h-6 transition-transform ${openSection === cat.title ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {openSection === cat.title && (
+                <div className="space-y-2 mt-2 bg-vforce-secondary/50 rounded-xl p-4">
+                  {cat.subRoutes.map(sub => (
+                    <Link 
+                      key={sub.title} 
+                      href={sub.path}
+                      className="flex items-center gap-4 w-full text-left group py-3 px-4 min-h-[44px]"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-vforce-secondary flex items-center justify-center border border-vforce-border shrink-0">
+                         {sub.icon && <sub.icon className="w-5 h-5 text-vforce-emerald" />}
+                      </div>
+                      <div className="text-vforce-navy text-[15px] font-black italic hover:text-vforce-emerald transition-colors font-heading uppercase">
+                        {sub.title}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          <Link 
+            href="/booking"
+            onClick={() => setIsMenuOpen(false)}
+            className="mt-8 bg-vforce-navy-blue text-white text-center w-full py-4 min-h-[44px] rounded-2xl font-black text-[14px] tracking-[0.2em] uppercase flex items-center justify-center font-heading hover:bg-vforce-navy transition-colors"
+          >
+            ENQUIRE NOW
+          </Link>
         </div>
-      )}
-
-    </header>
+      </div>
+    )}
     </>
   );
 };

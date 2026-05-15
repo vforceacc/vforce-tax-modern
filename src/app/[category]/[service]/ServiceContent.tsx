@@ -2,8 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Zap, ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+// Removed client-side firebase imports to use server-side API route instead
 
 interface Feature {
   name: string;
@@ -39,14 +38,23 @@ export default function ServiceContent({ details }: { details: ServiceDetails })
     setIsSubmitting(true);
     setErrorMsg('');
     try {
-      await addDoc(collection(db, 'enquiries'), {
-        name,
-        email,
-        message,
-        service: details.title,
-        source: 'Service Page',
-        createdAt: serverTimestamp(),
+      const res = await fetch('/api/enquire', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          service: details.title,
+          source: 'Service Page',
+        }),
       });
+
+      if (!res.ok) {
+        throw new Error('Server returned an error');
+      }
       setIsSuccess(true);
       setName('');
       setEmail('');
