@@ -92,8 +92,8 @@ export default function RootLayout({
       <body className={`${inter.variable} ${outfit.variable} font-sans bg-vforce-primary text-vforce-charcoal antialiased selection:bg-vforce-emerald selection:text-white overflow-x-hidden w-full`}>
         <MouseGlow />
         <Navbar />
-        {/* Spacer for fixed navbar */}
-        <div className="h-32 md:h-48"></div>
+        {/* Spacer for fixed navbar: h-16 on mobile (logo h-14 + py-2*2), h-28 on desktop */}
+        <div className="h-16 md:h-28"></div>
         <main>{children}</main>
         <Footer />
         <LazyAiChatWidget />

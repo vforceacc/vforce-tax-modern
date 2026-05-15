@@ -35,9 +35,9 @@
     @apply font-heading text-vforce-navy;
   }
 
-  /* Makes all color and opacity changes on the site feel intentional and smooth */
-  * {
-    @apply transition-colors duration-300 ease-in-out;
+  /* Smooth transitions only on interactive elements, not all elements */
+  a, button {
+    @apply transition-colors duration-200 ease-in-out;
   }
 
   ::selection {

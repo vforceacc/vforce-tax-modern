@@ -1,9 +1,10 @@
 'use client';
 import React, { useEffect, useState, useRef } from 'react';
 
+const BOOKINGS_URL = 'https://outlook.office.com/book/VForceTaxAdvisory@vforcetax.com.au/';
+
 export default function BookingsWidget() {
   const [srcUrl, setSrcUrl] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   // IntersectionObserver: only set the iframe src once it scrolls into view
@@ -11,35 +12,15 @@ export default function BookingsWidget() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          setSrcUrl(BOOKINGS_URL);
           observer.disconnect();
         }
       },
-      { rootMargin: '200px' } // start loading 200px before it's visible
+      { rootMargin: '200px' }
     );
     if (wrapperRef.current) observer.observe(wrapperRef.current);
     return () => observer.disconnect();
   }, []);
-
-  // Once visible, build the src URL (with optional prefill params)
-  useEffect(() => {
-    if (!isVisible) return;
-    const base = 'https://outlook.office.com/book/VForceTaxAdvisory@vforcetax.com.au/';
-    const urlParams = new URLSearchParams(window.location.search);
-    const name = urlParams.get('name');
-    const email = urlParams.get('email');
-    const phone = urlParams.get('phone');
-
-    if (name || email || phone) {
-      const params = new URLSearchParams();
-      if (name) params.append('name', name);
-      if (email) params.append('email', email);
-      if (phone) params.append('phone', phone);
-      setSrcUrl(`${base}?${params.toString()}`);
-    } else {
-      setSrcUrl(base);
-    }
-  }, [isVisible]);
 
   return (
     <div
@@ -52,6 +33,7 @@ export default function BookingsWidget() {
           width="100%"
           loading="lazy"
           className="border-none w-full min-h-[700px] md:min-h-[850px]"
+          title="Book an appointment with V-Force Tax"
         />
       ) : (
         <div className="flex flex-col items-center justify-center gap-3 text-vforce-charcoal">

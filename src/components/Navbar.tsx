@@ -47,7 +47,7 @@ const Navbar = () => {
 
   return (
     <>
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-vforce-primary/95 backdrop-blur-xl border-b border-vforce-border py-4 shadow-sm' : 'bg-transparent py-8'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${scrolled ? 'bg-vforce-primary/95 backdrop-blur-xl border-b border-vforce-border py-2 md:py-4 shadow-sm' : 'bg-vforce-primary/90 backdrop-blur-sm py-2 md:py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center relative">
         
         {/* LOGO */}
@@ -56,10 +56,11 @@ const Navbar = () => {
             <Image
               src="/vforce-logo.png"
               alt="VForce Tax Logo"
-              width={144}
-              height={144}
+              width={120}
+              height={120}
               priority
-              className="h-28 md:h-36 w-auto object-contain transition-all duration-300 group-hover:scale-105"
+              sizes="120px"
+              className="h-14 md:h-20 w-auto object-contain group-hover:scale-105"
             />
           </Link>
         </div>
@@ -126,7 +127,7 @@ const Navbar = () => {
       
       {/* MOBILE MENU PANEL */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-vforce-primary flex flex-col overflow-y-auto md:hidden animate-in fade-in duration-300 pt-[160px]">
+        <div className="fixed inset-0 z-50 bg-vforce-primary flex flex-col overflow-y-auto md:hidden animate-in fade-in duration-300 pt-20">
           {/* Menu items */}
           <div className="flex flex-col flex-1 p-6 pb-20">
             <div className="mb-4 border-b border-vforce-border pb-4">

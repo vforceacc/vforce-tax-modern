@@ -225,13 +225,7 @@ const AiChatWidget = () => {
                   {m.bookingData && m.bookingData.action === 'OPEN_BOOKING' && (
                     <div className="mt-3">
                       <button 
-                        onClick={() => {
-                          const params = new URLSearchParams();
-                          if (m.bookingData?.customerName) params.append('name', m.bookingData.customerName);
-                          if (m.bookingData?.customerEmail) params.append('email', m.bookingData.customerEmail);
-                          if (m.bookingData?.customerPhone) params.append('phone', m.bookingData.customerPhone);
-                          router.push(`/booking?${params.toString()}`);
-                        }}
+                        onClick={() => router.push('/booking')}
                         className="bg-vforce-emerald text-white text-[12px] font-black uppercase tracking-wider px-5 py-3 rounded-xl transition-all hover:bg-emerald-600 shadow-md w-full text-center flex justify-center items-center gap-2"
                       >
                         Book Your Free Consultation →
