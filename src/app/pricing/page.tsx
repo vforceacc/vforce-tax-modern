@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   Building, Users, Calculator, TrendingUp, ShieldCheck, 
   CheckCircle2, Printer, CheckSquare, Square, RefreshCw, Zap
@@ -251,13 +252,21 @@ export default function PricingPage() {
             2026 Market Pricing Guide & Service Approximations
           </p>
           
-          <div className="flex flex-wrap items-center justify-center print:justify-start gap-4 text-xs font-bold text-vforce-navy uppercase tracking-wider mb-6">
-            <span className="flex items-center bg-vforce-secondary border border-vforce-border px-4 py-2 rounded-full">
-              <CheckCircle2 className="w-4 h-4 text-vforce-emerald mr-2" /> CPA Certified Accountants
-            </span>
-            <span className="flex items-center bg-vforce-secondary border border-vforce-border px-4 py-2 rounded-full">
-              <CheckCircle2 className="w-4 h-4 text-vforce-emerald mr-2" /> ASIC Registered Agents (Australia)
-            </span>
+          <div className="flex flex-wrap items-center justify-center print:justify-start gap-8 mb-8">
+            <Image
+              src="/badge-cpa.png"
+              alt="CPA Australia"
+              width={180}
+              height={90}
+              className="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+            />
+            <Image
+              src="/badge-tpb-xero.png"
+              alt="TPB Registered & Xero Certified Advisor"
+              width={330}
+              height={90}
+              className="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+            />
           </div>
 
           <p className="text-base text-vforce-charcoal font-medium max-w-3xl mx-auto leading-relaxed print:text-sm print:max-w-none">
