@@ -403,7 +403,7 @@ export default function PricingPage() {
               
               <div className="lg:col-span-7">
                 <span className="text-vforce-emerald font-black tracking-[0.4em] uppercase text-[10px] mb-4 block">Interactive Calculator</span>
-                <h2 className="text-3xl md:text-5xl font-black italic uppercase tracking-tighter mb-6 font-heading">
+                <h2 className="text-3xl md:text-5xl font-black italic uppercase tracking-tighter mb-6 font-heading text-white">
                   Estimate Your <span className="text-vforce-emerald">Service Package.</span>
                 </h2>
                 <p className="text-slate-300 font-bold text-sm mb-10 leading-relaxed max-w-lg">
@@ -450,9 +450,9 @@ export default function PricingPage() {
                 <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-[2.5rem] p-8 md:p-10 text-center">
                   <Calculator className="w-12 h-12 text-vforce-emerald mx-auto mb-6" />
                   
-                  {selectedServices.length === 0 ? (
+                   {selectedServices.length === 0 ? (
                     <div>
-                      <h4 className="text-xl font-black uppercase italic tracking-tighter mb-4">No Services Selected</h4>
+                      <h4 className="text-xl font-black uppercase italic tracking-tighter mb-4 text-white">No Services Selected</h4>
                       <p className="text-slate-400 font-bold text-xs leading-relaxed mb-6">
                         Click &ldquo;Add to Estimate&rdquo; on any service cards above to dynamically estimate your benchmark rates.
                       </p>
@@ -461,7 +461,7 @@ export default function PricingPage() {
                     </div>
                   ) : (
                     <div>
-                      <h4 className="text-xl font-black uppercase italic tracking-tighter mb-2">Estimate Summary</h4>
+                      <h4 className="text-xl font-black uppercase italic tracking-tighter mb-2 text-white">Estimate Summary</h4>
                       <p className="text-[10px] text-vforce-emerald font-black uppercase tracking-widest mb-6">
                         {selectedServices.length} Service{selectedServices.length > 1 ? 's' : ''} Selected
                       </p>
