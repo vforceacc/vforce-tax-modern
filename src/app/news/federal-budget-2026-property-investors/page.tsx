@@ -82,7 +82,7 @@ export default function PropertyInvestorBudgetArticle() {
             What the current rules allow
           </h3>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            Under existing law, if your rental expenses exceed your rental income — creating a loss — you can deduct that loss against your wages or other taxable income in the same financial year. This reduces your overall tax bill immediately.
+            Under existing law, if your rental expenses exceed your rental income, creating a loss, you can deduct that loss against your wages or other taxable income in the same financial year. This reduces your overall tax bill immediately.
           </p>
 
           <h3 className="text-xl md:text-2xl font-bold font-outfit text-vforce-navy mt-8 mb-4">
@@ -145,7 +145,7 @@ export default function PropertyInvestorBudgetArticle() {
             The market value reset
           </h3>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            For properties held before and sold after 1 July 2027, the ATO is expected to introduce a market value reset mechanism. Investors may be able to use their property's value as at 1 July 2027 as the new cost base for the portion of the gain accrued after that date — or apply an ATO-supported apportionment formula.
+            For properties held before and sold after 1 July 2027, the ATO is expected to introduce a market value reset mechanism. Investors may be able to use their property's value as at 1 July 2027 as the new cost base for the portion of the gain accrued after that date, or apply an ATO-supported apportionment formula.
           </p>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             This is not just an accounting exercise. It has real tax consequences. Investors who do not have a <strong className="text-vforce-navy font-bold">professional, documented valuation</strong> dated at or before 1 July 2027 may be forced to rely on less favourable ATO default calculations.
@@ -195,7 +195,7 @@ export default function PropertyInvestorBudgetArticle() {
             <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Division 43 capital works deductions:</strong> These deductions also reduce the cost base of your property, meaning lower capital gains on sale. This interaction between depreciation and CGT planning requires careful modelling.</li>
           </ul>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            If you don't currently have a tax depreciation schedule for your investment property, now is the time to get one — before the rules shift and before you need that carried-forward loss balance to be as large as possible.
+            If you don't currently have a tax depreciation schedule for your investment property, now is the time to get one, before the rules shift and before you need that carried-forward loss balance to be as large as possible.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-bold font-outfit text-vforce-navy mt-12 mb-6 pb-2 border-b border-vforce-border">

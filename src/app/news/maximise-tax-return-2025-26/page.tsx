@@ -83,7 +83,7 @@ export default function TaxReturn2526Article() {
             Maximise Your <span className="text-vforce-emerald">2025–26 Tax Return:</span> Your EOFY Preparation Guide
           </h1>
           <p className="text-xl text-vforce-charcoal font-inter leading-relaxed">
-            Tax time has a habit of creeping up on you, and for many Australians, the end of the financial year can feel pretty stressful — especially when documents are scattered everywhere. The good news? Getting sorted early can make the whole process a lot smoother, and may mean a bigger refund too. Here&apos;s your no-nonsense guide to nailing tax time for 2025–26.
+            Tax time has a habit of creeping up on you, and for many Australians, the end of the financial year can feel pretty stressful, especially when documents are scattered everywhere. The good news? Getting sorted early can make the whole process a lot smoother, and may mean a bigger refund too. Here&apos;s your no-nonsense guide to nailing tax time for 2025–26.
           </p>
         </header>
 
@@ -110,7 +110,7 @@ export default function TaxReturn2526Article() {
             Get Your Records Sorted Before Anything Else
           </h2>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            Preparing early isn&apos;t just about chasing a refund — it&apos;s a chance to review your broader financial position, spot deductions you might have missed, and make sure your records are accurate and compliant. With the ATO continuing to expand its data-matching capabilities across income, investments, cryptocurrency, rental properties, and work-related claims, accuracy has never been more important.
+            Preparing early isn&apos;t just about chasing a refund; it&apos;s a chance to review your broader financial position, spot deductions you might have missed, and make sure your records are accurate and compliant. With the ATO continuing to expand its data-matching capabilities across income, investments, cryptocurrency, rental properties, and work-related claims, accuracy has never been more important.
           </p>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg font-bold text-vforce-navy">
             For most individuals, the first step is pulling together income-related documents:
@@ -123,13 +123,13 @@ export default function TaxReturn2526Article() {
             <li className="leading-relaxed">Private health insurance statements</li>
           </ul>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            If you&apos;ve bought or sold investments during the year, you&apos;ll also need share trading records, cryptocurrency transaction histories, and capital gains tax information. Crypto remains a key ATO focus area — many investors still underestimate how much record-keeping is required across multiple exchanges or wallets.
+            If you&apos;ve bought or sold investments during the year, you&apos;ll also need share trading records, cryptocurrency transaction histories, and capital gains tax information. Crypto remains a key ATO focus area, and many investors still underestimate how much record-keeping is required across multiple exchanges or wallets.
           </p>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             If you own an investment property, make sure you&apos;ve got your rental income summaries, loan interest statements, council rates, insurance records, depreciation schedules, and invoices for any repairs or maintenance.
           </p>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            Creating a simple digital folder throughout the year makes a massive difference. Rather than scrambling in July, consistent record-keeping allows for a smoother — and more accurate — lodgement.
+            Creating a simple digital folder throughout the year makes a massive difference. Rather than scrambling in July, consistent record-keeping allows for a smoother, more accurate lodgement.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-bold font-outfit text-vforce-navy mt-12 mb-6 pb-2 border-b border-vforce-border">
@@ -140,7 +140,7 @@ export default function TaxReturn2526Article() {
             1. Work-From-Home (WFH) Deductions
           </h3>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            If you&apos;re claiming home office expenses using the <strong className="text-vforce-navy font-bold">70-cents-per-hour fixed-rate method</strong>, you must have a representative 4-week diary to prove your hours. The old 80-cents shortcut method is gone — no worries if you missed it, but this year you need to keep a proper record. Your diary needs to cover a <em>representative</em> 4-week period that reflects your typical work pattern throughout the year.
+            If you&apos;re claiming home office expenses using the <strong className="text-vforce-navy font-bold">70-cents-per-hour fixed-rate method</strong>, you must have a representative 4-week diary to prove your hours. The old 80-cents shortcut method is gone; no worries if you missed it, but this year you need to keep a proper record. Your diary needs to cover a <em>representative</em> 4-week period that reflects your typical work pattern throughout the year.
           </p>
 
           <h3 className="text-xl md:text-2xl font-bold font-outfit text-vforce-navy mt-8 mb-4">
@@ -150,7 +150,7 @@ export default function TaxReturn2526Article() {
             Claiming car expenses via the logbook method? Make sure your <strong className="text-vforce-navy font-bold">12-week consecutive logbook is current</strong>. Logbooks are valid for five years, but if yours has lapsed or your usage patterns have changed significantly, now&apos;s the time to start a new one.
           </p>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            Alternatively, you can use the <strong className="text-vforce-navy font-bold">cents-per-kilometre method</strong> — set at <strong className="text-vforce-navy font-bold">88 cents per km</strong> for recent years — and claim up to 5,000 km without a logbook, as long as you can show your work-related travel pattern.
+            Alternatively, you can use the <strong className="text-vforce-navy font-bold">cents-per-kilometre method</strong>, set at <strong className="text-vforce-navy font-bold">88 cents per km</strong> for recent years, and claim up to 5,000 km without a logbook, as long as you can show your work-related travel pattern.
           </p>
 
           <h3 className="text-xl md:text-2xl font-bold font-outfit text-vforce-navy mt-8 mb-4">
@@ -161,7 +161,7 @@ export default function TaxReturn2526Article() {
           </p>
 
           <h3 className="text-xl md:text-2xl font-bold font-outfit text-vforce-navy mt-8 mb-4">
-            4. Superannuation — Don&apos;t Miss the Deadline
+            4. Superannuation: Don&apos;t Miss the Deadline
           </h3>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             The Superannuation Guarantee (SG) rate has increased to <strong className="text-vforce-navy font-bold">12% from 1 July 2025</strong> — confirm your employer has adjusted accordingly. If you&apos;re making personal concessional contributions to boost your retirement savings and claim a tax deduction, they must be <strong className="text-vforce-navy font-bold">received by your fund before 30 June</strong>. Many funds have their own early processing cut-offs, so don&apos;t leave this one to the last minute.
@@ -177,14 +177,14 @@ export default function TaxReturn2526Article() {
             To offset capital gains, consider <strong className="text-vforce-navy font-bold">selling underperforming shares or assets before 30 June</strong> to crystallise capital losses. Remember that if you&apos;ve held an asset for more than 12 months, you&apos;re generally entitled to a <strong className="text-vforce-navy font-bold">50% CGT discount</strong> on the gain. Timing the sale of assets relative to this 12-month threshold can make a heaps of difference to your tax bill.
           </p>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            Note: From the 2026-27 Budget, CGT rules are set to change for some investors from 1 July 2027 — now is a good time to review your portfolio with a registered tax agent.
+            Note: From the 2026-27 Budget, CGT rules are set to change for some investors from 1 July 2027; now is a good time to review your portfolio with a registered tax agent.
           </p>
 
           <h3 className="text-xl md:text-2xl font-bold font-outfit text-vforce-navy mt-8 mb-4">
             6. Declare All Your Income — Even the Side Hustle Stuff
           </h3>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            The ATO pre-fills a significant amount of data through myGov, including bank interest, dividends, and even some cryptocurrency transactions. However, <strong className="text-vforce-navy font-bold">don&apos;t assume pre-fill is complete or 100% accurate</strong> — always verify before lodging. You must also declare any income from side hustles, gig economy platforms (Uber, Airtasker, Deliveroo), freelancing, and any foreign income you may have earned.
+            The ATO pre-fills a significant amount of data through myGov, including bank interest, dividends, and even some cryptocurrency transactions. However, <strong className="text-vforce-navy font-bold">don&apos;t assume pre-fill is complete or 100% accurate</strong>, so always verify before lodging. You must also declare any income from side hustles, gig economy platforms (Uber, Airtasker, Deliveroo), freelancing, and any foreign income you may have earned.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-bold font-outfit text-vforce-navy mt-12 mb-6 pb-2 border-b border-vforce-border">
@@ -198,7 +198,7 @@ export default function TaxReturn2526Article() {
             <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">No receipts, no claim.</strong> The ATO expects substantiation for most deductions — small expenses still need records.</li>
             <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Lodging too early.</strong> Income statements, dividend info, and managed fund tax statements aren&apos;t always finalised right after 30 June. Lodging before pre-fill is complete increases the risk of having to amend later.</li>
             <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Getting home office calculations wrong.</strong> Estimated hours without a diary, or using the wrong method, can create issues if the ATO takes a closer look.</li>
-            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Forgetting crypto.</strong> The ATO receives extensive data from Australian exchanges and is actively matching transactions. Crypto is not anonymous — every trade, swap, or disposal is a potential tax event.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Forgetting crypto.</strong> The ATO receives extensive data from Australian exchanges and is actively matching transactions. Crypto is not anonymous; every trade, swap, or disposal is a potential tax event.</li>
             <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Mixing up repairs and improvements on investment properties.</strong> Repairs are generally deductible immediately; capital improvements are claimed over time via depreciation.</li>
           </ul>
 
@@ -206,17 +206,17 @@ export default function TaxReturn2526Article() {
             Key Dates for 2025–26 Tax Time
           </h2>
           <ul className="list-disc pl-6 mb-6 space-y-3 text-vforce-charcoal text-base md:text-lg">
-            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">30 June 2026</strong> — End of the 2025–26 financial year. All tax planning strategies must be executed by this date.</li>
-            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">14 July 2026</strong> — Deadline for employers to finalise Single Touch Payroll (STP) reporting.</li>
-            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">31 October 2026</strong> — Self-lodgement deadline for individuals not using a tax agent.</li>
-            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Extended deadlines</strong> — Registered tax agents can access extended lodgement deadlines depending on your circumstances. Another good reason to get a pro on your side.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">30 June 2026</strong>: End of the 2025–26 financial year. All tax planning strategies must be executed by this date.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">14 July 2026</strong>: Deadline for employers to finalise Single Touch Payroll (STP) reporting.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">31 October 2026</strong>: Final self-lodgement deadline for individuals not using a tax agent.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Extended deadlines</strong>: Registered tax agents can access extended lodgement deadlines depending on your circumstances. Another good reason to get a pro on your side.</li>
           </ul>
 
           <h2 className="text-2xl md:text-3xl font-bold font-outfit text-vforce-navy mt-12 mb-6 pb-2 border-b border-vforce-border">
             When to Bring in a Registered Tax Agent
           </h2>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg font-bold text-vforce-navy">
-            Straightforward tax returns can often be handled independently — but when things get a bit more complex, a registered tax professional can add real value. Consider getting professional advice if you have:
+            Straightforward tax returns can often be handled independently, but when things get a bit more complex, a registered tax professional can add real value. Consider getting professional advice if you have:
           </p>
           <ul className="list-disc pl-6 mb-6 space-y-3 text-vforce-charcoal text-base md:text-lg">
             <li className="leading-relaxed">Multiple income streams</li>
@@ -226,10 +226,10 @@ export default function TaxReturn2526Article() {
             <li className="leading-relaxed">Foreign income</li>
             <li className="leading-relaxed">Business activities or self-employment income</li>
             <li className="leading-relaxed">Significant or unusual deduction claims</li>
-            <li className="leading-relaxed">Major life changes — marriage, separation, inheritance, redundancy, or retirement</li>
+            <li className="leading-relaxed">Major life changes, including marriage, separation, inheritance, redundancy, or retirement</li>
           </ul>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            A registered tax agent doesn&apos;t just fill in your return — they help identify opportunities to improve your overall financial position and ensure your lodgement is accurate, compliant, and aligned with current legislation.
+            A registered tax agent doesn&apos;t just fill in your return; they help identify opportunities to improve your overall financial position and ensure your lodgement is accurate, compliant, and aligned with current legislation.
           </p>
         </div>
 
