@@ -29,7 +29,7 @@ export default function PropertyInvestorBudgetArticle() {
   };
 
   return (
-    <article className="min-h-screen pt-32 pb-20 relative z-10 overflow-hidden selection:bg-vforce-emerald selection:text-white">
+    <article className="min-h-screen pt-12 md:pt-32 pb-20 relative z-10 overflow-hidden selection:bg-vforce-emerald selection:text-white">
       {/* Schema.org JSON-LD */}
       <script
         type="application/ld+json"
@@ -69,42 +69,42 @@ export default function PropertyInvestorBudgetArticle() {
         </header>
 
         {/* Content Body */}
-        <div className="prose prose-lg max-w-none font-inter
-          prose-headings:font-outfit prose-headings:font-bold prose-headings:text-vforce-navy
-          prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pb-2 prose-h2:border-b prose-h2:border-vforce-border
-          prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-vforce-emerald
-          prose-p:text-vforce-charcoal prose-p:leading-relaxed prose-p:mb-6
-          prose-li:text-vforce-charcoal prose-ul:mb-6 prose-ol:mb-6
-          prose-strong:text-vforce-navy prose-strong:font-semibold">
+        <div className="font-inter">
 
-          <h2>Negative Gearing: The Rules Are Changing</h2>
-          <p>
-            For decades, negative gearing has been one of the most powerful levers available to Australian property investors (the ability to offset rental losses directly against salary income). The 2026 Budget fundamentally alters this from <strong>1 July 2027</strong>.
+          <h2 className="text-2xl md:text-3xl font-bold font-outfit text-vforce-navy mt-12 mb-6 pb-2 border-b border-vforce-border">
+            Negative Gearing: The Rules Are Changing
+          </h2>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
+            For decades, negative gearing has been one of the most powerful levers available to Australian property investors (the ability to offset rental losses directly against salary income). The 2026 Budget fundamentally alters this from <strong className="text-vforce-navy font-bold">1 July 2027</strong>.
           </p>
 
-          <h3>What the current rules allow</h3>
-          <p>
+          <h3 className="text-xl md:text-2xl font-bold font-outfit text-vforce-navy mt-8 mb-4">
+            What the current rules allow
+          </h3>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             Under existing law, if your rental expenses exceed your rental income — creating a loss — you can deduct that loss against your wages or other taxable income in the same financial year. This reduces your overall tax bill immediately.
           </p>
 
-          <h3>What changes from 1 July 2027</h3>
-          <p>
-            Under the new rules, rental losses will generally only be deductible against other <strong>passive income</strong>, such as dividends from shares or profits from other investment properties. If your rental losses exceed your passive income, the excess is <strong>carried forward</strong> to future years rather than offset against wages that year.
+          <h3 className="text-xl md:text-2xl font-bold font-outfit text-vforce-navy mt-8 mb-4">
+            What changes from 1 July 2027
+          </h3>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
+            Under the new rules, rental losses will generally only be deductible against other <strong className="text-vforce-navy font-bold">passive income</strong>, such as dividends from shares or profits from other investment properties. If your rental losses exceed your passive income, the excess is <strong className="text-vforce-navy font-bold">carried forward</strong> to future years rather than offset against wages that year.
           </p>
-          <p>
-            The critical exception: properties purchased before <strong>7:30 PM AEST on 12 May 2026 (Budget night)</strong> are grandfathered. They retain the current negative gearing treatment for as long as you hold them. If you already own investment properties, your existing deductions are protected.
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
+            The critical exception: properties purchased before <strong className="text-vforce-navy font-bold">7:30 PM AEST on 12 May 2026 (Budget night)</strong> are grandfathered. They retain the current negative gearing treatment for as long as you hold them. If you already own investment properties, your existing deductions are protected.
           </p>
-          <p>
-            Additionally, <strong>new residential builds</strong> acquired after Budget night will remain eligible for negative gearing against all income types, a deliberate policy decision designed to incentivise housing supply.
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
+            Additionally, <strong className="text-vforce-navy font-bold">new residential builds</strong> acquired after Budget night will remain eligible for negative gearing against all income types, a deliberate policy decision designed to incentivise housing supply.
           </p>
 
-          <div className="overflow-x-auto my-10">
+          <div className="overflow-x-auto my-10 border border-vforce-border rounded-2xl bg-white shadow-sm">
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
                 <tr className="bg-vforce-secondary">
-                  <th className="p-4 border-b-2 border-vforce-border font-bold text-vforce-navy">Property Type</th>
-                  <th className="p-4 border-b-2 border-vforce-border font-bold text-vforce-navy">Current System</th>
-                  <th className="p-4 border-b-2 border-vforce-border font-bold text-vforce-navy">After 1 July 2027</th>
+                  <th className="p-4 border-b border-vforce-border font-bold text-vforce-navy">Property Type</th>
+                  <th className="p-4 border-b border-vforce-border font-bold text-vforce-navy">Current System</th>
+                  <th className="p-4 border-b border-vforce-border font-bold text-vforce-navy">After 1 July 2027</th>
                 </tr>
               </thead>
               <tbody>
@@ -127,34 +127,40 @@ export default function PropertyInvestorBudgetArticle() {
             </table>
           </div>
 
-          <h2>Capital Gains Tax: A New Baseline from 2027</h2>
-          <p>
+          <h2 className="text-2xl md:text-3xl font-bold font-outfit text-vforce-navy mt-12 mb-6 pb-2 border-b border-vforce-border">
+            Capital Gains Tax: A New Baseline from 2027
+          </h2>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             Alongside the negative gearing changes, the Government is overhauling how Capital Gains Tax is calculated for assets held across the 1 July 2027 boundary.
           </p>
 
-          <h3>The 50% discount is being replaced</h3>
-          <p>
-            The current 50% CGT discount, available to individuals, trusts, and partnerships who hold an asset for more than 12 months, will be replaced with an <strong>inflation-adjusted cost base indexation model</strong>. Under this system, only your <em>real</em> gain (adjusted for inflation) is taxed, subject to a <strong>minimum 30% tax rate on net capital gains</strong>.
+          <h3 className="text-xl md:text-2xl font-bold font-outfit text-vforce-navy mt-8 mb-4">
+            The 50% discount is being replaced
+          </h3>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
+            The current 50% CGT discount, available to individuals, trusts, and partnerships who hold an asset for more than 12 months, will be replaced with an <strong className="text-vforce-navy font-bold">inflation-adjusted cost base indexation model</strong>. Under this system, only your <em>real</em> gain (adjusted for inflation) is taxed, subject to a <strong className="text-vforce-navy font-bold">minimum 30% tax rate on net capital gains</strong>.
           </p>
 
-          <h3>The market value reset</h3>
-          <p>
+          <h3 className="text-xl md:text-2xl font-bold font-outfit text-vforce-navy mt-8 mb-4">
+            The market value reset
+          </h3>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             For properties held before and sold after 1 July 2027, the ATO is expected to introduce a market value reset mechanism. Investors may be able to use their property's value as at 1 July 2027 as the new cost base for the portion of the gain accrued after that date — or apply an ATO-supported apportionment formula.
           </p>
-          <p>
-            This is not just an accounting exercise. It has real tax consequences. Investors who do not have a <strong>professional, documented valuation</strong> dated at or before 1 July 2027 may be forced to rely on less favourable ATO default calculations.
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
+            This is not just an accounting exercise. It has real tax consequences. Investors who do not have a <strong className="text-vforce-navy font-bold">professional, documented valuation</strong> dated at or before 1 July 2027 may be forced to rely on less favourable ATO default calculations.
           </p>
-          <p>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             Critically, gains accrued before 1 July 2027 remain eligible for the existing 50% discount rules, making the valuation date a pivotal milestone to document properly.
           </p>
 
-          <div className="overflow-x-auto my-10">
+          <div className="overflow-x-auto my-10 border border-vforce-border rounded-2xl bg-white shadow-sm">
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
                 <tr className="bg-vforce-secondary">
-                  <th className="p-4 border-b-2 border-vforce-border font-bold text-vforce-navy">CGT Rule</th>
-                  <th className="p-4 border-b-2 border-vforce-border font-bold text-vforce-navy">Current System</th>
-                  <th className="p-4 border-b-2 border-vforce-border font-bold text-vforce-navy">After 1 July 2027</th>
+                  <th className="p-4 border-b border-vforce-border font-bold text-vforce-navy">CGT Rule</th>
+                  <th className="p-4 border-b border-vforce-border font-bold text-vforce-navy">Current System</th>
+                  <th className="p-4 border-b border-vforce-border font-bold text-vforce-navy">After 1 July 2027</th>
                 </tr>
               </thead>
               <tbody>
@@ -177,39 +183,45 @@ export default function PropertyInvestorBudgetArticle() {
             </table>
           </div>
 
-          <h2>Why Depreciation Schedules Are More Important Than Ever</h2>
-          <p>
-            Under the new negative gearing framework, the depreciation deductions generated by your property don't disappear; they are <strong>carried forward</strong>. This means your tax depreciation schedule becomes even more strategically important, not less.
+          <h2 className="text-2xl md:text-3xl font-bold font-outfit text-vforce-navy mt-12 mb-6 pb-2 border-b border-vforce-border">
+            Why Depreciation Schedules Are More Important Than Ever
+          </h2>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
+            Under the new negative gearing framework, the depreciation deductions generated by your property don't disappear; they are <strong className="text-vforce-navy font-bold">carried forward</strong>. This means your tax depreciation schedule becomes even more strategically important, not less.
           </p>
-          <ul>
-            <li><strong>Carried-forward losses compound:</strong> High depreciation during ownership increases your carried-forward loss balance, which offsets rental profits or future capital gains when you sell.</li>
-            <li><strong>New builds remain fully deductible:</strong> For newly constructed properties (which are exempt from the negative gearing restrictions), depreciation deductions can still be offset against all income, making them highly tax-efficient holdings.</li>
-            <li><strong>Division 43 capital works deductions:</strong> These deductions also reduce the cost base of your property, meaning lower capital gains on sale. This interaction between depreciation and CGT planning requires careful modelling.</li>
+          <ul className="list-disc pl-6 mb-6 space-y-3 text-vforce-charcoal text-base md:text-lg">
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Carried-forward losses compound:</strong> High depreciation during ownership increases your carried-forward loss balance, which offsets rental profits or future capital gains when you sell.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">New builds remain fully deductible:</strong> For newly constructed properties (which are exempt from the negative gearing restrictions), depreciation deductions can still be offset against all income, making them highly tax-efficient holdings.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Division 43 capital works deductions:</strong> These deductions also reduce the cost base of your property, meaning lower capital gains on sale. This interaction between depreciation and CGT planning requires careful modelling.</li>
           </ul>
-          <p>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             If you don't currently have a tax depreciation schedule for your investment property, now is the time to get one — before the rules shift and before you need that carried-forward loss balance to be as large as possible.
           </p>
 
-          <h2>The Action Window: What to Do Before 1 July 2027</h2>
-          <p>
+          <h2 className="text-2xl md:text-3xl font-bold font-outfit text-vforce-navy mt-12 mb-6 pb-2 border-b border-vforce-border">
+            The Action Window: What to Do Before 1 July 2027
+          </h2>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             The next 14 months represent a critical window. Here is what property investors should be doing right now:
           </p>
-          <ul>
-            <li><strong>Review your existing portfolio:</strong> Confirm which properties are grandfathered under the old rules. Properties purchased before Budget night (12 May 2026) retain their negative gearing treatment indefinitely, but only if you hold them.</li>
-            <li><strong>Commission a professional CGT valuation:</strong> For any investment property you plan to hold past July 2027, a defensible market valuation dated on or before 1 July 2027 will be critical for accurate CGT calculations when you eventually sell.</li>
-            <li><strong>Get a tax depreciation schedule:</strong> If you don't have one, get it now. Even under the new carry-forward model, your depreciation balance reduces your future tax liability.</li>
-            <li><strong>Model new-build opportunities:</strong> If you're considering expanding your portfolio, new residential builds are exempt from the negative gearing restrictions. These present a strategic opportunity for investors willing to move before the rules lock in.</li>
-            <li><strong>Evaluate trust structures:</strong> The new 30% minimum tax on discretionary trust distributions (from 1 July 2028) may also affect how you hold property. A structural review now could save significant tax in future years.</li>
+          <ul className="list-disc pl-6 mb-6 space-y-3 text-vforce-charcoal text-base md:text-lg">
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Review your existing portfolio:</strong> Confirm which properties are grandfathered under the old rules. Properties purchased before Budget night (12 May 2026) retain their negative gearing treatment indefinitely, but only if you hold them.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Commission a professional CGT valuation:</strong> For any investment property you plan to hold past July 2027, a defensible market valuation dated on or before 1 July 2027 will be critical for accurate CGT calculations when you eventually sell.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Get a tax depreciation schedule:</strong> If you don't have one, get it now. Even under the new carry-forward model, your depreciation balance reduces your future tax liability.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Model new-build opportunities:</strong> If you're considering expanding your portfolio, new residential builds are exempt from the negative gearing restrictions. These present a strategic opportunity for investors willing to move before the rules lock in.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Evaluate trust structures:</strong> The new 30% minimum tax on discretionary trust distributions (from 1 July 2028) may also affect how you hold property. A structural review now could save significant tax in future years.</li>
           </ul>
 
-          <h2>The Bottom Line for Townsville Investors</h2>
-          <p>
+          <h2 className="text-2xl md:text-3xl font-bold font-outfit text-vforce-navy mt-12 mb-6 pb-2 border-b border-vforce-border">
+            The Bottom Line for Townsville Investors
+          </h2>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             These are the most significant changes to investment property taxation in a generation. But "significant change" does not mean "the end of property investment." It means the strategy must evolve.
           </p>
-          <p>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             Investors who act now, documenting valuations, reviewing their depreciation position, and understanding which properties are grandfathered, will be considerably better placed than those who wait until July 2027 to understand what applies to them.
           </p>
-          <p>
+          <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             The properties you own today may be your most valuable, precisely because they carry forward the old rules with them.
           </p>
 

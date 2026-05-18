@@ -48,7 +48,7 @@ export default function TaxReturn2526Article() {
   ];
 
   return (
-    <article className="min-h-screen pt-32 pb-20 relative z-10 overflow-hidden selection:bg-vforce-emerald selection:text-white">
+    <article className="min-h-screen pt-12 md:pt-32 pb-20 relative z-10 overflow-hidden selection:bg-vforce-emerald selection:text-white">
       {/* Schema.org JSON-LD */}
       <script
         type="application/ld+json"

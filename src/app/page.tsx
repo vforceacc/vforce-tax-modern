@@ -11,7 +11,7 @@ import {
 
 
 const Hero = () => (
-  <section className="relative pt-40 pb-32 lg:pt-56 lg:pb-48 overflow-hidden bg-vforce-secondary">
+  <section className="relative pt-12 pb-24 lg:pt-56 lg:pb-48 overflow-hidden bg-vforce-secondary">
     <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
       <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-vforce-emerald/20 blur-[150px] rounded-full"></div>
     </div>
@@ -110,17 +110,17 @@ export default function Home() {
             <Image
               src="/badge-cpa.png"
               alt="CPA Australia"
-              width={120}
-              height={60}
-              className="h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+              width={180}
+              height={90}
+              className="h-12 md:h-18 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
             />
             {/* Tax Practitioners Board + Xero Certified */}
             <Image
               src="/badge-tpb-xero.png"
               alt="TPB Registered & Xero Certified Advisor"
-              width={220}
-              height={60}
-              className="h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+              width={330}
+              height={90}
+              className="h-12 md:h-18 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
             />
           </div>
         </div>
