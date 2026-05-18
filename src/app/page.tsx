@@ -35,8 +35,8 @@ const Hero = () => (
             <Link href="/booking" className="bg-vforce-navy-blue text-white px-10 py-5 rounded-2xl font-black text-[12px] tracking-widest uppercase hover:bg-vforce-navy transition-all shadow-xl">
               Free Consultation
             </Link>
-            <Link href="/pricing-guide.pdf" target="_blank" className="border border-vforce-border bg-white text-vforce-navy px-10 py-5 rounded-2xl font-black text-[12px] tracking-widest uppercase hover:bg-slate-50 transition-all">
-              Download Pricing Guide
+            <Link href="/pricing" className="border border-vforce-border bg-white text-vforce-navy px-10 py-5 rounded-2xl font-black text-[12px] tracking-widest uppercase hover:bg-slate-50 transition-all">
+              View Pricing Guide
             </Link>
           </div>
         </div>
@@ -231,7 +231,7 @@ export default function Home() {
                   <Link href="/booking" className="block w-full bg-vforce-navy-blue text-white text-center py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-vforce-navy transition-all shadow-md">
                     Book My Strategy Session
                   </Link>
-                  <Link href="/pricing-guide.pdf" target="_blank" className="block w-full border border-vforce-border bg-vforce-secondary text-vforce-navy text-center py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-white transition-all">
+                  <Link href="/pricing" className="block w-full border border-vforce-border bg-vforce-secondary text-vforce-navy text-center py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-white transition-all">
                     View Pricing Structure
                   </Link>
                 </div>
