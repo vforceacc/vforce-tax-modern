@@ -7,6 +7,14 @@ export const metadata = {
 
 const newsArticles = [
   {
+    slug: 'maximise-tax-return-2025-26',
+    title: 'Maximise Your 2025–26 Tax Return: Your EOFY Preparation Guide',
+    excerpt: 'Maximize your 2025-26 tax return by organizing receipts, WFH deductions, vehicle logbooks, and super contributions before June 30.',
+    date: 'May 18, 2026',
+    category: 'Tax Tips',
+    readTime: '8 min read',
+  },
+  {
     slug: 'federal-budget-2026-property-investors',
     title: 'Federal Budget 2026: What Property Investors Must Do Now',
     excerpt: 'Negative gearing and CGT rules change from 1 July 2027. Understand which properties are grandfathered, why valuations are now critical, and the action window closing fast.',

@@ -14,10 +14,12 @@ export default function LazyAiChatWidget() {
   const pathname = usePathname();
 
   // Don't load the chat widget on the booking page — it interferes with the booking flow
-  const suppressedPaths = ['/booking'];
-  if (suppressedPaths.includes(pathname)) return null;
+  const isSuppressed = pathname === '/booking';
 
   useEffect(() => {
+    // Don't attach listeners if the widget is suppressed on this page
+    if (isSuppressed) return;
+
     let timeoutId: NodeJS.Timeout;
 
     const loadWidget = () => {
@@ -41,9 +43,10 @@ export default function LazyAiChatWidget() {
     window.addEventListener('touchstart', loadWidget, { once: true, passive: true });
 
     return cleanup;
-  }, []);
+  }, [isSuppressed]);
 
-  if (!shouldLoad) return null;
+  // Never render on suppressed paths, or before load is triggered
+  if (isSuppressed || !shouldLoad) return null;
 
   return <AiChatWidget />;
 }
