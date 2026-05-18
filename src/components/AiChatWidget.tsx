@@ -27,7 +27,7 @@ const AiChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "Hey! 👋 I'm AI-powered, so don't feel limited — ask me anything about tax, BAS, bookkeeping, or running your business. What's on your mind?" }
+    { role: 'model', text: "Hey! 👋 I'm Vee. I can answer any BAS, bookkeeping, or general tax questions you might have to help prepare you for a consultation! What's on your mind?" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +40,7 @@ const AiChatWidget = () => {
       // Only change intro if user hasn't interacted yet
       if (prev.length > 1) return prev;
 
-      let introText = "Hey! 👋 I'm AI-powered, so don't feel limited — ask me anything about tax, BAS, bookkeeping, or running your business. What's on your mind?";
+      let introText = "Hey! 👋 I'm Vee. I can answer any BAS, bookkeeping, or general tax questions you might have to help prepare you for a consultation! What's on your mind?";
       
       if (pathname.includes('/news/2026-27-tax-reform')) {
         introText = "Hi there! 👋 Reading up on the new 2026-27 Budget? Let me know if you want to know how the changes to CGT or negative gearing might affect you directly.";

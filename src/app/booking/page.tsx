@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function BookingPage() {
   return (
-    <div className="bg-vforce-primary min-h-screen pt-48 pb-32">
+    <div className="bg-vforce-primary min-h-screen pt-28 md:pt-40 pb-16 md:pb-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center mb-16">
         <div className="inline-flex items-center text-vforce-emerald font-black tracking-[0.4em] uppercase text-[10px] mb-8">
           <span className="w-8 h-[1px] bg-vforce-emerald mr-4"></span> Schedule Your Session

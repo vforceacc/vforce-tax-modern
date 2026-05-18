@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bg-vforce-primary min-h-screen pt-64 pb-32 relative overflow-hidden">
+    <div className="bg-vforce-primary min-h-screen pt-28 md:pt-48 pb-16 md:pb-32 relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
         <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-vforce-emerald/20 blur-[150px] rounded-full"></div>
@@ -87,7 +87,6 @@ export default function ContactPage() {
           
           <div className="lg:col-span-7">
             <div className="bg-vforce-secondary border border-vforce-border p-10 md:p-14 rounded-[2.5rem] shadow-sm relative text-center">
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-vforce-emerald/20 blur-[40px] rounded-full pointer-events-none"></div>
               
               <h4 className="text-vforce-navy font-black text-4xl italic tracking-tighter uppercase mb-6">Schedule Your <span className="text-vforce-emerald">Session.</span></h4>
               <p className="text-vforce-charcoal font-bold mb-10 leading-relaxed max-w-md mx-auto">

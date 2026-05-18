@@ -36,7 +36,7 @@ export default function BusinessTaxPage() {
   ];
 
   return (
-    <div className="bg-vforce-primary min-h-screen pt-40 pb-32">
+    <div className="bg-vforce-primary min-h-screen pt-28 md:pt-40 pb-16 md:pb-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <header className="mb-24">
           <div className="inline-flex items-center text-vforce-emerald font-black tracking-[0.4em] uppercase text-[10px] mb-8">

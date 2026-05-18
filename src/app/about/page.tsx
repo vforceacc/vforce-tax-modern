@@ -14,7 +14,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="bg-vforce-primary min-h-screen relative overflow-hidden">
-      <section className="relative pt-64 pb-32 overflow-hidden">
+      <section className="relative pt-28 md:pt-48 pb-16 md:pb-32 overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
           <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-vforce-emerald/20 blur-[150px] rounded-full"></div>
           <div className="absolute top-[40%] left-[-10%] w-[30%] h-[30%] bg-vforce-emerald/5 blur-[100px] rounded-full"></div>

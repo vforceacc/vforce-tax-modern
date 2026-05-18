@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-vforce-primary min-h-screen pt-48 pb-32 text-vforce-charcoal">
+    <div className="bg-vforce-primary min-h-screen pt-28 md:pt-48 pb-16 md:pb-32 text-vforce-charcoal">
       <div className="max-w-4xl mx-auto px-6 lg:px-12">
         <h1 className="text-4xl lg:text-6xl font-black text-vforce-navy italic tracking-tighter mb-8 uppercase font-heading">Privacy <span className="text-vforce-emerald">Policy.</span></h1>
         <div className="prose max-w-none text-vforce-charcoal">

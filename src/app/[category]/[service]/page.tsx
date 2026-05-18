@@ -31,7 +31,7 @@ export default async function ServicePage({ params }: { params: Promise<{ catego
   const { icon: _icon, ...details } = rawDetails;
 
   return (
-    <div className="pt-64 pb-48 bg-vforce-primary min-h-screen relative overflow-hidden">
+    <div className="pt-28 md:pt-48 pb-24 md:pb-48 bg-vforce-primary min-h-screen relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
         <div className="absolute top-[-5%] right-[-5%] w-[40%] h-[40%] bg-vforce-emerald/10 blur-[120px] rounded-full"></div>
