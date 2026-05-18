@@ -450,14 +450,33 @@ export default function PricingPage() {
                 <div className="bg-white/5 border border-white/10 backdrop-blur-md rounded-[2.5rem] p-8 md:p-10 text-center">
                   <Calculator className="w-12 h-12 text-vforce-emerald mx-auto mb-6" />
                   
-                   {selectedServices.length === 0 ? (
+                  {selectedServices.length === 0 ? (
                     <div>
                       <h4 className="text-xl font-black uppercase italic tracking-tighter mb-4 text-white">No Services Selected</h4>
                       <p className="text-slate-400 font-bold text-xs leading-relaxed mb-6">
                         Click &ldquo;Add to Estimate&rdquo; on any service cards above to dynamically estimate your benchmark rates.
                       </p>
+                      
+                      <button 
+                        onClick={handlePrint}
+                        className="w-full mb-6 bg-white/10 text-white border border-white/10 hover:bg-white/20 py-3.5 rounded-xl font-black text-[10px] tracking-widest uppercase transition-all shadow-sm flex items-center justify-center gap-2 print:hidden"
+                      >
+                        <Printer className="w-3.5 h-3.5 text-vforce-emerald" /> Print / Save Full Pricing Guide
+                      </button>
+
                       <div className="h-[2px] bg-white/10 w-full mb-6"></div>
-                      <span className="text-4xl font-black text-slate-500 italic font-heading tracking-tight">$0.00</span>
+                      
+                      <div className="mb-6">
+                        <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider block mb-1">CPA BENCHMARK APPROXIMATION</span>
+                        <span className="text-4xl font-black text-slate-500 italic font-heading tracking-tight">$0.00</span>
+                      </div>
+
+                      <div className="text-left bg-white/5 border border-white/5 p-4 rounded-xl text-[9px] text-slate-400 leading-normal font-medium">
+                        <strong className="text-slate-300 block mb-1 uppercase tracking-wider">Important Reference Notice</strong>
+                        All figures supplied are market approximations based on industry-standard fee guides observed among CPA certified and registered tax agents across Australia for the 2025/2026 financial cycles. Actual quotes will vary depending on data cleanliness, annual operational turnovers, and transactions volume.
+                        <br /><br />
+                        Identity details (such as your specific TFN or ABN credentials) must remain private; individual actual scope of work will require validation via standard firm letter of engagement.
+                      </div>
                     </div>
                   ) : (
                     <div>
@@ -484,20 +503,35 @@ export default function PricingPage() {
                         </span>
                       </div>
 
-                      <div className="flex gap-4">
+                      <div className="flex flex-col gap-3">
+                        <div className="flex gap-4">
+                          <button 
+                            onClick={clearCalculator}
+                            className="flex items-center justify-center border border-white/20 hover:bg-white/10 text-white p-4 rounded-xl transition-all"
+                            title="Reset selections"
+                          >
+                            <RefreshCw className="w-4 h-4" />
+                          </button>
+                          <Link 
+                            href="/booking" 
+                            className="flex-grow bg-vforce-emerald text-white text-center py-4 rounded-xl font-black text-[11px] tracking-widest uppercase hover:bg-emerald-500 hover:scale-105 transition-all shadow-md"
+                          >
+                            Lock in consultation
+                          </Link>
+                        </div>
                         <button 
-                          onClick={clearCalculator}
-                          className="flex items-center justify-center border border-white/20 hover:bg-white/10 text-white p-4 rounded-xl transition-all"
-                          title="Reset selections"
+                          onClick={handlePrint}
+                          className="w-full bg-white/10 text-white border border-white/10 hover:bg-white/20 py-3.5 rounded-xl font-black text-[10px] tracking-widest uppercase transition-all shadow-sm flex items-center justify-center gap-2 print:hidden"
                         >
-                          <RefreshCw className="w-4 h-4" />
+                          <Printer className="w-3.5 h-3.5 text-vforce-emerald" /> Print / Save PDF Guide
                         </button>
-                        <Link 
-                          href="/booking" 
-                          className="flex-grow bg-vforce-emerald text-white text-center py-4 rounded-xl font-black text-[11px] tracking-widest uppercase hover:bg-emerald-500 hover:scale-105 transition-all shadow-md"
-                        >
-                          Lock in consultation
-                        </Link>
+                      </div>
+
+                      <div className="text-left bg-white/5 border border-white/5 p-4 rounded-xl text-[9px] text-slate-400 leading-normal font-medium mt-6">
+                        <strong className="text-slate-300 block mb-1 uppercase tracking-wider">Important Reference Notice</strong>
+                        All figures supplied are market approximations based on industry-standard fee guides observed among CPA certified and registered tax agents across Australia for the 2025/2026 financial cycles. Actual quotes will vary depending on data cleanliness, annual operational turnovers, and transactions volume.
+                        <br /><br />
+                        Identity details (such as your specific TFN or ABN credentials) must remain private; individual actual scope of work will require validation via standard firm letter of engagement.
                       </div>
                     </div>
                   )}
