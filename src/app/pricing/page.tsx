@@ -211,7 +211,7 @@ export default function PricingPage() {
   const currentCategory = pricingCategories.find(cat => cat.id === activeTab) || pricingCategories[0];
 
   return (
-    <div className="bg-vforce-primary min-h-screen pt-28 md:pt-40 pb-16 md:pb-32 relative overflow-hidden print:bg-white print:pt-0 print:pb-0">
+    <div className="bg-vforce-primary min-h-screen pt-28 md:pt-40 pb-16 md:pb-32 relative overflow-x-hidden print:overflow-visible print:bg-white print:pt-0 print:pb-0">
       
       {/* Decorative Blur - Hidden in Print */}
       <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none print:hidden">
@@ -342,7 +342,7 @@ export default function PricingPage() {
         </section>
 
         {/* PRINT ONLY VIEW - Full Document Matching User Page Structure */}
-        <div className="hidden print:block font-inter text-slate-800">
+        <div className="absolute -z-10 opacity-0 pointer-events-none h-0 overflow-hidden print:static print:z-0 print:opacity-100 print:pointer-events-auto print:h-auto print:overflow-visible print:block font-inter text-slate-800">
           
           {pricingCategories.map((cat, catIdx) => (
             <div key={cat.id} className="mb-8 avoid-break-inside">
