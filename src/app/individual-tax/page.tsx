@@ -96,7 +96,7 @@ export default function IndividualTaxPage() {
               <Zap className="w-12 h-12 text-white mx-auto mb-6" />
               <h3 className="text-white text-2xl font-black italic uppercase tracking-tighter mb-4">Fast Lodgement</h3>
               <p className="text-white/80 text-sm font-bold mb-8">Most refunds processed within 10-14 business days.</p>
-              <Link href="/contact" className="inline-block bg-vforce-navy-blue text-white px-10 py-4 rounded-xl font-black text-[12px] tracking-widest uppercase hover:scale-105 transition-transform">
+              <Link href="/booking" className="inline-block bg-vforce-navy-blue text-white px-10 py-4 rounded-xl font-black text-[12px] tracking-widest uppercase hover:scale-105 transition-transform">
                 Book Tax Return
               </Link>
             </div>

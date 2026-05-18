@@ -100,7 +100,7 @@ export default function BusinessServicesPage() {
             <p className="text-[15px] font-bold uppercase tracking-widest mb-12 opacity-90">
               Choose V-Force for Expert Tax Agent and Advisory Services to Achieve Your Financial Goals!
             </p>
-            <Link href="/contact" className="inline-block bg-vforce-navy-blue text-white px-12 py-5 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:scale-105 transition-all shadow-md hover:bg-vforce-navy">
+            <Link href="/booking" className="inline-block bg-vforce-navy-blue text-white px-12 py-5 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:scale-105 transition-all shadow-md hover:bg-vforce-navy">
               Book Your Appointment
             </Link>
           </div>

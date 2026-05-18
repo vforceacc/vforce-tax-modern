@@ -81,12 +81,12 @@ const Navbar = () => {
               onMouseEnter={() => setActiveDropdown(item.title)}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <button 
-                onClick={() => toggleDropdown(item.title)}
+              <Link 
+                href={item.path}
                 className="flex items-center text-[11px] font-black uppercase tracking-[0.2em] text-vforce-charcoal hover:text-vforce-emerald transition-all py-2 font-heading"
               >
                 {item.title} <ChevronDown className={`ml-2 w-3.5 h-3.5 transition-transform ${activeDropdown === item.title ? 'rotate-180' : ''}`} />
-              </button>
+              </Link>
               
               {/* Dropdown Menu */}
               <div className={`absolute left-1/2 -translate-x-1/2 top-full pt-4 w-80 transition-all duration-300 ${activeDropdown === item.title ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}>
@@ -150,13 +150,22 @@ const Navbar = () => {
         
           {navigation.map(cat => (
             <div key={cat.title} className="mb-2 border-b border-vforce-border pb-2 last:border-0">
-              <button 
-                onClick={() => toggleSection(cat.title)}
-                className="flex justify-between items-center w-full text-left text-vforce-navy text-2xl font-black py-3 px-4 min-h-[44px] hover:text-vforce-emerald transition-colors italic font-heading uppercase"
-              >
-                {cat.title}
-                <ChevronDown className={`w-6 h-6 transition-transform ${openSection === cat.title ? 'rotate-180' : ''}`} />
-              </button>
+              <div className="flex justify-between items-center w-full min-h-[44px]">
+                <Link 
+                  href={cat.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-left text-vforce-navy text-2xl font-black py-3 px-4 hover:text-vforce-emerald transition-colors italic font-heading uppercase flex-grow"
+                >
+                  {cat.title}
+                </Link>
+                <button 
+                  onClick={() => toggleSection(cat.title)}
+                  className="p-3 text-vforce-navy hover:text-vforce-emerald transition-colors"
+                  aria-label="Toggle section"
+                >
+                  <ChevronDown className={`w-7 h-7 transition-transform ${openSection === cat.title ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
               
               {openSection === cat.title && (
                 <div className="space-y-2 mt-2 bg-vforce-secondary/50 rounded-xl p-4">

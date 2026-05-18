@@ -102,7 +102,7 @@ export default function BusinessTaxPage() {
               <Zap className="w-12 h-12 text-vforce-emerald mx-auto mb-6" />
               <h3 className="text-vforce-navy text-2xl font-black italic uppercase tracking-tighter mb-4">Ready to Optimise?</h3>
               <p className="text-vforce-charcoal text-sm mb-8">Book a free consultation with our Townsville experts today.</p>
-              <Link href="/contact" className="inline-block bg-vforce-navy-blue text-white px-10 py-4 rounded-xl font-black text-[12px] tracking-widest uppercase hover:scale-105 transition-transform hover:bg-vforce-navy">
+              <Link href="/booking" className="inline-block bg-vforce-navy-blue text-white px-10 py-4 rounded-xl font-black text-[12px] tracking-widest uppercase hover:scale-105 transition-transform hover:bg-vforce-navy">
                 Get Started
               </Link>
             </div>

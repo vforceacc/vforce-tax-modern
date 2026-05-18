@@ -130,11 +130,8 @@ export default function ServiceContent({ details }: { details: ServiceDetails })
         </div>
 
         <div className="flex flex-wrap gap-6">
-          <Link href="/contact" className="bg-vforce-navy-blue text-white px-12 py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-vforce-navy transition-all shadow-md transform hover:-translate-y-1 font-heading">
-            Book a Consultation
-          </Link>
-          <Link href="/booking" className="bg-vforce-secondary border border-vforce-border text-vforce-navy px-12 py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-vforce-primary transition-all font-heading flex items-center gap-2">
-            Book Online <ArrowRight className="w-4 h-4" />
+          <Link href="/booking" className="bg-vforce-navy-blue text-white px-12 py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-vforce-navy transition-all shadow-md transform hover:-translate-y-1 font-heading">
+            Book Online Now
           </Link>
         </div>
       </div>

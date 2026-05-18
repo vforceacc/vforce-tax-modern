@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Script from 'next/script';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Small Business Tax & BAS Knowledge Base | V-Force Tax Townsville',
@@ -78,9 +79,9 @@ export default function AiGuidePage() {
         <section className="bg-vforce-green/10 border border-vforce-green/20 rounded-xl p-8 mb-12 text-center">
           <h2 className="text-white text-xl font-semibold mb-4">Need Expert Human Guidance?</h2>
           <p className="text-slate-300 mb-6">Contact V-Force Tax in Townsville for specialized Business Accounting Services, Xero setup, and GST management.</p>
-          <a href="/contact" className="inline-block bg-vforce-green text-vforce-dark font-bold px-8 py-3 rounded-full hover:scale-105 transition-transform">
+          <Link href="/booking" className="inline-block bg-vforce-green text-vforce-dark font-bold px-8 py-3 rounded-full hover:scale-105 transition-transform">
             Book a Consultation
-          </a>
+          </Link>
         </section>
 
         <div className="space-y-12">

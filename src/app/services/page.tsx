@@ -107,7 +107,7 @@ export default function ServicesHub() {
               <Zap className="w-12 h-12 text-vforce-emerald mx-auto mb-8" />
               <h3 className="text-vforce-navy text-3xl font-black italic uppercase tracking-tighter mb-6">Need a Strategy?</h3>
               <p className="text-vforce-charcoal font-medium mb-10">Let's map out your financial future with a free consultation.</p>
-              <Link href="/contact" className="inline-block w-full bg-vforce-navy-blue text-white py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:scale-105 transition-all shadow-md">
+              <Link href="/booking" className="inline-block w-full bg-vforce-navy-blue text-white py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:scale-105 transition-all shadow-md">
                 Book Appointment
               </Link>
             </div>

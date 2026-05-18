@@ -5,7 +5,7 @@ import FAQ from '@/components/FAQ';
 import Link from 'next/link';
 import { 
   ChevronDown, ArrowRight, Building, Users, 
-  CheckCircle2, ShieldCheck, Zap, Target, Activity
+  CheckCircle2, ShieldCheck, Zap, Target, Activity, TrendingUp
 } from 'lucide-react';
 
 
@@ -128,58 +128,66 @@ export default function Home() {
 
       <section id="specialities" className="py-40 bg-vforce-secondary border-t border-vforce-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-24">
-            <h4 className="text-[12px] font-black tracking-[0.4em] text-vforce-emerald uppercase mb-6">Expert Solutions</h4>
-            <h2 className="text-5xl lg:text-7xl font-black text-vforce-navy italic tracking-tighter uppercase leading-none">Our Specialities</h2>
-          </div>
+          <header className="mb-24 text-center">
+            <div className="inline-flex items-center text-vforce-emerald font-black tracking-[0.4em] uppercase text-[10px] mb-8">
+              <span className="w-8 h-[1px] bg-vforce-emerald mr-4"></span> Expert Solutions
+            </div>
+            <h2 className="text-5xl lg:text-7xl font-black text-vforce-navy italic tracking-tighter mb-8 uppercase leading-none font-heading">
+              Our <span className="text-vforce-emerald">Services.</span>
+            </h2>
+            <p className="text-xl text-vforce-charcoal font-medium max-w-2xl mx-auto leading-relaxed">
+              Choose a category to explore our specialised accounting and advisory solutions tailored for the Townsville community.
+            </p>
+          </header>
+
           <div className="grid lg:grid-cols-3 gap-8">
             {[
-              { 
-                icon: Building, 
-                title: "Business Tax", 
-                path: "/business-tax", 
-                items: ["ABN Setup", "GST/BAS", "Payroll"],
-                summary: "Expert tax returns and compliance for Townsville companies and partnerships."
+              {
+                title: "Business Tax",
+                path: "/business-tax",
+                icon: Building,
+                summary: "Precision-engineered tax solutions for Townsville companies, partnerships, and trusts.",
+                color: "#1e3a8a" // vforce-navy-blue
               },
-              { 
-                icon: Users, 
-                title: "Individual Tax", 
-                path: "/individual-tax", 
-                items: ["PAYG Returns", "Investments", "Tax Planning"],
-                summary: "Maximise your personal refund with local specialists who know your industry."
+              {
+                title: "Individual Tax",
+                path: "/individual-tax",
+                icon: Users,
+                summary: "Maximise your personal return with local experts who know the North Queensland industry.",
+                color: "#059669" // vforce-emerald
               },
-              { 
-                icon: Target, 
-                title: "Advisory", 
-                path: "/business-services", 
-                items: ["Financial Analysis", "Budgets", "Audit Support"],
-                summary: "Strategic guidance to scale your business and protect your financial future."
+              {
+                title: "Business Advisory",
+                path: "/business-services",
+                icon: TrendingUp,
+                summary: "Strategic guidance beyond compliance to drive profit and long-term financial stability.",
+                color: "#d97706" // vforce-gold
               }
-            ].map((s, i) => (
-              <div key={i} className="bg-white border border-vforce-border p-12 rounded-[3rem] hover:border-vforce-emerald transition-all duration-500 group flex flex-col relative overflow-hidden">
-                {/* Hover Summary Overlay */}
-                <div className="absolute inset-0 bg-vforce-navy opacity-0 group-hover:opacity-100 transition-all duration-500 z-20 p-12 flex flex-col justify-center translate-y-4 group-hover:translate-y-0 pointer-events-none">
-                  <div className="text-[10px] font-black text-vforce-emerald tracking-[0.4em] uppercase mb-4 italic">V-Force Expert</div>
-                  <h4 className="text-white font-black text-2xl uppercase italic tracking-tighter mb-4">{s.title}</h4>
-                  <p className="text-slate-300 font-bold leading-relaxed">{s.summary}</p>
-                  <div className="mt-8 flex items-center text-[10px] font-black text-vforce-emerald uppercase tracking-widest">
-                    Explore Details <ArrowRight className="ml-2 w-4 h-4" />
+            ].map((cat, i) => (
+              <Link key={i} href={cat.path} className="group relative block h-full">
+                {/* Hover Summary Box */}
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-[3rem] z-20 flex flex-col justify-center p-12 translate-y-4 group-hover:translate-y-0 pointer-events-none"
+                  style={{ backgroundColor: cat.color }}
+                >
+                  <h4 className="text-white font-black text-2xl uppercase italic tracking-tighter mb-4">Expert Oversight</h4>
+                  <p className="text-white/90 font-bold leading-relaxed">{cat.summary}</p>
+                  <div className="mt-8 flex items-center text-[10px] font-black text-white uppercase tracking-widest">
+                    View Category <ArrowRight className="ml-2 w-4 h-4" />
                   </div>
                 </div>
 
-                <s.icon className="w-10 h-10 text-vforce-emerald mb-8" />
-                <h3 className="text-3xl font-black text-vforce-navy uppercase italic tracking-tighter mb-8">{s.title}</h3>
-                <ul className="space-y-4 mb-10 flex-grow">
-                  {s.items.map((item: string) => (
-                    <li key={item} className="text-vforce-charcoal font-bold uppercase tracking-widest text-[11px] flex items-center">
-                      <ArrowRight className="w-3 h-3 mr-3 text-vforce-emerald" /> {item}
-                    </li>
-                  ))}
-                </ul>
-                <Link href={s.path} className="text-[11px] font-black tracking-widest text-vforce-navy uppercase group-hover:text-vforce-emerald transition-colors flex items-center mt-auto">
-                  View All <ChevronDown className="ml-2 w-4 h-4 -rotate-90" />
-                </Link>
-              </div>
+                <div className="bg-white border border-vforce-border p-12 rounded-[3rem] hover:border-vforce-emerald transition-all duration-500 h-full flex flex-col items-center text-center shadow-sm min-h-[380px] justify-center">
+                  <div className="w-20 h-20 bg-vforce-secondary rounded-3xl flex items-center justify-center mb-10 border border-vforce-border group-hover:bg-vforce-emerald transition-colors duration-500">
+                    <cat.icon className="w-10 h-10 text-vforce-emerald group-hover:text-white" />
+                  </div>
+                  <h3 className="text-3xl font-black text-vforce-navy uppercase italic tracking-tighter mb-6 font-heading">{cat.title}</h3>
+                  <div className="w-12 h-[2px] bg-vforce-emerald/30 mb-8 group-hover:w-full transition-all duration-700"></div>
+                  <p className="text-vforce-charcoal font-bold uppercase tracking-widest text-[10px]">
+                    Explore Specialized Services
+                  </p>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

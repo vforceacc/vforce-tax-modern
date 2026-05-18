@@ -149,7 +149,7 @@ export default function TaxReformArticle() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 relative z-10">
             <Link 
-              href="/contact" 
+              href="/booking" 
               className="inline-flex justify-center items-center px-8 py-4 rounded-full bg-vforce-navy-blue text-white font-bold font-inter hover:bg-vforce-navy transition-all duration-300 hover:shadow-md hover:-translate-y-1"
             >
               Book a Strategy Session
