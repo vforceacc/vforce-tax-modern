@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as admin from 'firebase-admin';
+import { getFirestore } from 'firebase-admin/firestore';
 
 // Initialize Firebase Admin for writing to Firestore securely on the server
 if (!admin.apps.length) {
@@ -9,7 +10,7 @@ if (!admin.apps.length) {
     console.error("Firebase Admin initialization error:", e);
   }
 }
-const db = admin.firestore();
+const db = getFirestore('contact');
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,6 +21,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Name and email are required' }, { status: 400 });
     }
 
+    // Calculate expiration timestamp (1 hour from now for TTL auto-purge)
+    const expireTime = new Date(Date.now() + 60 * 60 * 1000);
+
     await db.collection('enquiries').add({
       // Lead details for record-keeping in Firestore
       name,
@@ -28,6 +32,7 @@ export async function POST(request: NextRequest) {
       service: service || 'General Enquiry',
       source: source || 'Website',
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      expireAt: admin.firestore.Timestamp.fromDate(expireTime),
 
       // Firebase "Trigger Email" Extension compatible structure
       to: 'contact@vforcetax.com.au',

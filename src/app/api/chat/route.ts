@@ -14,7 +14,7 @@ if (!admin.apps.length) {
     console.error("Firebase Admin initialization error:", e);
   }
 }
-const db = admin.firestore();
+
 
 const BASE_SYSTEM_PROMPT = `You are Vee, a friendly tax assistant for VForce Tax based in Townsville, Australia. 
 
