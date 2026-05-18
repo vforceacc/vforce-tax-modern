@@ -213,6 +213,24 @@ export default function PricingPage() {
   return (
     <div className="bg-vforce-primary min-h-screen pt-28 md:pt-40 pb-16 md:pb-32 relative overflow-x-hidden print:overflow-visible print:bg-white print:pt-0 print:pb-0">
       
+      {/* Print/Screen layout helper stylesheet */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media screen {
+          .print-only {
+            display: none !important;
+          }
+        }
+        @media print {
+          .print-only {
+            display: block !important;
+          }
+          .avoid-break-inside {
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+        }
+      `}} />
+      
       {/* Decorative Blur - Hidden in Print */}
       <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none print:hidden">
         <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-vforce-emerald/10 blur-[150px] rounded-full"></div>
@@ -342,7 +360,7 @@ export default function PricingPage() {
         </section>
 
         {/* PRINT ONLY VIEW - Full Document Matching User Page Structure */}
-        <div className="absolute -z-10 opacity-0 pointer-events-none h-0 overflow-hidden print:static print:z-0 print:opacity-100 print:pointer-events-auto print:h-auto print:overflow-visible print:block font-inter text-slate-800">
+        <div className="print-only font-inter text-slate-800 print:text-black">
           
           {pricingCategories.map((cat, catIdx) => (
             <div key={cat.id} className="mb-8 avoid-break-inside">
@@ -542,19 +560,7 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* Reference Notice Box - Hidden in Print */}
-        <section className="bg-vforce-secondary border border-vforce-border rounded-[3rem] p-10 md:p-14 print:hidden">
-          <h3 className="text-vforce-navy font-black text-xl italic tracking-tighter uppercase mb-4">Important Reference Notice</h3>
-          <p className="text-vforce-charcoal font-medium text-xs leading-relaxed mb-4">
-            All figures supplied are market approximations based on industry-standard fee guides observed
-            among CPA certified and registered tax agents across Australia for the 2025/2026 financial cycles. Actual quotes will vary
-            depending on data cleanliness, annual operational turnovers, and transactions volume.
-          </p>
-          <p className="text-vforce-charcoal font-medium text-xs leading-relaxed">
-            Identity details (such as your specific TFN or ABN credentials) must remain private; individual actual scope of work will require
-            validation via standard firm letter of engagement.
-          </p>
-        </section>
+
 
       </div>
     </div>
