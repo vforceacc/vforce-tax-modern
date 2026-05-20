@@ -48,7 +48,12 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="text-vforce-navy font-bold uppercase tracking-widest text-sm mb-2">Phone Number</h4>
-                  <p className="text-vforce-charcoal font-medium">07 3473 5556</p>
+                  <a 
+                    href="tel:+61734735556" 
+                    className="block text-vforce-charcoal font-medium hover:text-vforce-navy transition-colors"
+                  >
+                    +61 7 3473 5556
+                  </a>
                 </div>
               </div>
               
@@ -58,7 +63,12 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="text-vforce-navy font-bold uppercase tracking-widest text-sm mb-2">Email Address</h4>
-                  <p className="text-vforce-charcoal font-medium">contact@vforcetax.com.au</p>
+                  <a 
+                    href="mailto:contact@vforcetax.com.au" 
+                    className="block text-vforce-charcoal font-medium hover:text-vforce-navy transition-colors"
+                  >
+                    contact@vforcetax.com.au
+                  </a>
                 </div>
               </div>
               
