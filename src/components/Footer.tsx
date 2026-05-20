@@ -24,8 +24,18 @@ const Footer = () => {
             </p>
             <div className="space-y-2 text-[12px] font-bold text-vforce-charcoal uppercase tracking-widest">
               <p>43 Roosevelt Loop, Mount Louisa 4814</p>
-              <p>07 3473 5556</p>
-              <p>contact@vforcetax.com.au</p>
+              <a
+                href="tel:+61734735556"
+                className="block hover:text-vforce-navy transition-colors"
+              >
+                +61 7 3473 5556
+              </a>
+              <a
+                href="mailto:contact@vforcetax.com.au"
+                className="block normal-case hover:text-vforce-navy transition-colors"
+              >
+                contact@vforcetax.com.au
+              </a>
             </div>
           </div>
           {navigation.map(cat => (
