@@ -68,3 +68,4 @@ These variables must be kept secure and should be added to the Cloudflare dashbo
 *   [ ] 8. Update frontend AI chat widget (`src/components/AiChatWidget.tsx`) to point to the Cloudflare worker URL once deployed.
 *   [ ] 9. Final QA testing across mobile and desktop.
 *   [x] 10. Align contact page (`src/app/contact/page.tsx`) contact details with the footer (clickable phone link +61 7 3473 5556 and clickable email link contact@vforcetax.com.au).
+*   [ ] 11. Add new news article: $20,000 instant asset write-off (no dashes, Australian English).

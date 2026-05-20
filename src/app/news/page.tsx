@@ -7,6 +7,14 @@ export const metadata = {
 
 const newsArticles = [
   {
+    slug: 'instant-asset-write-off-20000',
+    title: 'Small Business Support: $20,000 Instant Asset Write-off',
+    excerpt: 'The Government announced a permanent increase to the instant asset write-off for small businesses to $20,000, boosting cashflow and reducing compliance costs.',
+    date: 'May 18, 2026',
+    category: 'Tax Updates',
+    readTime: '5 min read',
+  },
+  {
     slug: 'maximise-tax-return-2025-26',
     title: 'Maximise Your 2025–26 Tax Return: Your EOFY Preparation Guide',
     excerpt: 'Maximize your 2025-26 tax return by organizing receipts, WFH deductions, vehicle logbooks, and super contributions before June 30.',
