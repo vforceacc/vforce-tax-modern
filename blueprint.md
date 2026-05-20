@@ -65,8 +65,8 @@ These variables must be kept secure and should be added to the Cloudflare dashbo
 *   [x] 5. Refactor Dynamic Routes (`services`, `[category]/[service]`, `news`, `news/[slug]`) to Light Theme.
 *   [x] 6. Refactor Legal Pages (`terms`, `privacy`) to Light Theme.
 *   [x] 7. **Cloudflare Architecture:** Scaffold `cloudflare-worker` directory with `src/index.js` and `wrangler.toml` for the AI proxy.
-*   [ ] 8. Update frontend AI chat widget (`src/components/AiChatWidget.tsx`) to point to the Cloudflare worker URL once deployed.
-*   [ ] 9. Final QA testing across mobile and desktop.
+*   [x] 8. Update frontend AI chat widget (`src/components/AiChatWidget.tsx`) to point to the Cloudflare worker URL once deployed.
+*   [x] 9. Final QA testing across mobile and desktop.
 *   [x] 10. Align contact page (`src/app/contact/page.tsx`) contact details with the footer (clickable phone link +61 7 3473 5556 and clickable email link contact@vforcetax.com.au).
 *   [x] 11. Add new news article: $20,000 instant asset write-off (no dashes, Australian English).
-*   [ ] 12. Migrate to Cloudflare Edge: Restructure Next.js for static export, build edge-compatible Worker with direct Firestore REST client, add 429 rate limit error handling, and output wrangler + CI/CD blueprints.
+*   [x] 12. Migrate to Cloudflare Edge: Restructure Next.js for static export, build edge-compatible Worker with direct Firestore REST client, add 429 rate limit error handling, and output wrangler + CI/CD blueprints.
