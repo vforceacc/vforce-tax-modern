@@ -67,4 +67,4 @@ These variables must be kept secure and should be added to the Cloudflare dashbo
 *   [x] 7. **Cloudflare Architecture:** Scaffold `cloudflare-worker` directory with `src/index.js` and `wrangler.toml` for the AI proxy.
 *   [ ] 8. Update frontend AI chat widget (`src/components/AiChatWidget.tsx`) to point to the Cloudflare worker URL once deployed.
 *   [ ] 9. Final QA testing across mobile and desktop.
-*   [ ] 10. Align contact page (`src/app/contact/page.tsx`) contact details with the footer (clickable phone link +61 7 3473 5556 and clickable email link contact@vforcetax.com.au).
+*   [x] 10. Align contact page (`src/app/contact/page.tsx`) contact details with the footer (clickable phone link +61 7 3473 5556 and clickable email link contact@vforcetax.com.au).
