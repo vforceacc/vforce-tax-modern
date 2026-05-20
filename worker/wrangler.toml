@@ -1,0 +1,13 @@
+name = "vforce-ai-proxy"
+main = "index.js"
+compatibility_date = "2024-05-14"
+
+# Routing rules:
+# You can map the worker to handle your production /api/* path on your custom domain
+# Example (uncomment and configure in your Cloudflare dashboard):
+# [[routes]]
+# pattern = "vforcetax.com.au/api/*"
+# zone_name = "vforcetax.com.au"
+
+[observability]
+enabled = true

@@ -52,9 +52,9 @@ These variables must be kept secure and should be added to the Cloudflare dashbo
 *   `GOOGLE_AI_STUDIO_API_KEY` (or `GEMINI_API_KEY`) -> *Must be set via `npx wrangler secret put GOOGLE_AI_STUDIO_API_KEY`*
 
 ### Components
-*   `Navbar.tsx` & `Footer.tsx` — Global layout components (Light Theme).
-*   `AiChatWidget.tsx` — Client-side AI chat interface sending requests to the Cloudflare Worker proxy.
-*   `BookingsWidget.tsx` — Microsoft Bookings iframe wrapper.
+*   `Navbar.tsx` & `Footer.tsx` - Global layout components (Light Theme).
+*   `AiChatWidget.tsx` - Client-side AI chat interface sending requests to the Cloudflare Worker proxy.
+*   `BookingsWidget.tsx` - Microsoft Bookings iframe wrapper.
 
 ## Current Plan: V-Force Corporate UI Migration & Cloudflare Prep
 
@@ -69,3 +69,4 @@ These variables must be kept secure and should be added to the Cloudflare dashbo
 *   [ ] 9. Final QA testing across mobile and desktop.
 *   [x] 10. Align contact page (`src/app/contact/page.tsx`) contact details with the footer (clickable phone link +61 7 3473 5556 and clickable email link contact@vforcetax.com.au).
 *   [x] 11. Add new news article: $20,000 instant asset write-off (no dashes, Australian English).
+*   [ ] 12. Migrate to Cloudflare Edge: Restructure Next.js for static export, build edge-compatible Worker with direct Firestore REST client, add 429 rate limit error handling, and output wrangler + CI/CD blueprints.

@@ -23,6 +23,11 @@
 !/.github/
 !/apphosting.yaml
 !/cloudflare-worker/
+!/worker/
+
+# Cloudflare Wrangler ignores
+.wrangler/
+.dev.vars
 
 # Standard ignores for allowed folders
 node_modules/

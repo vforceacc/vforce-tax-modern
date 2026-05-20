@@ -86,11 +86,15 @@ const AiChatWidget = () => {
         const res = await fetch(url, options);
         if (res.ok) return res;
         if (res.status === 429) {
+          if (i === retries - 1) {
+            throw new Error("RATE_LIMITED");
+          }
           await delay(Math.pow(2, i) * 1000);
           continue;
         }
         throw new Error(`HTTP error! status: ${res.status}`);
-      } catch (e) {
+      } catch (e: any) {
+        if (e.message === "RATE_LIMITED") throw e;
         if (i === retries - 1) throw e;
         await delay(Math.pow(2, i) * 1000);
       }
@@ -131,8 +135,24 @@ const AiChatWidget = () => {
       }
 
       setMessages([...newMessages, { role: 'model', text: replyText, buttons: actionButtons, bookingData }]);
-    } catch {
-      setMessages([...newMessages, { role: 'model', text: "Sorry, the network is playing up. Please call our Townsville office directly on 07 3473 5556." }]);
+    } catch (err: any) {
+      if (err.message === "RATE_LIMITED") {
+        setMessages([
+          ...newMessages,
+          { 
+            role: 'model', 
+            text: "Whoa, hold your horses! 🐎 We've received a heap of questions lately and hit a brief speed limit to protect the server. Please wait a tick or give our Townsville office a buzz on 07 3473 5556!" 
+          }
+        ]);
+      } else {
+        setMessages([
+          ...newMessages, 
+          { 
+            role: 'model', 
+            text: "Sorry, the network is playing up. Please call our Townsville office directly on 07 3473 5556." 
+          }
+        ]);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -300,7 +320,7 @@ const AiChatWidget = () => {
             <MessageSquare className="w-7 h-7 text-white fill-current" />
             {/* Static white dot */}
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-vforce-navy-blue"></div>
-            {/* Red notification badge — appears after 30s */}
+            {/* Red notification badge - appears after 30s */}
             {showNotification && (
               <div className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center border-2 border-white animate-bounce">
                 <span className="text-white text-[9px] font-black leading-none">1</span>
