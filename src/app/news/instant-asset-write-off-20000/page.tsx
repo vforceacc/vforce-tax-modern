@@ -176,7 +176,7 @@ export default function InstantAssetWriteOffArticle() {
             Navigating small business tax rules can be incredibly complex. Knowing which assets qualify, calculating depreciation pools, and managing second element costs requires experienced professional advice. To get the best outcomes for your business, you need the best accountant Townsville has to offer.
           </p>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            At V-Force Tax, we specialize in helping North Queensland small businesses navigate simplified depreciation, optimize cashflow, and structure asset purchases to maximize immediate tax deductions. We ensure you are claiming every dollar you are entitled to while staying fully compliant with the ATO.
+            At V-Force Tax, we specialise in helping North Queensland small businesses navigate simplified depreciation, optimise cashflow, and structure asset purchases to maximise immediate tax deductions. We ensure you are claiming every dollar you are entitled to while staying fully compliant with the ATO.
           </p>
         </div>
 
@@ -202,12 +202,12 @@ export default function InstantAssetWriteOffArticle() {
         <div className="mt-12 rounded-2xl bg-vforce-navy p-8 md:p-10 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-vforce-emerald/10 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
           <div className="relative z-10">
-            <p className="text-vforce-emerald font-bold text-xs uppercase tracking-widest font-inter mb-3">Optimize your business tax setup</p>
+            <p className="text-vforce-emerald font-bold text-xs uppercase tracking-widest font-inter mb-3">Optimise your business tax setup</p>
             <h3 className="text-2xl font-bold font-outfit text-white mb-4">
               Get expert small business tax support in Townsville.
             </h3>
             <p className="text-gray-300 font-inter text-sm leading-relaxed mb-8">
-              Want to see how the new permanent $20,000 instant asset write-off fits into your business plan? Have a yarn with our Townsville team to plan your equipment purchases and maximize your deductions.
+              Want to see how the new permanent $20,000 instant asset write-off fits into your business plan? Have a yarn with our Townsville team to plan your equipment purchases and maximise your deductions.
             </p>
             <Link
               href="/booking"

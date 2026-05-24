@@ -18,7 +18,7 @@ export default function PrivacyPage() {
           <h2 className="text-vforce-navy text-2xl font-bold mt-8 mb-4">2. How We Use Information</h2>
           <p>We use the information we collect to provide our accounting and tax advisory services, communicate with you, and improve our website experience.</p>
           <h2 className="text-vforce-navy text-2xl font-bold mt-8 mb-4">3. Data Security</h2>
-          <p>We implement appropriate technical and organizational security measures to protect your personal information.</p>
+          <p>We implement appropriate technical and organisational security measures to protect your personal information.</p>
         </div>
       </div>
     </div>

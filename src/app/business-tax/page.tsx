@@ -4,7 +4,7 @@ import { Building, ShieldCheck, Zap, ArrowRight, CheckCircle2 } from 'lucide-rea
 
 export const metadata = {
   title: 'Townsville Business Tax Services | CPA & ASIC Registered Agents',
-  description: 'Expert business tax returns, GST, BAS, and ABN registration for Townsville SMEs. TPB registered agents specializing in tax compliance and optimization.',
+  description: 'Expert business tax returns, GST, BAS, and ABN registration for Townsville SMEs. TPB registered agents specialising in tax compliance and optimisation.',
 };
 
 export default function BusinessTaxPage() {
@@ -12,7 +12,7 @@ export default function BusinessTaxPage() {
     {
       title: "Income Tax Returns",
       desc: "Preparation by CPA Certified & ASIC Registered Accountants for Partnerships, Companies, and Trusts.",
-      summary: "Precision-engineered returns that ensure full compliance while maximizing your legal tax position.",
+      summary: "Precision-engineered returns that ensure full compliance while maximising your legal tax position.",
       path: "/business-tax/income-tax-returns"
     },
     {

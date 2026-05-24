@@ -184,7 +184,7 @@ export default function Home() {
                   <h3 className="text-3xl font-black text-vforce-navy uppercase italic tracking-tighter mb-6 font-heading">{cat.title}</h3>
                   <div className="w-12 h-[2px] bg-vforce-emerald/30 mb-8 group-hover:w-full transition-all duration-700"></div>
                   <p className="text-vforce-charcoal font-bold uppercase tracking-widest text-[10px]">
-                    Explore Specialized Services
+                    Explore Specialised Services
                   </p>
                 </div>
               </Link>

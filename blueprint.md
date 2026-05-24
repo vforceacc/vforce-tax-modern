@@ -87,9 +87,10 @@ npx -y firebase-tools@latest apphosting:secrets:set GMAIL_APP_PASSWORD
 *   [x] 13. Enquiry email notifications via Gmail SMTP (nodemailer) — implemented, secrets need setting in Firebase.
 *   [x] 14. Set `GMAIL_USER` and `GMAIL_APP_PASSWORD` secrets in Firebase Secret Manager for production.
 *   [x] 15. Deploy to production via `npx -y firebase-tools@latest deploy --only apphosting`.
-*   [ ] 16. Replace the default Firebase/Vercel icon with the V-Force logo favicon.
+*   [x] 16. Replace the default Firebase/Vercel icon with the V-Force logo favicon.
+*   [x] 17. Align website copywriting to Australian English spelling conventions (e.g. -ise over -ize, -organise, etc.).
 
-## Plan for Favicon Update
+## Plan for Favicon Update [COMPLETED]
 
 ### Objective
 Replace the default Firebase triangle favicon in the browser tab with the V-Force logo.
@@ -100,3 +101,14 @@ Replace the default Firebase triangle favicon in the browser tab with the V-Forc
 3. Verify that the files are placed correctly.
 4. Commit the changes and push to GitHub (`origin main`) to trigger the Firebase App Hosting automatic deployment.
 
+## Plan for Australian English Copywriting Alignment
+
+### Objective
+Ensure that all website contents, especially user-facing pages, news items, and metadata, strictly use Australian/British English spelling conventions (e.g. `maximise`, `specialise`, `optimise`, `organise` instead of `maximize`, `specialize`, `optimize`, `organize`).
+
+### Steps
+1. Perform project-wide searches for common American spelling variants like `maximiz`, `specializ`, `optimiz`, `organiz`, `color`, `center`, `analyze`, and `minim`.
+2. Ensure technical/schema fields (like JSON-LD `@type: "Organization"`) are untouched so search engine integration remains functional.
+3. Replace user-facing occurrences in headings, paragraphs, excerpts, and metadata.
+4. Verify compiling and linting status.
+5. Commit and push the spelling correction updates to GitHub to trigger live production updates on Firebase App Hosting.

@@ -69,7 +69,7 @@ export default function AboutPage() {
             {[
               { icon: ShieldCheck, title: "Integrity", text: "We do the right thing, especially when no one is looking. Absolute compliance and ethical advice." },
               { icon: Target, title: "Precision", text: "Near enough isn't good enough. We engineer exact solutions tailored to your unique financial footprint." },
-              { icon: Zap, title: "Velocity", text: "Speed matters in business. We utilize modern tech to give you real-time numbers so you can move fast." }
+              { icon: Zap, title: "Velocity", text: "Speed matters in business. We utilise modern tech to give you real-time numbers so you can move fast." }
             ].map((value, i) => (
               <div key={i} className="text-center group">
                 <div className="w-20 h-20 mx-auto bg-white border border-vforce-border rounded-3xl flex items-center justify-center mb-8 group-hover:bg-vforce-emerald group-hover:border-vforce-emerald group-hover:-translate-y-2 transition-all duration-500 shadow-sm hover:shadow-xl">
@@ -97,7 +97,7 @@ export default function AboutPage() {
             
             <div className="bg-vforce-secondary border border-vforce-border rounded-2xl p-8 backdrop-blur-sm shadow-sm hover:border-vforce-emerald transition-colors">
               <h3 className="text-xl font-bold text-vforce-navy mb-3">Do you provide services for small businesses in North Queensland?</h3>
-              <p className="text-vforce-charcoal leading-relaxed">Absolutely. We specialize in SME accounting across North Queensland. Whether you are a sole trader, partnership, or company, our business tax agents handle everything from BAS preparation and GST compliance to ASIC corporate secretarial services.</p>
+              <p className="text-vforce-charcoal leading-relaxed">Absolutely. We specialise in SME accounting across North Queensland. Whether you are a sole trader, partnership, or company, our business tax agents handle everything from BAS preparation and GST compliance to ASIC corporate secretarial services.</p>
             </div>
             
             <div className="bg-vforce-secondary border border-vforce-border rounded-2xl p-8 backdrop-blur-sm shadow-sm hover:border-vforce-emerald transition-colors">
@@ -128,7 +128,7 @@ export default function AboutPage() {
                   "name": "Do you provide services for small businesses in North Queensland?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Absolutely. We specialize in SME accounting across North Queensland. Whether you are a sole trader, partnership, or company, our business tax agents handle everything from BAS preparation and GST compliance to ASIC corporate secretarial services."
+                    "text": "Absolutely. We specialise in SME accounting across North Queensland. Whether you are a sole trader, partnership, or company, our business tax agents handle everything from BAS preparation and GST compliance to ASIC corporate secretarial services."
                   }
                 },
                 {

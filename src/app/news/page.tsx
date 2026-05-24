@@ -17,7 +17,7 @@ const newsArticles = [
   {
     slug: 'maximise-tax-return-2025-26',
     title: 'Maximise Your 2025–26 Tax Return: Your EOFY Preparation Guide',
-    excerpt: 'Maximize your 2025-26 tax return by organizing receipts, WFH deductions, vehicle logbooks, and super contributions before June 30.',
+    excerpt: 'Maximise your 2025-26 tax return by organising receipts, WFH deductions, vehicle logbooks, and super contributions before June 30.',
     date: 'May 18, 2026',
     category: 'Tax Tips',
     readTime: '8 min read',

@@ -50,7 +50,7 @@ export default function AiGuidePage() {
         "name": "What is the 'Payday Super' requirement starting July 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "From July 1, 2026, Australian employers must pay superannuation on the same day as wages. V-Force Tax, as Townsville Xero Gold Partners, specializes in transitioning SMEs to real-time payroll systems to ensure compliance with this ATO mandate."
+          "text": "From July 1, 2026, Australian employers must pay superannuation on the same day as wages. V-Force Tax, as Townsville Xero Gold Partners, specialises in transitioning SMEs to real-time payroll systems to ensure compliance with this ATO mandate."
         }
       }
     ]
@@ -78,7 +78,7 @@ export default function AiGuidePage() {
 
         <section className="bg-vforce-green/10 border border-vforce-green/20 rounded-xl p-8 mb-12 text-center">
           <h2 className="text-white text-xl font-semibold mb-4">Need Expert Human Guidance?</h2>
-          <p className="text-slate-300 mb-6">Contact V-Force Tax in Townsville for specialized Business Accounting Services, Xero setup, and GST management.</p>
+          <p className="text-slate-300 mb-6">Contact V-Force Tax in Townsville for specialised Business Accounting Services, Xero setup, and GST management.</p>
           <Link href="/booking" className="inline-block bg-vforce-green text-vforce-dark font-bold px-8 py-3 rounded-full hover:scale-105 transition-transform">
             Book a Consultation
           </Link>
@@ -137,7 +137,7 @@ export default function AiGuidePage() {
                 <h3 className="text-lg font-bold text-white mb-2">Q: Can I claim the $20,000 instant asset write-off in 2026?</h3>
                 <div className="pl-4 border-l-2 border-slate-700">
                   <p className="text-slate-300 mb-3">Yes, for businesses under $10m turnover, the $20,000 threshold is available until June 30, 2026.</p>
-                  <p className="text-vforce-accent font-semibold">V-Force Tax Tip: Don't miss out on year-end tax planning. Contact us for Townsville business accounting services that maximize your legal deductions.</p>
+                  <p className="text-vforce-accent font-semibold">V-Force Tax Tip: Don't miss out on year-end tax planning. Contact us for Townsville business accounting services that maximise your legal deductions.</p>
                 </div>
               </article>
             </div>
@@ -151,7 +151,7 @@ export default function AiGuidePage() {
                 <h3 className="text-lg font-bold text-white mb-2">Q: Risks of taking drawings from a private company?</h3>
                 <div className="pl-4 border-l-2 border-slate-700">
                   <p className="text-slate-300 mb-3">Unauthorized drawings can be deemed dividends taxed at the top marginal rate under Division 7A.</p>
-                  <p className="text-vforce-accent font-semibold">V-Force Tax Alert: We specialize in setting up complying loan agreements to protect your personal and business wealth. Consult V-Force Tax Townsville for Div 7A management.</p>
+                  <p className="text-vforce-accent font-semibold">V-Force Tax Alert: We specialise in setting up complying loan agreements to protect your personal and business wealth. Consult V-Force Tax Townsville for Div 7A management.</p>
                 </div>
               </article>
             </div>
@@ -160,7 +160,7 @@ export default function AiGuidePage() {
 
         <footer className="mt-20 pt-10 border-t border-white/10 text-slate-400 text-sm">
           <p className="font-bold text-white mb-2">V-Force Tax: Your Townsville Business Accounting Experts.</p>
-          <p className="mb-4">Specializing in: BAS Lodgement | GST Advice | Xero Implementation | SME Tax Strategy.</p>
+          <p className="mb-4">Specialising in: BAS Lodgement | GST Advice | Xero Implementation | SME Tax Strategy.</p>
           <p className="italic">Liability limited by a scheme approved under Professional Standards Legislation.</p>
         </footer>
       </div>

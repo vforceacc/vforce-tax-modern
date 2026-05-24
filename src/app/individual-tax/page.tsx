@@ -18,13 +18,13 @@ export default function IndividualTaxPage() {
     {
       title: "Investment Planning",
       desc: "Expert advice on capital gains, rental properties, and investment tax implications.",
-      summary: "Protect your wealth with specialized CGT and rental property advice from local CPA experts.",
+      summary: "Protect your wealth with specialised CGT and rental property advice from local CPA experts.",
       path: "/individual-tax/investment-services"
     },
     {
       title: "Tax Time Strategy",
       desc: "Proactive tips and planning to ensure you are organised and compliant every financial year.",
-      summary: "Stay organized year-round with our checklists and tools for stress-free tax lodgement.",
+      summary: "Stay organised year-round with our checklists and tools for stress-free tax lodgement.",
       path: "/individual-tax/tax-time-tips"
     }
   ];
