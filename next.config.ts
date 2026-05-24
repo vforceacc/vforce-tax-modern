@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // Removed output: "export" because it prevents API routes from working and breaks Firebase App Hosting builds
   images: {
     unoptimized: true,
   },
