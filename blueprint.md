@@ -23,50 +23,67 @@ A modern, responsive, professional corporate website for V-Force Tax, a Townsvil
 *   **Contact Page:** A detailed contact form with office location, phone, email, and hours.
 *   **Header and Footer:** Consistent navigation and branding across all pages with dropdown menus and mobile responsiveness (fixed 100dvh overlay for mobile).
 *   **AI Chat Widget:** A floating AI assistant powered by Gemini 2.5 Flash Lite, available on every page. Answers tax/accounting questions in Australian English, steers conversations toward booking consultations, and automatically captures leads.
+*   **Microsoft Bookings Integration:** Working iframe-based booking widget for scheduling consultations.
 *   **SEO/AEO Content:** Townsville-focused SEO blocks, FAQ section with structured data, and local business content targeting North Queensland tax agent searches.
 
-## Architecture & Cloudflare Migration Strategy
+## Architecture (Actual Deployed State)
 
-### Frontend Hosting
-*   Migrating from Firebase Hosting to **Cloudflare Pages** (Free Tier).
-*   All Next.js App Router components and assets will be statically exported or deployed via Cloudflare adapters.
+### Hosting: Firebase App Hosting (Active)
+The entire Next.js application runs on **Firebase App Hosting** (Cloud Run backend), deployed via the Firebase CLI. This is the live production environment.
 
-### Serverless AI Proxy (Cloudflare Worker)
-*   Instead of calling Google AI Studio directly from the browser (or a Next.js server route on Firebase), we use a **Cloudflare Worker** (`cloudflare-worker/src/index.js`).
-*   **Purpose:** Protect the `GOOGLE_AI_STUDIO_API_KEY` while allowing fast edge-based LLM inference.
-*   **CORS:** The worker handles CORS to accept requests from the Cloudflare Pages frontend.
+### API Routes (Next.js — runs on Firebase App Hosting server)
+These are the two active server-side endpoints. They run as part of the Next.js app on Firebase, NOT on Cloudflare.
 
-### Environment Variable Mapping
+*   **`/api/chat`** (`src/app/api/chat/route.ts`): Handles AI chat widget requests.
+    *   Calls Google Gemini 2.5 Flash Lite via `@google/generative-ai` SDK.
+    *   Protected by `GEMINI_API_KEY` (injected from Firebase Secret Manager via `apphosting.yaml`).
+*   **`/api/enquire`** (`src/app/api/enquire/route.ts`): Handles contact/enquiry form submissions.
+    *   Writes enquiry to Firestore (`contact` database, `enquiries` collection) using Firebase Admin SDK.
+    *   Sends email notification to `contact@vforcetax.com.au` via Gmail SMTP (nodemailer).
+    *   Uses `GMAIL_USER` and `GMAIL_APP_PASSWORD` secrets from Firebase Secret Manager.
 
-**Cloudflare Pages (Public Variables)**
-These variables configure the Firebase client SDK for database access on the frontend.
-*   `NEXT_PUBLIC_FIREBASE_API_KEY`
-*   `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
-*   `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
-*   `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
-*   `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
-*   `NEXT_PUBLIC_FIREBASE_APP_ID`
+### Firebase Firestore (Active)
+*   **Database:** `contact` (named database, not `(default)`)
+*   **Collection:** `enquiries`
+*   Enquiry documents expire after 1 hour via `expireAt` TTL field.
 
-**Cloudflare Worker (Secret Variables)**
-These variables must be kept secure and should be added to the Cloudflare dashboard or via wrangler.
-*   `GOOGLE_AI_STUDIO_API_KEY` (or `GEMINI_API_KEY`) -> *Must be set via `npx wrangler secret put GOOGLE_AI_STUDIO_API_KEY`*
+### Cloudflare Worker (Legacy Scaffolding — NOT deployed/active)
+The `worker/` and `cloudflare-worker/` directories contain earlier scaffolding for a Cloudflare-based migration that was never completed. These directories can be ignored. All functionality is handled by Firebase App Hosting.
+
+### Environment Variables
+
+**Local Dev (`.env.local` — never committed to Git)**
+*   `GEMINI_API_KEY` — Google AI Studio key for Gemini API
+*   `GMAIL_USER` — `vforceacc@gmail.com`
+*   `GMAIL_APP_PASSWORD` — 16-char Google App Password
+
+**Production (Firebase Secret Manager, referenced in `apphosting.yaml`)**
+*   `GEMINI_API_KEY` → secret: `GEMINI_API_KEY`
+*   `GMAIL_USER` → secret: `GMAIL_USER`
+*   `GMAIL_APP_PASSWORD` → secret: `GMAIL_APP_PASSWORD`
 
 ### Components
-*   `Navbar.tsx` & `Footer.tsx` - Global layout components (Light Theme).
-*   `AiChatWidget.tsx` - Client-side AI chat interface sending requests to the Cloudflare Worker proxy.
-*   `BookingsWidget.tsx` - Microsoft Bookings iframe wrapper.
+*   `Navbar.tsx` & `Footer.tsx` — Global layout components (Light Theme).
+*   `AiChatWidget.tsx` — Client-side AI chat interface. Calls `/api/chat` (Next.js route on Firebase).
+*   `BookingsWidget.tsx` — Microsoft Bookings iframe wrapper.
 
-## Current Plan: V-Force Corporate UI Migration & Cloudflare Prep
+## Deployment
 
-*   [x] 1. Resolve mobile navigation scroll bug (`h-[100dvh]`).
-*   [x] 2. Implement Professional Corporate color palette (Navy, White, Charcoal, Emerald) in `tailwind.config.ts` and `globals.css`.
-*   [x] 3. Refactor Global Components (`Navbar`, `Footer`) to Light Theme and replace logo with standard non-inverted version.
-*   [x] 4. Refactor Core Pages (`page.tsx`, `about`, `contact`, `booking`) to Light Theme.
-*   [x] 5. Refactor Dynamic Routes (`services`, `[category]/[service]`, `news`, `news/[slug]`) to Light Theme.
-*   [x] 6. Refactor Legal Pages (`terms`, `privacy`) to Light Theme.
-*   [x] 7. **Cloudflare Architecture:** Scaffold `cloudflare-worker` directory with `src/index.js` and `wrangler.toml` for the AI proxy.
-*   [x] 8. Update frontend AI chat widget (`src/components/AiChatWidget.tsx`) to point to the Cloudflare worker URL once deployed.
-*   [x] 9. Final QA testing across mobile and desktop.
-*   [x] 10. Align contact page (`src/app/contact/page.tsx`) contact details with the footer (clickable phone link +61 7 3473 5556 and clickable email link contact@vforcetax.com.au).
-*   [x] 11. Add new news article: $20,000 instant asset write-off (no dashes, Australian English).
-*   [x] 12. Migrate to Cloudflare Edge: Restructure Next.js for static export, build edge-compatible Worker with direct Firestore REST client, add 429 rate limit error handling, and output wrangler + CI/CD blueprints.
+### Deploy to Firebase App Hosting
+```bash
+npx -y firebase-tools@latest deploy --only apphosting
+```
+
+### Set Production Secrets (run once per secret)
+```bash
+npx -y firebase-tools@latest apphosting:secrets:set GEMINI_API_KEY
+npx -y firebase-tools@latest apphosting:secrets:set GMAIL_USER
+npx -y firebase-tools@latest apphosting:secrets:set GMAIL_APP_PASSWORD
+```
+
+## Current Status
+
+*   [x] 1–12. All UI, routing, and feature work complete.
+*   [x] 13. Enquiry email notifications via Gmail SMTP (nodemailer) — implemented, secrets need setting in Firebase.
+*   [ ] 14. Set `GMAIL_USER` and `GMAIL_APP_PASSWORD` secrets in Firebase Secret Manager for production.
+*   [ ] 15. Deploy to production via `npx -y firebase-tools@latest deploy --only apphosting`.
