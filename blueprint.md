@@ -85,5 +85,18 @@ npx -y firebase-tools@latest apphosting:secrets:set GMAIL_APP_PASSWORD
 
 *   [x] 1–12. All UI, routing, and feature work complete.
 *   [x] 13. Enquiry email notifications via Gmail SMTP (nodemailer) — implemented, secrets need setting in Firebase.
-*   [ ] 14. Set `GMAIL_USER` and `GMAIL_APP_PASSWORD` secrets in Firebase Secret Manager for production.
-*   [ ] 15. Deploy to production via `npx -y firebase-tools@latest deploy --only apphosting`.
+*   [x] 14. Set `GMAIL_USER` and `GMAIL_APP_PASSWORD` secrets in Firebase Secret Manager for production.
+*   [x] 15. Deploy to production via `npx -y firebase-tools@latest deploy --only apphosting`.
+*   [ ] 16. Replace the default Firebase/Vercel icon with the V-Force logo favicon.
+
+## Plan for Favicon Update
+
+### Objective
+Replace the default Firebase triangle favicon in the browser tab with the V-Force logo.
+
+### Steps
+1. Copy `public/vforce-logo.png` to `src/app/icon.png` (Next.js App Router automatically uses `icon.png` as the page icon).
+2. Delete the default `src/app/favicon.ico` or replace it so it doesn't conflict or default to the Firebase triangle.
+3. Verify that the files are placed correctly.
+4. Commit the changes and push to GitHub (`origin main`) to trigger the Firebase App Hosting automatic deployment.
+
