@@ -7,6 +7,14 @@ export const metadata = {
 
 const newsArticles = [
   {
+    slug: 'productivity-impact-cgt-changes',
+    title: 'Treasurer Challenged on Productivity Impact of CGT Changes',
+    excerpt: 'Business groups challenge the Treasurer on how proposed Capital Gains Tax (CGT) changes will boost productivity. Learn how to maximise your position.',
+    date: 'May 24, 2026',
+    category: 'Tax Updates',
+    readTime: '5 min read',
+  },
+  {
     slug: 'instant-asset-write-off-20000',
     title: 'Small Business Support: $20,000 Instant Asset Write-off',
     excerpt: 'The Government announced a permanent increase to the instant asset write-off for small businesses to $20,000, boosting cashflow and reducing compliance costs.',
