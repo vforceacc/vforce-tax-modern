@@ -164,7 +164,7 @@ export default function TaxReturn2526Article() {
             4. Superannuation: Don&apos;t Miss the Deadline
           </h3>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
-            The Superannuation Guarantee (SG) rate has increased to <strong className="text-vforce-navy font-bold">12% from 1 July 2025</strong> — confirm your employer has adjusted accordingly. If you&apos;re making personal concessional contributions to boost your retirement savings and claim a tax deduction, they must be <strong className="text-vforce-navy font-bold">received by your fund before 30 June</strong>. Many funds have their own early processing cut-offs, so don&apos;t leave this one to the last minute.
+            The Superannuation Guarantee (SG) rate has increased to <strong className="text-vforce-navy font-bold">12% from 1 July 2025</strong>, so make sure to confirm your employer has adjusted accordingly. If you&apos;re making personal concessional contributions to boost your retirement savings and claim a tax deduction, they must be <strong className="text-vforce-navy font-bold">received by your fund before 30 June</strong>. Many funds have their own early processing cut-offs, so don&apos;t leave this one to the last minute.
           </p>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             The concessional contributions cap is currently <strong className="text-vforce-navy font-bold">$30,000 per year</strong>. You may also be eligible to use carry-forward contributions if your super balance was below $500,000 at 30 June of the prior year and you had unused cap amounts in previous years.
@@ -181,7 +181,7 @@ export default function TaxReturn2526Article() {
           </p>
 
           <h3 className="text-xl md:text-2xl font-bold font-outfit text-vforce-navy mt-8 mb-4">
-            6. Declare All Your Income — Even the Side Hustle Stuff
+            6. Declare All Your Income, Including Side Hustles
           </h3>
           <p className="text-vforce-charcoal font-inter leading-relaxed mb-6 text-base md:text-lg">
             The ATO pre-fills a significant amount of data through myGov, including bank interest, dividends, and even some cryptocurrency transactions. However, <strong className="text-vforce-navy font-bold">don&apos;t assume pre-fill is complete or 100% accurate</strong>, so always verify before lodging. You must also declare any income from side hustles, gig economy platforms (Uber, Airtasker, Deliveroo), freelancing, and any foreign income you may have earned.
@@ -195,7 +195,7 @@ export default function TaxReturn2526Article() {
           </p>
           <ul className="list-disc pl-6 mb-6 space-y-3 text-vforce-charcoal text-base md:text-lg">
             <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Claiming private expenses as work-related.</strong> This often happens with vehicle use, mobile phones, internet bills, or clothing.</li>
-            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">No receipts, no claim.</strong> The ATO expects substantiation for most deductions — small expenses still need records.</li>
+            <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">No receipts, no claim.</strong> The ATO expects substantiation for most deductions, meaning even small expenses still need records.</li>
             <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Lodging too early.</strong> Income statements, dividend info, and managed fund tax statements aren&apos;t always finalised right after 30 June. Lodging before pre-fill is complete increases the risk of having to amend later.</li>
             <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Getting home office calculations wrong.</strong> Estimated hours without a diary, or using the wrong method, can create issues if the ATO takes a closer look.</li>
             <li className="leading-relaxed"><strong className="text-vforce-navy font-bold">Forgetting crypto.</strong> The ATO receives extensive data from Australian exchanges and is actively matching transactions. Crypto is not anonymous; every trade, swap, or disposal is a potential tax event.</li>
@@ -260,7 +260,7 @@ export default function TaxReturn2526Article() {
               Grab a free 15-minute chat with our Townsville team.
             </h3>
             <p className="text-gray-300 font-inter text-sm leading-relaxed mb-8">
-              No obligation, no jargon — just a quick yarn to see if we&apos;re the right fit for your situation. Whether you&apos;re a sole trader, investor, or just want to make sure you&apos;re claiming everything you&apos;re entitled to, we&apos;re here to help.
+              No obligation, no jargon: just a quick yarn to see if we&apos;re the right fit for your situation. Whether you&apos;re a sole trader, investor, or just want to make sure you&apos;re claiming everything you&apos;re entitled to, we&apos;re here to help.
             </p>
             <Link
               href="/booking"

@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
     const gmailPass = process.env.GMAIL_APP_PASSWORD; // 16-char App Password
 
     if (!gmailUser || !gmailPass) {
-      console.warn('[Enquire API] Gmail credentials not set — skipping email notification.');
+      console.warn('[Enquire API] Gmail credentials not set, skipping email notification.');
     } else {
       const transporter = nodemailer.createTransport({
         service: 'gmail',

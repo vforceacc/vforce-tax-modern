@@ -247,7 +247,7 @@ export default function PricingPage() {
           </h1>
           <p className="text-base text-vforce-charcoal font-medium max-w-2xl mx-auto leading-relaxed mb-8">
             Explore our transparent market rate approximations and build your own service estimate below.
-            All figures are indicative — we&apos;ll provide a tailored quote at your consultation.
+            All figures are indicative, and we&apos;ll provide a tailored quote at your consultation.
           </p>
 
           {/* Badges */}
@@ -288,7 +288,7 @@ export default function PricingPage() {
         {/* ── Main two-column layout ── */}
         <div className="grid lg:grid-cols-12 gap-8 items-start">
 
-          {/* LEFT — Service Categories (Accordion) */}
+          {/* LEFT: Service Categories (Accordion) */}
           <div className="lg:col-span-7 space-y-4">
             {pricingCategories.map(cat => {
               const isOpen = expandedCategories.includes(cat.id);
@@ -300,7 +300,7 @@ export default function PricingPage() {
                   key={cat.id}
                   className="bg-white border border-vforce-border rounded-[2rem] overflow-hidden shadow-sm transition-all duration-300"
                 >
-                  {/* Category Header — clickable */}
+                  {/* Category Header: clickable */}
                   <button
                     onClick={() => toggleCategory(cat.id)}
                     className="w-full flex items-center justify-between gap-4 px-7 py-5 hover:bg-vforce-secondary transition-colors text-left group"
@@ -383,7 +383,7 @@ export default function PricingPage() {
             </div>
           </div>
 
-          {/* RIGHT — Live Estimator (sticky) */}
+          {/* RIGHT: Live Estimator (sticky) */}
           <div className="lg:col-span-5 lg:sticky lg:top-32" id="estimator">
             <div className="bg-vforce-navy text-white rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-[60%] h-[60%] bg-vforce-emerald/10 blur-[80px] rounded-full pointer-events-none" />
@@ -459,7 +459,7 @@ export default function PricingPage() {
                     </div>
                   )}
                   <div className="text-[10px] text-slate-500 font-medium mt-1">
-                    Indicative only — subject to formal engagement
+                    Indicative only, subject to formal engagement
                   </div>
                 </div>
 
@@ -493,7 +493,7 @@ export default function PricingPage() {
             <div className="mt-4 bg-white border border-vforce-border rounded-2xl px-6 py-4 flex items-center justify-between gap-4">
               <div>
                 <div className="text-xs font-black text-vforce-navy uppercase tracking-tight">Not sure what you need?</div>
-                <div className="text-[11px] text-vforce-charcoal font-medium">We&apos;ll help you figure it out — no obligation.</div>
+                <div className="text-[11px] text-vforce-charcoal font-medium">We&apos;ll help you figure it out with no obligation.</div>
               </div>
               <Link href="/contact" className="shrink-0 bg-vforce-navy text-white px-4 py-2.5 rounded-xl font-black text-[10px] tracking-widest uppercase hover:bg-vforce-navy-blue transition-all">
                 Get in touch

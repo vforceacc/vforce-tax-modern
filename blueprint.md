@@ -89,6 +89,7 @@ npx -y firebase-tools@latest apphosting:secrets:set GMAIL_APP_PASSWORD
 *   [x] 15. Deploy to production via `npx -y firebase-tools@latest deploy --only apphosting`.
 *   [x] 16. Replace the default Firebase/Vercel icon with the V-Force logo favicon.
 *   [x] 17. Align website copywriting to Australian English spelling conventions (e.g. -ise over -ize, -organise, etc.).
+*   [x] 18. Replace all rogue em-dashes `—` with natural punctuation to remove "AI grammar" patterns.
 
 ## Plan for Favicon Update [COMPLETED]
 
@@ -101,7 +102,7 @@ Replace the default Firebase triangle favicon in the browser tab with the V-Forc
 3. Verify that the files are placed correctly.
 4. Commit the changes and push to GitHub (`origin main`) to trigger the Firebase App Hosting automatic deployment.
 
-## Plan for Australian English Copywriting Alignment
+## Plan for Australian English Copywriting Alignment [COMPLETED]
 
 ### Objective
 Ensure that all website contents, especially user-facing pages, news items, and metadata, strictly use Australian/British English spelling conventions (e.g. `maximise`, `specialise`, `optimise`, `organise` instead of `maximize`, `specialize`, `optimize`, `organize`).
@@ -112,3 +113,14 @@ Ensure that all website contents, especially user-facing pages, news items, and 
 3. Replace user-facing occurrences in headings, paragraphs, excerpts, and metadata.
 4. Verify compiling and linting status.
 5. Commit and push the spelling correction updates to GitHub to trigger live production updates on Firebase App Hosting.
+
+## Plan for AI Grammar Punctuation Cleanup [COMPLETED]
+
+### Objective
+Remove any rogue em-dashes `—` that often make text feel AI-generated, substituting them with natural Australian punctuation and flowing phrasing (such as commas, colons, semi-colons, or fresh conjunctions).
+
+### Steps
+1. Use project-wide grep searches to identify all files and lines containing `—`.
+2. Evaluate each context and substitute it with natural phrasing.
+3. Compile and build the project to verify changes.
+4. Commit and push to Git to deploy.
