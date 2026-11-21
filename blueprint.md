@@ -62,7 +62,7 @@ The `worker/` and `cloudflare-worker/` directories contain earlier scaffolding f
 *   `GMAIL_USER` → secret: `GMAIL_USER`
 *   `GMAIL_APP_PASSWORD` → secret: `GMAIL_APP_PASSWORD`
 *   `TURNSTILE_SECRET_KEY` → secret: `TURNSTILE_SECRET_KEY`
-*   `NEXT_PUBLIC_TURNSTILE_SITE_KEY` → secret: `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (available at `BUILD` and `RUNTIME`)
+*   `NEXT_PUBLIC_TURNSTILE_SITE_KEY` → plain public `value` in `apphosting.yaml` (available at `BUILD` and `RUNTIME`)
 
 ### Components
 *   `Navbar.tsx` & `Footer.tsx` — Global layout components (Light Theme).
