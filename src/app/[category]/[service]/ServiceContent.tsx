@@ -1,8 +1,9 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { Zap, ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
-// Removed client-side firebase imports to use server-side API route instead
+import { Zap, CheckCircle2, Loader2 } from 'lucide-react';
+import TurnstileWidget from '@/components/TurnstileWidget';
+import { ENQUIRY_LIMITS } from '@/lib/enquiry-validation';
 
 interface Feature {
   name: string;
@@ -19,10 +20,31 @@ export default function ServiceContent({ details }: { details: ServiceDetails })
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
+  const [website, setWebsite] = useState(''); // Hidden honeypot field
+  const [formLoadedAt] = useState<number>(() => Date.now());
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+
+  const turnstileEnabled = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
+
+  const handleTurnstileVerify = useCallback((token: string) => {
+    setTurnstileToken(token);
+    setErrorMsg('');
+  }, []);
+
+  const handleTurnstileExpire = useCallback(() => {
+    setTurnstileToken('');
+  }, []);
+
+  const handleTurnstileError = useCallback(() => {
+    setTurnstileToken('');
+    setErrorMsg('Security check could not load. Please refresh the page and try again.');
+  }, []);
 
   // Pre-fill form from chat widget query params
   useEffect(() => {
@@ -35,8 +57,14 @@ export default function ServiceContent({ details }: { details: ServiceDetails })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setErrorMsg('');
+
+    if (turnstileEnabled && !turnstileToken) {
+      setErrorMsg('Please complete the security verification check before submitting.');
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
       const res = await fetch('/api/enquire', {
         method: 'POST',
@@ -46,21 +74,41 @@ export default function ServiceContent({ details }: { details: ServiceDetails })
         body: JSON.stringify({
           name,
           email,
+          phone,
           message,
+          website,
+          formLoadedAt,
+          turnstileToken,
           service: details.title,
           source: 'Service Page',
         }),
       });
 
+      const data = await res.json().catch(() => ({}));
+
       if (!res.ok) {
-        throw new Error('Server returned an error');
+        setTurnstileToken('');
+        setTurnstileResetKey((prev) => prev + 1);
+        setErrorMsg(
+          typeof data.error === 'string'
+            ? data.error
+            : 'Failed to send enquiry. Please try again.'
+        );
+        return;
       }
+
       setIsSuccess(true);
       setName('');
       setEmail('');
+      setPhone('');
       setMessage('');
+      setWebsite('');
+      setTurnstileToken('');
+      setTurnstileResetKey((prev) => prev + 1);
     } catch (err) {
       console.error('Error submitting enquiry:', err);
+      setTurnstileToken('');
+      setTurnstileResetKey((prev) => prev + 1);
       setErrorMsg('Failed to send enquiry. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -153,11 +201,30 @@ export default function ServiceContent({ details }: { details: ServiceDetails })
               {errorMsg && (
                 <div className="p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded-xl font-medium">{errorMsg}</div>
               )}
+              {/* Hidden honeypot field — bots fill this, real users never see it */}
+              <div
+                aria-hidden="true"
+                className="absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0 pointer-events-none"
+              >
+                <label htmlFor="enquiry-website">Website</label>
+                <input
+                  id="enquiry-website"
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                />
+              </div>
+
               <div>
                 <label className="text-[10px] font-black text-vforce-charcoal uppercase tracking-widest ml-1 mb-2 block">Full Name</label>
                 <input
                   type="text"
                   required
+                  minLength={ENQUIRY_LIMITS.nameMin}
+                  maxLength={ENQUIRY_LIMITS.nameMax}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full bg-vforce-primary border border-vforce-border rounded-2xl p-5 text-[13px] font-bold text-vforce-navy focus:ring-2 focus:ring-vforce-emerald focus:bg-white transition-all outline-none"
@@ -168,8 +235,20 @@ export default function ServiceContent({ details }: { details: ServiceDetails })
                 <input
                   type="email"
                   required
+                  maxLength={ENQUIRY_LIMITS.emailMax}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-vforce-primary border border-vforce-border rounded-2xl p-5 text-[13px] font-bold text-vforce-navy focus:ring-2 focus:ring-vforce-emerald focus:bg-white transition-all outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-black text-vforce-charcoal uppercase tracking-widest ml-1 mb-2 block">Phone Number <span className="text-vforce-charcoal/50">(Optional)</span></label>
+                <input
+                  type="tel"
+                  maxLength={ENQUIRY_LIMITS.phoneMax}
+                  placeholder="e.g. 0412 345 678"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   className="w-full bg-vforce-primary border border-vforce-border rounded-2xl p-5 text-[13px] font-bold text-vforce-navy focus:ring-2 focus:ring-vforce-emerald focus:bg-white transition-all outline-none"
                 />
               </div>
@@ -178,15 +257,23 @@ export default function ServiceContent({ details }: { details: ServiceDetails })
                 <textarea
                   rows={4}
                   required
+                  minLength={ENQUIRY_LIMITS.messageMin}
+                  maxLength={ENQUIRY_LIMITS.messageMax}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="How can we help you?"
                   className="w-full bg-vforce-primary border border-vforce-border rounded-2xl p-5 text-[13px] font-bold text-vforce-navy focus:ring-2 focus:ring-vforce-emerald focus:bg-white transition-all outline-none resize-none"
                 ></textarea>
               </div>
+              <TurnstileWidget
+                onVerify={handleTurnstileVerify}
+                onExpire={handleTurnstileExpire}
+                onError={handleTurnstileError}
+                resetKey={turnstileResetKey}
+              />
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || (turnstileEnabled && !turnstileToken)}
                 className="w-full bg-vforce-navy-blue text-white py-6 rounded-2xl font-black text-[13px] tracking-widest uppercase hover:bg-vforce-navy transition-all duration-300 shadow-md font-heading flex justify-center items-center disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : 'SEND MESSAGE'}

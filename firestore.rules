@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // All enquiries are written server-side via Firebase Admin SDK in /api/enquire
+    // after Turnstile verification, honeypot checks, validation, and rate limiting.
+    // Direct client access is completely denied to prevent spam bypass and data scraping.
+    match /enquiries/{enquiryId} {
+      allow read, write: if false;
+    }
+
+    // Server-side rate limiting buckets (managed exclusively by Firebase Admin SDK).
+    match /rate_limits/{bucketId} {
+      allow read, write: if false;
+    }
+
+    // Default deny for all other collections.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

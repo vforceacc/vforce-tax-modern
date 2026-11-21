@@ -61,6 +61,8 @@ The `worker/` and `cloudflare-worker/` directories contain earlier scaffolding f
 *   `GEMINI_API_KEY` → secret: `GEMINI_API_KEY`
 *   `GMAIL_USER` → secret: `GMAIL_USER`
 *   `GMAIL_APP_PASSWORD` → secret: `GMAIL_APP_PASSWORD`
+*   `TURNSTILE_SECRET_KEY` → secret: `TURNSTILE_SECRET_KEY`
+*   `NEXT_PUBLIC_TURNSTILE_SITE_KEY` → secret: `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (available at `BUILD` and `RUNTIME`)
 
 ### Components
 *   `Navbar.tsx` & `Footer.tsx` — Global layout components (Light Theme).
@@ -90,6 +92,8 @@ npx -y firebase-tools@latest apphosting:secrets:set GMAIL_APP_PASSWORD
 *   [x] 16. Replace the default Firebase/Vercel icon with the V-Force logo favicon.
 *   [x] 17. Align website copywriting to Australian English spelling conventions (e.g. -ise over -ize, -organise, etc.).
 *   [x] 18. Replace all rogue em-dashes `—` with natural punctuation to remove "AI grammar" patterns.
+*   [x] 19. Publish new article regarding the Treasurer and CGT productivity impacts.
+*   [x] 20. Harden enquiry form & `/api/enquire` against spam (Cloudflare Turnstile, honeypot, timing check, payload/spam validation, two-tier rate limiting, locked-down Firestore rules, 1-hour `expireAt` TTL).
 
 ## Plan for Favicon Update [COMPLETED]
 
