@@ -58,7 +58,7 @@ The `worker/` and `cloudflare-worker/` directories contain earlier scaffolding f
 *   `GMAIL_APP_PASSWORD` — 16-char Google App Password
 
 **Production (Firebase Secret Manager, referenced in `apphosting.yaml`)**
-*   `GEMINI_API_KEY` → secret: `GEMINI_API_KEY`
+*   `GEMINI_API_KEY` → secret: `GEMINI_API_KEY@1` (pinned to active v1; v2 is destroyed in Secret Manager)
 *   `GMAIL_USER` → secret: `GMAIL_USER`
 *   `GMAIL_APP_PASSWORD` → secret: `GMAIL_APP_PASSWORD`
 *   `TURNSTILE_SECRET_KEY` → secret: `TURNSTILE_SECRET_KEY`

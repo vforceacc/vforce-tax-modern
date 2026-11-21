@@ -24,7 +24,7 @@ runConfig:
   #   secret: mySecretRef
 env:
   - variable: GEMINI_API_KEY
-    secret: GEMINI_API_KEY
+    secret: GEMINI_API_KEY@1
   - variable: GMAIL_USER
     secret: GMAIL_USER
   - variable: GMAIL_APP_PASSWORD
