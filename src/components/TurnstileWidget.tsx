@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 declare global {
   interface Window {
@@ -41,11 +41,33 @@ export default function TurnstileWidget({
   resetKey = 0,
 }: TurnstileWidgetProps) {
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+  const outerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  const [scale, setScale] = useState(1);
 
   const callbacksRef = useRef({ onVerify, onExpire, onError });
   callbacksRef.current = { onVerify, onExpire, onError };
+
+  // Keep the 300px Turnstile widget centered and never clipped in narrower sidebars
+  useEffect(() => {
+    if (!siteKey || !outerRef.current) return;
+
+    const updateScale = () => {
+      if (!outerRef.current) return;
+      const availableWidth = outerRef.current.clientWidth;
+      if (availableWidth > 0 && availableWidth < 300) {
+        setScale(Math.max(0.75, availableWidth / 300));
+      } else {
+        setScale(1);
+      }
+    };
+
+    updateScale();
+    const ro = new ResizeObserver(updateScale);
+    ro.observe(outerRef.current);
+    return () => ro.disconnect();
+  }, [siteKey]);
 
   useEffect(() => {
     if (!siteKey) return;
@@ -59,7 +81,7 @@ export default function TurnstileWidget({
       widgetIdRef.current = window.turnstile.render(containerRef.current, {
         sitekey: siteKey,
         theme: 'light',
-        size: 'flexible',
+        size: 'normal',
         callback: (token: string) => callbacksRef.current.onVerify(token),
         'expired-callback': () => callbacksRef.current.onExpire?.(),
         'error-callback': () => callbacksRef.current.onError?.(),
@@ -131,5 +153,21 @@ export default function TurnstileWidget({
     return null;
   }
 
-  return <div ref={containerRef} className="w-full min-h-[65px]" />;
+  return (
+    <div
+      ref={outerRef}
+      className="w-full flex justify-center overflow-hidden"
+      style={{ height: `${Math.ceil(65 * scale)}px` }}
+    >
+      <div
+        ref={containerRef}
+        className="w-[300px] shrink-0"
+        style={
+          scale < 1
+            ? { transform: `scale(${scale})`, transformOrigin: 'top center' }
+            : undefined
+        }
+      />
+    </div>
+  );
 }

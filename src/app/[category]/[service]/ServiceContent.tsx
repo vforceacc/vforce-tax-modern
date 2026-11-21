@@ -186,7 +186,7 @@ export default function ServiceContent({ details }: { details: ServiceDetails })
 
       {/* Right column - enquiry form */}
       <div id="contact-form" className="lg:col-span-4 sticky top-56 scroll-mt-32">
-        <div className="bg-white border border-vforce-border p-12 rounded-[3rem] shadow-xl relative overflow-hidden">
+        <div className="bg-white border border-vforce-border p-8 xl:p-10 rounded-[3rem] shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-vforce-emerald/5 blur-3xl rounded-full -mr-16 -mt-16"></div>
           <h4 className="text-vforce-navy font-black text-3xl italic tracking-tighter uppercase mb-10 font-heading">Enquire Now</h4>
 
