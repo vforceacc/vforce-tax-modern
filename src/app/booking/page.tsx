@@ -1,11 +1,24 @@
 import React from 'react';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 import BookingsWidget from '@/components/BookingsWidget';
+import { BOOKINGS_URL, isMobilePhoneUserAgent } from '@/lib/booking';
 
 export const metadata = {
   title: 'Book an Appointment | V-Force Tax',
 };
 
-export default function BookingPage() {
+export const dynamic = 'force-dynamic';
+
+export default async function BookingPage() {
+  const headersList = await headers();
+  const userAgent = headersList.get('user-agent');
+  const secChUaMobile = headersList.get('sec-ch-ua-mobile');
+
+  if (isMobilePhoneUserAgent(userAgent, secChUaMobile)) {
+    redirect(BOOKINGS_URL);
+  }
+
   return (
     <div className="bg-vforce-primary min-h-screen pt-28 md:pt-40 pb-16 md:pb-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center mb-16">

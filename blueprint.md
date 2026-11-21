@@ -94,6 +94,7 @@ npx -y firebase-tools@latest apphosting:secrets:set GMAIL_APP_PASSWORD
 *   [x] 18. Replace all rogue em-dashes `—` with natural punctuation to remove "AI grammar" patterns.
 *   [x] 19. Publish new article regarding the Treasurer and CGT productivity impacts.
 *   [x] 20. Harden enquiry form & `/api/enquire` against spam (Cloudflare Turnstile, honeypot, timing check, payload/spam validation, two-tier rate limiting, locked-down Firestore rules, 1-hour `expireAt` TTL).
+*   [x] 21. Replace mobile "Best Mobile Experience" prompt on `/booking` with a native automatic redirect to Microsoft Bookings (server-side UA/Client Hints redirect + client-side narrow viewport fallback using `window.location.replace`).
 
 ## Plan for Favicon Update [COMPLETED]
 
